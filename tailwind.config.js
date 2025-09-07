@@ -8,6 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary : {
+          background_green : '#E0FFF6',
+          testimonial_text : '#3548A2',
+        },
         'gradient-fill': {
           mobile: '#1CE8AB',
           desktop: '#4EF0D2',
