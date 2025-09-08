@@ -11,11 +11,15 @@ module.exports = {
         primary : {
           background_green : '#E0FFF6',
           testimonial_text : '#3548A2',
+          background_purple : '#F1F0FF',
+          text_blue : '#394BA5',
+          text_gray : '#3D3D3D',
         },
         'gradient-fill': {
           mobile: '#1CE8AB',
           desktop: '#4EF0D2',
           blueText: '#394CA9',
+          submitButton: '#3547A1',
         },       
       },
       fontFamily: {
