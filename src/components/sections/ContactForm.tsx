@@ -53,7 +53,7 @@ const ContactForm = () => {
               </div>
 
               <div className="text-sm text-gray-600 font-content">
-                Let's chat. <a href="#" className="text-gradient-fill-blueText hover:underline">Click here</a> to grab a quick slot and we'll take it from there.
+                Let&apos;s chat. <a href="#" className="text-gradient-fill-blueText hover:underline">Click here</a> to grab a quick slot and we&apos;ll take it from there.
               </div>
 
               <button
