@@ -1,10 +1,10 @@
-import { ComponentType } from 'react'
+import { ComponentType, SVGProps } from 'react'
 
 export interface NavigationItem {
   name: string
   href: string
   description?: string
-  icon?: ComponentType<any>
+  icon?: ComponentType<SVGProps<SVGSVGElement>>
 }
 
 export interface FooterNavigation {

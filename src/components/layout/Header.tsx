@@ -14,11 +14,7 @@ import {
 } from '@headlessui/react'
 import {
   Bars3Icon,
-  XMarkIcon,
-  FolderIcon,
-  ScaleIcon,
-  BuildingOfficeIcon,
-  ServerIcon
+  XMarkIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
