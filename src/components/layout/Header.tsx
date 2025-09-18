@@ -22,22 +22,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-
-const products = [
-  { name: 'Koala Image Directory', description: 'Browse and manage your koala image collection', href: '#', icon: FolderIcon },
-  { name: 'Compare Koala Images', description: 'Compare your solutions with other alternatives', href: '#', icon: ScaleIcon },
-]
-
-const solutions = [
-  { name: 'For CISCOs', description: 'Tailored solutions for CISCO environments', href: '#', icon: BuildingOfficeIcon },
-  { name: 'For Platform/Devops Teams', description: 'Streamline your DevOps workflow', href: '#', icon: ServerIcon },
-]
-
-const navigation = [
-  { name: 'Blogs', href: '#' },
-  { name: 'About Us', href: '#' },
-  { name: 'Contact Us', href: '#' },
-]
+import { mainNavigation, products, solutions } from '@/config/navigation'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -83,7 +68,7 @@ export default function Header() {
                       className="flex items-center rounded-lg p-3 transition duration-150 ease-in-out hover:bg-gray-50"
                     >
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
-                        <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />
+                        {item.icon && <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />}
                       </div>
                       <div className="ml-4">
                         <p className="text-sm font-medium text-gray-900">{item.name}</p>
@@ -112,7 +97,7 @@ export default function Header() {
                       className="flex items-center rounded-lg p-3 transition duration-150 ease-in-out "
                     >
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
-                        <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />
+                        {item.icon && <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />}
                       </div>
                       <div className="ml-4">
                         <p className="text-sm font-medium text-gray-900">{item.name}</p>
@@ -125,14 +110,14 @@ export default function Header() {
             </PopoverPanel>
           </Popover>
 
-          {navigation.map((item) => (
+          {mainNavigation.map((item) => (
             <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
               {item.name}
             </a>
           ))}
         </PopoverGroup>
         <div className="flex items-center gap-4">
-          <a href="#" className="text-sm/6 font-semibold bg-gradient-fill-mobile md:bg-gradient-fill-desktop px-4 py-2 rounded-md">
+          <a href="#" className="text-sm/6 font-semibold bg-gradient-fill-mobile md:bg-gradient-fill-desktop px-4 py-2 rounded-md w-max">
             Request a trial
           </a>
         </div>
@@ -213,7 +198,7 @@ export default function Header() {
                     </>
                   )}
                 </Disclosure>
-                {navigation.map((item) => (
+                {mainNavigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
