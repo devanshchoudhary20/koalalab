@@ -33,6 +33,8 @@ const ExplainerSection = () => {
           alt="Background"
           fill
           className="object-cover"
+          quality={85}
+          sizes="100vw"
           priority
         />
       </div>
