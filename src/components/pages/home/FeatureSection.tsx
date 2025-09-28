@@ -30,7 +30,7 @@ const TAB_DATA: Tab[] = [
       "Centralized control and monitoring for all your containerized applications with enterprise-grade security and compliance.",
     cta1: "View dashboard →",
     cta2: "Learn More →",
-    image: "/images/Accelerate.webp", // You can replace this with a specific Manage image
+    image: "/images/Accelerate.webp",
   },
   {
     id: "secure",
@@ -40,7 +40,7 @@ const TAB_DATA: Tab[] = [
       "Advanced security scanning and vulnerability management with real-time threat detection and automated remediation.",
     cta1: "Security features →",
     cta2: "Learn More →",
-    image: "/images/Accelerate.webp", // You can replace this with a specific Secure image
+    image: "/images/Accelerate.webp", 
   },
 ];
 

@@ -33,7 +33,6 @@ const CompaniesCarousel: React.FC<CompaniesCarouselProps> = ({
     if (!scrollContainer) return
 
     const handleWheel = (e: WheelEvent) => {
-      // Prevent default vertical scrolling
       e.preventDefault()
       
       // Convert vertical scroll to horizontal scroll
