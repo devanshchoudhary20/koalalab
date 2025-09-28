@@ -108,7 +108,7 @@ const TestimonialSection = () => {
             </div>
             
             <div className='flex flex-col items-center gap-2'>
-              <p className='text-primary-testimonial_text font-heading font-bold text-base'>
+              <p className='text-primary-testimonial_text font-heading font-bold text-base '>
                 {currentTestimonial.title}
               </p>
               <p className='text-primary-testimonial_text font-content text-sm'>
