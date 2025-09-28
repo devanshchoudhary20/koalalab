@@ -12,6 +12,7 @@ module.exports = {
           background_green : '#E0FFF6',
           testimonial_text : '#3548A2',
           background_purple : '#F1F0FF',
+          background_brown : '#F2F2F2',
           text_blue : '#394BA5',
           text_gray : '#3D3D3D',
         },
