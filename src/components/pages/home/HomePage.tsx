@@ -1,5 +1,5 @@
 import { Header, Footer } from '@/components/shared/layout';
-import { ContactForm } from '@/components/shared/common';
+import { ContactForm, VideoCarousel } from '@/components/shared/common';
 import {
   HeroSection,
   CompanySection,
@@ -19,6 +19,7 @@ export default function HomePage() {
       <ExplainerSection />
       <FeatureSection />
       <TestimonialSection />
+      <VideoCarousel />
       <HowItWorksImageSection />
       <ContactForm />
       <HowItWorksContentSection />
