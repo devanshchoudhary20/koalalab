@@ -1,6 +1,6 @@
 [build]
-  publish = "out"
   command = "npm run build"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -10,6 +10,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[functions]
-  node_bundler = "esbuild"

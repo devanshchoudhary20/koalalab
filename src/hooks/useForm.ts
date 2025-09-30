@@ -20,7 +20,7 @@ export function useForm() {
         setEmail('')
         setInquiry('')
         setErrors({})
-      } catch (error) {
+      } catch {
         setErrors({ email: 'Failed to submit. Please try again.' })
       }
     }
@@ -39,6 +39,6 @@ export function useForm() {
   }
 }
 
-async function submitForm(data: { email: string; inquiry: string }) {
+async function submitForm(_data: { email: string; inquiry: string }) {
   await new Promise(resolve => setTimeout(resolve, 1000))
 }

@@ -12,7 +12,8 @@ export default function Input({
   id,
   ...props 
 }: InputProps) {
-  const inputId = id || useId()
+  const generatedId = useId()
+  const inputId = id || generatedId
   
   return (
     <div className="space-y-2">

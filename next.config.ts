@@ -6,10 +6,6 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  // Ensure compatibility with Netlify
-  experimental: {
-    esmExternals: false
   }
 };
 
