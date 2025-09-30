@@ -25,20 +25,12 @@ export default function VideoCarousel({
 }: VideoCarouselProps) {
   const [isOpen, setIsOpen] = React.useState(false)
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null)
-  const [isWindows, setIsWindows] = React.useState(false)
-  const [isMobile, setIsMobile] = React.useState(false)
 
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const videoRef = React.useRef<HTMLVideoElement>(null)
   const modalRef = React.useRef<HTMLDivElement>(null)
   const videoContainerRef = React.useRef<HTMLDivElement>(null)
 
-  React.useEffect(() => {
-    // platform detection only on client
-    const ua = typeof window !== "undefined" ? window.navigator.userAgent : ""
-    setIsWindows(/Windows/i.test(ua))
-    setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua))
-  }, [])
 
   React.useEffect(() => {
     // lock body scroll when modal open
@@ -88,25 +80,7 @@ export default function VideoCarousel({
     }
   }
 
-  const enterFullscreenWeb = async () => {
-    // Desktop/web custom fullscreen control
-    const el = videoContainerRef.current ?? videoRef.current
-    if (!el) return
 
-    // Different vendors
-    const anyEl = el as any
-    if (anyEl.requestFullscreen) return anyEl.requestFullscreen()
-    if (anyEl.webkitRequestFullscreen) return anyEl.webkitRequestFullscreen()
-    if (anyEl.mozRequestFullScreen) return anyEl.mozRequestFullScreen()
-    if (anyEl.msRequestFullscreen) return anyEl.msRequestFullscreen()
-  }
-
-  const scrollBy = (dir: "left" | "right") => {
-    const el = scrollRef.current
-    if (!el) return
-    const amount = Math.min(el.clientWidth * 0.9, 600)
-    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" })
-  }
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // close when clicking backdrop (outside the centered panel)
@@ -147,10 +121,10 @@ export default function VideoCarousel({
             className="group relative inline-flex min-w-[68%] max-w-[420px] snap-start flex-col overflow-hidden rounded-xl bg-card text-left shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:min-w-[280px]"
             role="option"
             aria-label={`Open video ${idx + 1}`}
+            aria-selected="false"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden">
               {/* Shared thumbnail */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <Image
                 src={thumbnailSrc || "/placeholder.svg"}
                 alt="Video thumbnail"
@@ -219,23 +193,4 @@ function PlayIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" {...props}>
-      <path strokeWidth="2" strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
-    </svg>
-  )
-}
-
-function FullscreenIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" {...props}>
-      <path
-        strokeWidth="2"
-        strokeLinecap="round"
-        d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-18h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"
-      />
-    </svg>
-  )
-}
 

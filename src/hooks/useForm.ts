@@ -39,6 +39,8 @@ export function useForm() {
   }
 }
 
-async function submitForm(_data: { email: string; inquiry: string }) {
+async function submitForm(data: { email: string; inquiry: string }) {
+  // TODO: Implement actual form submission
+  console.log('Submitting form:', data)
   await new Promise(resolve => setTimeout(resolve, 1000))
 }
