@@ -1,19 +1,34 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function FooterSection() {
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      const headerHeight = 80 // Approximate header height
+      const targetPosition = contactSection.offsetTop - headerHeight
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
   return (
     <footer className="bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-20">
         {/* Top Section - Logo and Social Media */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-16">
           <div className="mb-6 sm:mb-0 w-[200px]">
-            <Image
-              src="/images/FooterLogo.webp"
-              alt="KoalaLab Logo"
-              width={200}
-              height={40}
-              className="h-10"
-            />
+            <Link href="/">
+              <Image
+                src="/images/FooterLogo.webp"
+                alt="KoalaLab Logo"
+                width={200}
+                height={40}
+                className="h-10 cursor-pointer"
+              />
+            </Link>
           </div>
           <div className="flex space-x-4">
             {/* LinkedIn */}
@@ -75,6 +90,23 @@ export default function FooterSection() {
             {/* About Us */}
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">About Us</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-sm text-gray-300 hover:text-white">
+                    About KoalaLab
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about#team" className="text-sm text-gray-300 hover:text-white">
+                    Our Team
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about#advisors" className="text-sm text-gray-300 hover:text-white">
+                    Advisors
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             {/* Blogs */}
@@ -85,9 +117,13 @@ export default function FooterSection() {
             {/* Book Your Call */}
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">Book Your Call</h3>
-              <button className="px-6 py-2 border border-white text-white rounded hover:bg-white hover:text-gray-900 transition-colors">
+              <a 
+                href="#contact" 
+                onClick={scrollToContact}
+                className="inline-block px-6 py-2 border border-white text-white rounded hover:bg-white hover:text-gray-900 transition-colors"
+              >
                 Contact Us
-              </button>
+              </a>
             </div>
           </div>
         </div>

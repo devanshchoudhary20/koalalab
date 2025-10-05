@@ -12,6 +12,7 @@ export default function ContactFormFields() {
       <Input
         type="email"
         label="Your work E-mail"
+        placeholder="john.doe@company.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         error={errors.email}

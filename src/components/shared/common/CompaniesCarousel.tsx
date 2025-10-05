@@ -9,7 +9,7 @@ interface CompaniesCarouselProps {
 
 export default function CompaniesCarousel({
   companies: propCompanies = companies,
-  containerClassName = "py-8 sm:py-16"
+  containerClassName = "py-4 sm:py-8"
 }: CompaniesCarouselProps) {
   return (
     <div className={containerClassName}>

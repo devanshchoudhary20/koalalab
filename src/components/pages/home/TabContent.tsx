@@ -54,7 +54,7 @@ export default function TabContent({ active }: TabContentProps) {
                 />
               </div>
 
-              <div className="flex flex-col gap-4 justify-center">
+              <div className="flex flex-col gap-4 justify-center mb-8">
                 <Button variant="primary" className="w-max-content mx-auto sm:w-full min-w-[188px]">
                   {t.cta1}
                 </Button>

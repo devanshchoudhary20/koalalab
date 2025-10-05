@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
   Dialog,
@@ -23,6 +23,36 @@ import { mainNavigation, products, solutions } from '@/config/navigation'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const contactSection = document.getElementById('contact')
+    if (contactSection) {
+      const headerHeight = 80 // Approximate header height
+      const targetPosition = contactSection.offsetTop - headerHeight
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  useEffect(() => {
+    const handleAnchorClick = (e: Event) => {
+      const target = e.target as HTMLAnchorElement
+      if (target && target.getAttribute('href') === '#contact') {
+        e.preventDefault()
+        scrollToContact(e as any)
+      }
+    }
+
+    // Add event listener for anchor clicks
+    document.addEventListener('click', handleAnchorClick)
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick)
+    }
+  }, [])
 
   return (
     <header className="relative inset-x-0 top-0 z-50">
@@ -108,15 +138,24 @@ export default function Header() {
           </Popover>
 
           {mainNavigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+            <a 
+              key={item.name} 
+              href={item.name === 'Contact Us' ? '#contact' : item.href} 
+              onClick={item.name === 'Contact Us' ? scrollToContact : undefined}
+              className="text-sm/6 font-semibold text-gray-900"
+            >
               {item.name}
             </a>
           ))}
         </PopoverGroup>
         <div className="flex items-center gap-4">
-          <Link href="#" className="text-sm/6 font-semibold bg-gradient-fill-mobile md:bg-gradient-fill-desktop px-4 py-2 rounded-md w-max">
-            Request a trial
-          </Link>
+          <a 
+            href="#contact" 
+            onClick={scrollToContact}
+            className="text-sm/6 font-semibold bg-gradient-fill-desktop px-4 py-2 rounded-md w-max"
+          >
+            Contact Us
+          </a>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -198,7 +237,8 @@ export default function Header() {
                 {mainNavigation.map((item) => (
                   <a
                     key={item.name}
-                    href={item.href}
+                    href={item.name === 'Contact Us' ? '#contact' : item.href}
+                    onClick={item.name === 'Contact Us' ? scrollToContact : undefined}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}

@@ -29,3 +29,13 @@ h1, h2, h3, h4, h5, h6 {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent default anchor scrolling to account for fixed header */
+html {
+  scroll-padding-top: 80px;
+}

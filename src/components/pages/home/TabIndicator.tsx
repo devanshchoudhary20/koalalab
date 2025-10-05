@@ -11,10 +11,10 @@ interface TabIndicatorProps {
 
 export default function TabIndicator({ active, isInView, onTabChange }: TabIndicatorProps) {
   return (
-    <div className={`hidden sm:flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 transition-opacity duration-300 ${
+    <div className={`flex fixed right-0 top-1/2 -translate-y-1/2 z-40 flex-col gap-3 transition-opacity duration-300 ${
       isInView ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
-      <div className="flex flex-col gap-3 pr-16">
+      <div className="flex flex-col gap-3 pr-4 sm:pr-16">
         {TAB_DATA.map((_, i) => (
           <button
             key={i}

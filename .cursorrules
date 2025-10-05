@@ -1,0 +1,265 @@
+# Cursor Rules for React/Next.js/TypeScript/Tailwind - 2024
+
+## 🎯 Development Philosophy
+- Write clean, maintainable, and scalable code
+- Follow SOLID principles and functional programming patterns
+- Emphasize type safety and static analysis
+- Practice component-driven development
+- Always plan before coding - write pseudocode first
+
+## 🖥️ Terminal Commands
+- **WSL Environment**: Always prefix terminal commands with `wsl` to switch to WSL terminal
+- Example: `wsl npm install`, `wsl npx create-next-app`, `wsl git status`
+- Use WSL for all Node.js, npm, and development tool commands
+
+## 📁 Project Structure
+- Use feature-based folder organization
+- Components: `components/[feature]/[ComponentName].tsx`
+- Hooks: `hooks/use[Name].ts`
+- Utils: `utils/[name].ts`
+- Types: `types/[name].ts`
+- Use index.ts files for clean exports
+
+## 🎨 Code Style & Formatting
+- Use tabs for indentation
+- Single quotes for strings (except to avoid escaping)
+- Omit semicolons unless required for disambiguation
+- Eliminate unused variables and imports
+- Add space after keywords and before function parentheses
+- Always use strict equality (`===`) instead of loose equality (`==`)
+- Limit line length to 80 characters
+- Use trailing commas in multiline object/array literals
+- Add space after commas
+
+## 🏷️ Naming Conventions
+- **Components**: PascalCase (`UserProfile`, `NavigationBar`)
+- **Files**: kebab-case (`user-profile.tsx`, `navigation-bar.tsx`)
+- **Directories**: kebab-case (`components/auth-wizard`)
+- **Variables/Functions**: camelCase (`userData`, `handleSubmit`)
+- **Constants**: UPPER_SNAKE_CASE (`API_ENDPOINTS`, `MAX_RETRIES`)
+- **Event Handlers**: prefix with 'handle' (`handleClick`, `handleSubmit`)
+- **Boolean Variables**: prefix with verbs (`isLoading`, `hasError`, `canSubmit`)
+- **Custom Hooks**: prefix with 'use' (`useAuth`, `useForm`)
+- **Complete words over abbreviations** (except common ones: `err`, `req`, `res`, `props`, `ref`)
+
+## ⚛️ React Best Practices
+- Use functional components with TypeScript interfaces
+- Define components using `function` keyword for better hoisting
+- Extract reusable logic into custom hooks
+- Use `React.memo()` strategically for performance
+- Implement proper cleanup in `useEffect` hooks
+- Use `useCallback` for memoizing callback functions
+- Use `useMemo` for expensive computations
+- Avoid inline function definitions in JSX
+- Implement proper key props in lists (avoid using index as key)
+- Use proper component composition patterns
+
+## 🚀 Next.js Best Practices
+- **Default to Server Components** - minimize 'use client' usage
+- Use App Router for routing
+- Implement proper metadata management
+- Use Next.js built-in components:
+  - `Image` component for optimized images
+  - `Link` component for client-side navigation
+  - `Script` component for external scripts
+- Use URL query parameters for server state management
+- Use 'use client' only when necessary:
+  - Event listeners
+  - Browser APIs
+  - State management
+  - Client-side-only libraries
+- Implement proper loading states and error boundaries
+
+## 🔷 TypeScript Best Practices
+- Enable strict mode
+- Prefer `interface` over `type` for object structures
+- Use type guards for safe null/undefined handling
+- Apply generics for type flexibility
+- Use TypeScript utility types (`Partial`, `Pick`, `Omit`)
+- Use mapped types for dynamic type variations
+- Define clear interfaces for props, state, and API responses
+- Avoid `any` type - use `unknown` or proper typing
+
+## 🎨 UI & Styling with Tailwind CSS
+- Use Shadcn UI for consistent, accessible components
+- Integrate Radix UI primitives for customizable elements
+- Follow mobile-first responsive design
+- Use Tailwind utility classes for styling
+- Implement dark mode using CSS variables
+- Ensure proper color contrast ratios for accessibility
+- Maintain consistent spacing values
+- Use CSS custom properties for theming
+
+## 🔄 State Management
+- **Local State**: Use `useState` for simple state, `useReducer` for complex state
+- **Shared State**: Use `useContext` for component tree state
+- **Global State**: Use Redux Toolkit with `createSlice`
+- Normalize state structure to avoid deep nesting
+- Use selectors to encapsulate state access
+- Separate concerns by feature
+
+## ✅ Error Handling & Validation
+- Use Zod for schema validation
+- Implement proper error boundaries
+- Use React Hook Form for form management
+- Log errors to external services (Sentry)
+- Design user-friendly fallback UIs
+- Handle loading and error states gracefully
+
+## 🧪 Testing Guidelines
+- Write unit tests with Jest and React Testing Library
+- Follow Arrange-Act-Assert pattern
+- Mock external dependencies
+- Test user interactions, not implementation details
+- Aim for high test coverage on critical paths
+
+## 🚀 Performance Optimization
+- Optimize for Core Web Vitals (LCP, CLS, FID)
+- Use dynamic imports for code splitting
+- Implement proper image optimization with WebP
+- Use `React.memo`, `useCallback`, `useMemo` strategically
+- Minimize client-side JavaScript bundle size
+- Implement proper caching strategies
+
+## 📝 Code Quality Rules
+- Write self-documenting code with clear variable names
+- Avoid unnecessary curly braces in simple conditionals
+- Use declarative JSX patterns
+- Implement proper error handling and loading states
+- Keep functions small and focused (single responsibility)
+- Use meaningful comments for complex logic only
+- Prefer composition over inheritance
+
+## 🔧 Development Workflow
+- Always start with planning and pseudocode
+- Consider edge cases and error scenarios
+- Document component architecture and data flow
+- Use proper TypeScript types from the start
+- Test components in isolation
+- Refactor regularly to maintain code quality
+
+## 🖼️ IMAGE-BASED COMPONENT REPLICATION
+
+### Image Analysis & Interpretation
+- **Analyze every visual detail** from provided images including:
+  - Layout structure and component hierarchy
+  - Color schemes, gradients, and shadows
+  - Typography (font families, sizes, weights, line heights)
+  - Spacing and padding (measure relative to other elements)
+  - Border radius, borders, and visual effects
+  - Interactive states (hover, focus, active, disabled)
+  - Icons, images, and visual assets
+  - Responsive behavior across different screen sizes
+
+### Pixel-Perfect Implementation
+- **Match the design exactly** - replicate every minor detail from the image
+- **Measure relative proportions** - use the image as a reference for spacing and sizing
+- **Preserve visual hierarchy** - maintain the same visual weight and importance
+- **Implement exact colors** - use color picker tools to match hex values precisely
+- **Replicate typography** - match font families, sizes, and weights exactly
+- **Copy visual effects** - shadows, gradients, blur, and other effects
+
+### Component Structure from Images
+- **Break down the image** into logical component parts
+- **Identify reusable elements** that can be extracted into separate components
+- **Map interactive elements** and their expected behaviors
+- **Document state changes** visible in the image (hover, active, etc.)
+
+### When Image Details Are Unclear
+- **Ask specific questions** about ambiguous elements:
+  - "What should happen when the user hovers over this element?"
+  - "What's the exact color of this background/shadow?"
+  - "Should this text be clickable or just informational?"
+  - "What's the expected behavior when this button is clicked?"
+  - "Are there any animations or transitions I should implement?"
+  - "What should be the responsive behavior on mobile/tablet?"
+
+### Image Analysis Checklist
+When analyzing an image, always check for:
+- [ ] **Layout**: Flexbox/Grid structure, alignment, positioning
+- [ ] **Colors**: Background, text, border, shadow colors
+- [ ] **Typography**: Font family, size, weight, line height, letter spacing
+- [ ] **Spacing**: Padding, margins, gaps between elements
+- [ ] **Borders**: Width, style, radius, color
+- [ ] **Shadows**: Box shadows, text shadows, drop shadows
+- [ ] **Interactive States**: Hover, focus, active, disabled appearances
+- [ ] **Icons**: Type, size, color, positioning
+- [ ] **Images**: Aspect ratios, positioning, effects
+- [ ] **Responsive Behavior**: How elements adapt to different screen sizes
+
+### Implementation Strategy
+1. **Start with structure** - create the basic HTML/JSX structure
+2. **Add styling layer by layer** - background, borders, spacing, typography
+3. **Implement interactions** - hover effects, click handlers, state changes
+4. **Add responsive behavior** - mobile-first approach with breakpoints
+5. **Test and refine** - compare with original image and adjust
+
+### Code Quality for Image Replication
+- **Use semantic HTML** - proper heading hierarchy, button elements, etc.
+- **Implement accessibility** - ARIA labels, keyboard navigation, screen reader support
+- **Write clean Tailwind classes** - use consistent spacing scale, color palette
+- **Create reusable components** - extract common patterns into separate components
+- **Add proper TypeScript types** - define interfaces for props and state
+- **Include proper error handling** - loading states, error boundaries
+
+### Common Image Replication Patterns
+- **Card Components**: Use `bg-white rounded-lg shadow-md p-6` as base
+- **Button Variants**: Primary, secondary, ghost, outline with proper hover states
+- **Form Elements**: Input fields with focus states, validation styling
+- **Navigation**: Header, sidebar, breadcrumbs with active states
+- **Data Display**: Tables, lists, grids with proper spacing
+- **Modals/Overlays**: Backdrop, positioning, z-index management
+
+### Questions to Ask When Image is Unclear
+- "What's the exact hex color of this element?"
+- "Should this element be clickable or just visual?"
+- "What happens when the user interacts with this component?"
+- "Are there any loading or error states I should implement?"
+- "What's the expected behavior on mobile devices?"
+- "Should this component support dark mode?"
+- "Are there any animations or micro-interactions?"
+- "What data should this component display?"
+- "Are there any accessibility requirements?"
+
+### Responsive Design from Images
+- **Mobile-first approach** - start with mobile layout from image
+- **Breakpoint strategy** - identify when layout changes occur
+- **Content prioritization** - what elements are most important on smaller screens
+- **Touch targets** - ensure buttons/links are properly sized for mobile
+- **Typography scaling** - how text sizes adapt across devices
+
+### Performance Considerations
+- **Optimize images** - use Next.js Image component with proper sizing
+- **Lazy load components** - implement lazy loading for non-critical elements
+- **Minimize re-renders** - use React.memo and useCallback appropriately
+- **Bundle optimization** - tree-shake unused Tailwind classes
+
+## 🎨 ENHANCED STYLING GUIDELINES FOR IMAGE REPLICATION
+
+### Color Matching
+- Use browser dev tools to extract exact hex values from images
+- Create a consistent color palette based on the design
+- Implement CSS custom properties for theme colors
+- Support both light and dark modes when applicable
+
+### Typography Precision
+- Match font families exactly (Google Fonts, system fonts)
+- Replicate font weights and sizes precisely
+- Implement proper line heights and letter spacing
+- Use consistent text hierarchy throughout
+
+### Spacing and Layout
+- Use Tailwind's spacing scale consistently
+- Measure relative spacing from the image
+- Implement proper responsive breakpoints
+- Maintain visual rhythm and alignment
+
+### Visual Effects
+- Replicate shadows, gradients, and blur effects
+- Implement proper border radius and borders
+- Add subtle animations and transitions
+- Ensure visual consistency across components
+
+## 🚀 OPTIMAL QUESTION FORMATS
+
+### Creating Components from Images
