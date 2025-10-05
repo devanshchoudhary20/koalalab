@@ -24,8 +24,8 @@ import { mainNavigation, products, solutions } from '@/config/navigation'
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+  const scrollToContact = (e?: React.MouseEvent<HTMLAnchorElement>) => {
+    e?.preventDefault()
     const contactSection = document.getElementById('contact')
     if (contactSection) {
       const headerHeight = 80 // Approximate header height
@@ -42,7 +42,7 @@ export default function Header() {
       const target = e.target as HTMLAnchorElement
       if (target && target.getAttribute('href') === '#contact') {
         e.preventDefault()
-        scrollToContact(e as any)
+        scrollToContact()
       }
     }
 
