@@ -17,7 +17,7 @@ module.exports = {
           text_gray : '#3D3D3D',
         },
         'gradient-fill': {
-          mobile: '#1CE8AB',
+          mobile: '#4EF0D2',
           desktop: '#4EF0D2',
           blueText: '#394CA9',
           submitButton: '#3547A1',

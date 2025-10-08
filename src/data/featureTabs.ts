@@ -25,7 +25,7 @@ export const TAB_DATA: Tab[] = [
     description: "Centralized control and monitoring for all your containerized applications with enterprise-grade security and compliance.",
     cta1: "View dashboard →",
     cta2: "Learn More →",
-    image: "/images/Accelerate.webp",
+    image: "/images/Manage.webp",
   },
   {
     id: "secure",
@@ -34,6 +34,6 @@ export const TAB_DATA: Tab[] = [
     description: "Advanced security scanning and vulnerability management with real-time threat detection and automated remediation.",
     cta1: "Security features →",
     cta2: "Learn More →",
-    image: "/images/Accelerate.webp", 
+    image: "/images/Secure.webp", 
   },
 ]

@@ -47,8 +47,8 @@ export default function TabContent({ active }: TabContentProps) {
                 <Image
                   src={t.image}
                   alt={`${t.label} illustration`}
-                  width={164}
-                  height={230}
+                  width={210}
+                  height={200}
                   className="rounded-xl select-none pointer-events-none"
                   priority={i === 0}
                 />
@@ -82,8 +82,8 @@ export default function TabContent({ active }: TabContentProps) {
                 <Image
                   src={t.image}
                   alt={`${t.label} illustration`}
-                  width={418}
-                  height={584}
+                  width={620}
+                  height={615}
                   className="rounded-xl select-none pointer-events-none"
                   priority={i === 0}
                 />
