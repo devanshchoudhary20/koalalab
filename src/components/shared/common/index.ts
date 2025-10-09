@@ -1,5 +1,3 @@
-export { default as ContactForm } from './ContactForm';
-export { default as CompaniesCarousel } from './CompaniesCarousel';
-export { default as ContactFormFields } from './ContactFormFields';
-export { default as CompaniesScrollContainer } from './CompaniesScrollContainer';
+export { ContactForm, ContactFormFields } from './contact';
+export { CompaniesCarousel, CompaniesScrollContainer } from './companies';
 export { default as VideoCarousel } from './Video/VideoCarousel';

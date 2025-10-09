@@ -49,11 +49,11 @@ export default function TabNavigation({ active, onTabChange }: TabNavigationProp
                 onClick={() => onTabChange(i)}
                 aria-current={isActive}
                 aria-controls={t.id}
-                className={`flex items-center gap-3 px-6 sm:px-8 py-5 rounded-lg border transition-all w-full sm:w-auto min-w-[175px] justify-center
+                className={`flex items-center gap-3 px-6 sm:px-8 py-5 rounded-lg border transition-all duration-500 ease-in-out w-full sm:w-auto min-w-[175px] justify-center
                 ${isActive ? "border-[#4EF0D2] shadow-sm" : "border-[#C4C4C4] hover:border-gray-400"}`}
               >
                 <TabIcon active={isActive} />
-                <span className={`text-base ${isActive ? "text-[#5B5B5B]" : "text-[#C4C4C4]"}`}>{t.label}</span>
+                <span className={`text-base transition-colors duration-500 ease-in-out ${isActive ? "text-[#5B5B5B]" : "text-[#C4C4C4]"}`}>{t.label}</span>
               </button>
             );
           })}

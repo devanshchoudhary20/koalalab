@@ -30,7 +30,7 @@ export default function TabContent({ active }: TabContentProps) {
         <section
           id={t.id}
           key={t.id}
-          className={`absolute inset-0 min-h-screen flex items-start transition-all duration-500 ease-in-out ${
+          className={`absolute inset-0 min-h-screen flex items-start transition-all duration-700 ease-in-out ${
             active === i 
               ? "opacity-100 translate-y-0" 
               : "opacity-0 translate-y-8"
