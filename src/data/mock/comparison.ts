@@ -95,8 +95,7 @@ export function getComparisonData(
 	containerSlug: string,
 	tagSlug: string,
 	alternative: string = 'official-python',
-	period: string = '30d',
-	_criticalHighOnly: boolean = false
+	period: string = '30d'
 ): ComparisonData {
 	const periodDays = {
 		'30d': 30,

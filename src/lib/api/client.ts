@@ -7,6 +7,8 @@ import type {
 	VulnerabilityListResponse,
 	AdvisoryListResponse,
 	ComparisonData,
+	VulnerabilityDetails,
+	AdvisoryDetails,
 } from '@/types/api'
 
 export interface ApiError {
@@ -131,6 +133,21 @@ export class ApiClient {
 		params: { alternative?: string; period?: string; critical_high_only?: boolean } = {}
 	): Promise<ComparisonData> {
 		return this.get<ComparisonData>(`/containers/${slug}/tags/${tagSlug}/comparison`, params)
+	}
+
+	async getVulnerabilityDetails(
+		packageSlug: string,
+		versionSlug: string,
+		cveSlug: string
+	): Promise<VulnerabilityDetails> {
+		return this.get<VulnerabilityDetails>(`/packages/${packageSlug}/versions/${versionSlug}/vulnerabilities/${cveSlug}`)
+	}
+
+	async getAdvisoryDetails(
+		packageSlug: string,
+		cveSlug: string
+	): Promise<AdvisoryDetails> {
+		return this.get<AdvisoryDetails>(`/packages/${packageSlug}/advisories/${cveSlug}`)
 	}
 }
 
