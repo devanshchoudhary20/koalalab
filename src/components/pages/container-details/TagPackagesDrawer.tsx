@@ -11,14 +11,12 @@ import {
 	Download, 
 	Copy, 
 	Package,
-	Filter,
 	AlertTriangle,
 	ChevronDown,
-	Plus,
-	Minus
+	Plus
 } from 'lucide-react'
 import { Tag } from '@/types/api'
-import { formatRelativeTime, formatSize, getSeverityColor } from '@/lib/utils/formatters'
+import { formatRelativeTime, formatSize } from '@/lib/utils/formatters'
 
 interface TagPackagesDrawerProps {
 	containerSlug: string
@@ -338,7 +336,7 @@ export default function TagPackagesDrawer({
 											</TableRow>
 										</TableHeader>
 										<TableBody>
-											{filteredVulnerabilities.map((vuln, index) => (
+											{filteredVulnerabilities.map((vuln) => (
 												<React.Fragment key={vuln.cve_id}>
 													<TableRow 
 														className="cursor-pointer hover:bg-muted/50"
@@ -388,7 +386,7 @@ export default function TagPackagesDrawer({
 																		<div className="mb-4">
 																			<h3 className="font-semibold mb-2 text-sm">Description</h3>
 																			<p className="text-sm text-muted-foreground leading-relaxed">
-																				There is an issue in CPython when using "bytes.decode("unicode_escape", error="ignore | replace"). If you are not using the "unicode_escape" encoding or an error handler your usage is not affected. To work-around this issue you may stop using the error handler and instead wrap the bytes.decode() call in a try-except catching the DecodeError.
+																				There is an issue in CPython when using &quot;bytes.decode(&quot;unicode_escape&quot;, error=&quot;ignore | replace&quot;). If you are not using the &quot;unicode_escape&quot; encoding or an error handler your usage is not affected. To work-around this issue you may stop using the error handler and instead wrap the bytes.decode() call in a try-except catching the DecodeError.
 																			</p>
 																		</div>
 																		

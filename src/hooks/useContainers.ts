@@ -24,7 +24,7 @@ export function useContainers(params: ContainerParams = {}) {
 		}
 
 		loadContainers()
-	}, [params.search, params.tags, params.page])
+	}, [params])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }
@@ -80,7 +80,7 @@ export function useContainerTags(slug: string, params: TagParams = {}) {
 		}
 
 		loadTags()
-	}, [slug, params.variant, params.search, params.page])
+	}, [slug, params])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }

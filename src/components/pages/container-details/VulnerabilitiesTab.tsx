@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Search, Filter, AlertTriangle, ExternalLink } from 'lucide-react'
+import { Search, Filter } from 'lucide-react'
 import VulnerabilityTable from './VulnerabilityTable'
 import Pagination from '@/components/shared/Pagination'
-import { formatRelativeTime, getSeverityColor, formatCVSSScore, getCVSSColor } from '@/lib/utils/formatters'
 
 interface VulnerabilitiesTabProps {
 	containerSlug: string
@@ -27,7 +24,7 @@ const architectures = [
 ]
 
 export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTabProps) {
-	const [selectedTag, setSelectedTag] = useState('latest')
+	const [selectedTag] = useState('latest')
 	const [severity, setSeverity] = useState('all')
 	const [arch, setArch] = useState('x86_64')
 	const [search, setSearch] = useState('')

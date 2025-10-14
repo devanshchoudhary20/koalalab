@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { usePackages } from '@/hooks/usePackages'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Filter, Download, Package } from 'lucide-react'
+import { Search, Filter, Download } from 'lucide-react'
 import PackageTable from './PackageTable'
 import Pagination from '@/components/shared/Pagination'
 
@@ -16,7 +16,7 @@ const architectures = [
 ]
 
 export default function SBOMTab({ containerSlug }: SBOMTabProps) {
-	const [selectedTag, setSelectedTag] = useState('latest')
+	const [selectedTag] = useState('latest')
 	const [arch, setArch] = useState('x86_64')
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)

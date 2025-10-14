@@ -30,7 +30,7 @@ export function usePackages(
 		}
 
 		loadPackages()
-	}, [slug, tagSlug, params.arch, params.search, params.page])
+	}, [slug, tagSlug, params])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }
