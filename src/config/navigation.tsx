@@ -19,13 +19,13 @@ export const products: NavigationItem[] = [
   { 
     name: 'Koala Image Directory', 
     description: 'Browse and manage your koala image collection', 
-    href: '/products/image-directory', 
+    href: '/containers', 
     icon: FolderIcon 
   },
   { 
     name: 'Compare Koala Images', 
     description: 'Compare your solutions with other alternatives', 
-    href: '/products/compare', 
+    href: '/containers', 
     icon: ScaleIcon 
   },
 ]
