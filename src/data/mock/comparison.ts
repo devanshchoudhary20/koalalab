@@ -96,7 +96,7 @@ export function getComparisonData(
 	tagSlug: string,
 	alternative: string = 'official-python',
 	period: string = '30d',
-	criticalHighOnly: boolean = false
+	_criticalHighOnly: boolean = false
 ): ComparisonData {
 	const periodDays = {
 		'30d': 30,
@@ -137,7 +137,7 @@ export function getComparisonData(
 		alternative: generateDailyCVEData(periodDays, true),
 	}
 
-	const netNewCVEsTimeline = generateNetNewCVEsTimeline(periodDays, criticalHighOnly)
+	const netNewCVEsTimeline = generateNetNewCVEsTimeline(periodDays)
 
 	return {
 		available_alternatives: availableAlternatives,
