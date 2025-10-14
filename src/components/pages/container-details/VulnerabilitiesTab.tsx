@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
 import { Input } from '@/components/ui/input'
-import { Search, Filter } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Search, Filter, AlertTriangle, ExternalLink } from 'lucide-react'
 import VulnerabilityTable from './VulnerabilityTable'
 import Pagination from '@/components/shared/Pagination'
+import { formatRelativeTime, getSeverityColor, formatCVSSScore, getCVSSColor } from '@/lib/utils/formatters'
 
 interface VulnerabilitiesTabProps {
 	containerSlug: string
@@ -24,7 +27,7 @@ const architectures = [
 ]
 
 export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTabProps) {
-	const [selectedTag] = useState('latest')
+	const [selectedTag, setSelectedTag] = useState('latest')
 	const [severity, setSeverity] = useState('all')
 	const [arch, setArch] = useState('x86_64')
 	const [search, setSearch] = useState('')
@@ -71,33 +74,23 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 			{data && (
 				<div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6 bg-muted/50 rounded-lg">
 					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-critical">
-							{data.results.filter(v => v.severity === 'Critical').length}
-						</div>
+						<div className="text-2xl font-bold text-severity-critical">{data.tag_metadata?.vulnerabilities?.critical || 0}</div>
 						<div className="text-sm text-muted-foreground">Critical</div>
 					</div>
 					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-high">
-							{data.results.filter(v => v.severity === 'High').length}
-						</div>
+						<div className="text-2xl font-bold text-severity-high">{data.tag_metadata?.vulnerabilities?.high || 0}</div>
 						<div className="text-sm text-muted-foreground">High</div>
 					</div>
 					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-medium">
-							{data.results.filter(v => v.severity === 'Medium').length}
-						</div>
+						<div className="text-2xl font-bold text-severity-medium">{data.tag_metadata?.vulnerabilities?.medium || 0}</div>
 						<div className="text-sm text-muted-foreground">Medium</div>
 					</div>
 					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-low">
-							{data.results.filter(v => v.severity === 'Low').length}
-						</div>
+						<div className="text-2xl font-bold text-severity-low">{data.tag_metadata?.vulnerabilities?.low || 0}</div>
 						<div className="text-sm text-muted-foreground">Low</div>
 					</div>
 					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-negligible">
-							{data.results.filter(v => v.severity === 'Unspecified').length}
-						</div>
+						<div className="text-2xl font-bold text-severity-negligible">{data.tag_metadata?.vulnerabilities?.negligible || 0}</div>
 						<div className="text-sm text-muted-foreground">Negligible</div>
 					</div>
 				</div>

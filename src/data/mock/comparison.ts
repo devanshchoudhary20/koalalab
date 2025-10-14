@@ -44,7 +44,7 @@ function generateDailyCVEData(days: number, isAlternative: boolean = false): Dai
 	}))
 }
 
-function generateNetNewCVEsTimeline(days: number): NetNewCVEsTimeline[] {
+function generateNetNewCVEsTimeline(days: number, criticalHighOnly: boolean = false): NetNewCVEsTimeline[] {
 	const data: NetNewCVEsTimeline[] = []
 	const baseDate = new Date()
 	baseDate.setDate(baseDate.getDate() - days)
@@ -95,7 +95,8 @@ export function getComparisonData(
 	containerSlug: string,
 	tagSlug: string,
 	alternative: string = 'official-python',
-	period: string = '30d'
+	period: string = '30d',
+	criticalHighOnly: boolean = false
 ): ComparisonData {
 	const periodDays = {
 		'30d': 30,
@@ -136,7 +137,7 @@ export function getComparisonData(
 		alternative: generateDailyCVEData(periodDays, true),
 	}
 
-	const netNewCVEsTimeline = generateNetNewCVEsTimeline(periodDays)
+	const netNewCVEsTimeline = generateNetNewCVEsTimeline(periodDays, criticalHighOnly)
 
 	return {
 		available_alternatives: availableAlternatives,

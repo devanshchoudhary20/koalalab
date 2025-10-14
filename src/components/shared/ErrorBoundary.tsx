@@ -47,7 +47,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 					</CardHeader>
 					<CardContent>
 						<p className="text-muted-foreground mb-4">
-							We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
+							We're sorry, but something unexpected happened. Please try refreshing the page.
 						</p>
 						{process.env.NODE_ENV === 'development' && this.state.error && (
 							<details className="mb-4">

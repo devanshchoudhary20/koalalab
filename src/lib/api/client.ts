@@ -1,15 +1,4 @@
-import { API_BASE_URL } from './config'
-import type {
-	ContainerListResponse,
-	Container,
-	TagListResponse,
-	PackageListResponse,
-	VulnerabilityListResponse,
-	AdvisoryListResponse,
-	ComparisonData,
-	VulnerabilityDetails,
-	AdvisoryDetails,
-} from '@/types/api'
+const API_BASE_URL = 'http://localhost:3000/api/v1'
 
 export interface ApiError {
 	error: string
@@ -86,68 +75,6 @@ export class ApiClient {
 
 	async delete<T>(endpoint: string): Promise<T> {
 		return this.request<T>(endpoint, { method: 'DELETE' })
-	}
-
-	// Container methods
-	async getContainers(params: { search?: string; tags?: string; page?: number } = {}): Promise<ContainerListResponse> {
-		return this.get<ContainerListResponse>('/containers', params)
-	}
-
-	async getContainer(slug: string): Promise<Container> {
-		return this.get<Container>(`/containers/${slug}`)
-	}
-
-	async getContainerTags(
-		slug: string,
-		params: { variant?: string; search?: string; page?: number } = {}
-	): Promise<TagListResponse> {
-		return this.get<TagListResponse>(`/containers/${slug}/tags`, params)
-	}
-
-	async getTagPackages(
-		slug: string,
-		tagSlug: string,
-		params: { arch?: string; search?: string; page?: number } = {}
-	): Promise<PackageListResponse> {
-		return this.get<PackageListResponse>(`/containers/${slug}/tags/${tagSlug}/packages`, params)
-	}
-
-	async getTagVulnerabilities(
-		slug: string,
-		tagSlug: string,
-		params: { arch?: string; severity?: string; search?: string; page?: number } = {}
-	): Promise<VulnerabilityListResponse> {
-		return this.get<VulnerabilityListResponse>(`/containers/${slug}/tags/${tagSlug}/vulnerabilities`, params)
-	}
-
-	async getContainerAdvisories(
-		slug: string,
-		params: { search?: string; status?: string; page?: number } = {}
-	): Promise<AdvisoryListResponse> {
-		return this.get<AdvisoryListResponse>(`/containers/${slug}/advisories`, params)
-	}
-
-	async getTagComparison(
-		slug: string,
-		tagSlug: string,
-		params: { alternative?: string; period?: string } = {}
-	): Promise<ComparisonData> {
-		return this.get<ComparisonData>(`/containers/${slug}/tags/${tagSlug}/comparison`, params)
-	}
-
-	async getVulnerabilityDetails(
-		packageSlug: string,
-		versionSlug: string,
-		cveSlug: string
-	): Promise<VulnerabilityDetails> {
-		return this.get<VulnerabilityDetails>(`/packages/${packageSlug}/versions/${versionSlug}/vulnerabilities/${cveSlug}`)
-	}
-
-	async getAdvisoryDetails(
-		packageSlug: string,
-		cveSlug: string
-	): Promise<AdvisoryDetails> {
-		return this.get<AdvisoryDetails>(`/packages/${packageSlug}/advisories/${cveSlug}`)
 	}
 }
 

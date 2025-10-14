@@ -43,6 +43,7 @@ export interface AdvisoryParams {
 export interface ComparisonParams {
 	alternative?: string
 	period?: string
+	critical_high_only?: boolean
 }
 
 // Container endpoints

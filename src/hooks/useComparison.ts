@@ -30,7 +30,7 @@ export function useComparison(
 		}
 
 		loadComparison()
-	}, [slug, tagSlug, params])
+	}, [slug, tagSlug, params.alternative, params.period, params.critical_high_only])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }

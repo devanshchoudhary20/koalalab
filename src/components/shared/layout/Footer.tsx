@@ -55,14 +55,14 @@ export default function FooterSection() {
               <h3 className="text-lg font-semibold text-white mb-4">Products</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white">
+                  <a href="/containers" className="text-sm text-gray-300 hover:text-white">
                     Koala Image directory
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white">
+                  <a href="/containers" className="text-sm text-gray-300 hover:text-white">
                     Compare Koala Images
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>

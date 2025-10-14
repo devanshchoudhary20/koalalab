@@ -35,7 +35,7 @@ const statuses = [
 	'Fix Not Planned',
 ]
 
-export function generateAdvisoriesForContainer(): Advisory[] {
+export function generateAdvisoriesForContainer(containerSlug: string): Advisory[] {
 	const advisories: Advisory[] = []
 
 	// Generate 15-25 advisories

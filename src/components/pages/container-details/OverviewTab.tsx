@@ -12,8 +12,9 @@ import {
 	ExternalLink,
 	Info,
 	CheckCircle,
+	AlertTriangle
 } from 'lucide-react'
-import { formatRelativeTime } from '@/lib/utils/formatters'
+import { formatRelativeTime, formatSize } from '@/lib/utils/formatters'
 
 interface OverviewTabProps {
 	containerSlug: string
@@ -48,7 +49,7 @@ export default function OverviewTab({ containerSlug }: OverviewTabProps) {
 			<div className="text-center py-12">
 				<h2 className="text-2xl font-bold mb-2">Container Not Found</h2>
 				<p className="text-muted-foreground">
-					The container you&apos;re looking for doesn&apos;t exist.
+					The container you're looking for doesn't exist.
 				</p>
 			</div>
 		)

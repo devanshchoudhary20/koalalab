@@ -82,7 +82,7 @@ export class MockApiClient {
 	): Promise<PackageListResponse> {
 		await simulateDelay()
 		
-		const { packages, tag_metadata } = generatePackagesForTag(slug, tagSlug)
+		const { packages, tag_metadata } = generatePackagesForTag(slug, tagSlug, params.arch)
 		
 		let filteredPackages = packages
 		
@@ -104,7 +104,7 @@ export class MockApiClient {
 	): Promise<VulnerabilityListResponse> {
 		await simulateDelay()
 		
-		const { vulnerabilities, tag_metadata } = generateVulnerabilitiesForTag(slug, tagSlug)
+		const { vulnerabilities, tag_metadata } = generateVulnerabilitiesForTag(slug, tagSlug, params.arch)
 		
 		let filteredVulnerabilities = vulnerabilities
 		
@@ -130,7 +130,7 @@ export class MockApiClient {
 	): Promise<AdvisoryListResponse> {
 		await simulateDelay()
 		
-		let advisories = generateAdvisoriesForContainer()
+		let advisories = generateAdvisoriesForContainer(slug)
 		
 		// Filter by status
 		if (params.status) {
@@ -148,7 +148,7 @@ export class MockApiClient {
 	async getTagComparison(
 		slug: string,
 		tagSlug: string,
-		params: { alternative?: string; period?: string } = {}
+		params: { alternative?: string; period?: string; critical_high_only?: boolean } = {}
 	): Promise<ComparisonData> {
 		await simulateDelay()
 		
@@ -156,7 +156,8 @@ export class MockApiClient {
 			slug,
 			tagSlug,
 			params.alternative,
-			params.period
+			params.period,
+			params.critical_high_only
 		)
 	}
 
