@@ -37,8 +37,7 @@ const severityLevels = [
 
 export function generateVulnerabilitiesForTag(
 	containerSlug: string,
-	tagSlug: string,
-	_arch: string = 'x86_64'
+	tagSlug: string
 ): { vulnerabilities: Vulnerability[]; tag_metadata: TagMetadata } {
 	const vulnerabilities: Vulnerability[] = []
 

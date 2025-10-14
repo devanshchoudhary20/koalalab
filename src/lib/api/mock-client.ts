@@ -82,7 +82,7 @@ export class MockApiClient {
 	): Promise<PackageListResponse> {
 		await simulateDelay()
 		
-		const { packages, tag_metadata } = generatePackagesForTag(slug, tagSlug, params.arch)
+		const { packages, tag_metadata } = generatePackagesForTag(slug, tagSlug)
 		
 		let filteredPackages = packages
 		
@@ -104,7 +104,7 @@ export class MockApiClient {
 	): Promise<VulnerabilityListResponse> {
 		await simulateDelay()
 		
-		const { vulnerabilities, tag_metadata } = generateVulnerabilitiesForTag(slug, tagSlug, params.arch)
+		const { vulnerabilities, tag_metadata } = generateVulnerabilitiesForTag(slug, tagSlug)
 		
 		let filteredVulnerabilities = vulnerabilities
 		
@@ -130,7 +130,7 @@ export class MockApiClient {
 	): Promise<AdvisoryListResponse> {
 		await simulateDelay()
 		
-		let advisories = generateAdvisoriesForContainer(slug)
+		let advisories = generateAdvisoriesForContainer()
 		
 		// Filter by status
 		if (params.status) {
