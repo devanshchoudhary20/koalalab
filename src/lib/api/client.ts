@@ -130,7 +130,7 @@ export class ApiClient {
 	async getTagComparison(
 		slug: string,
 		tagSlug: string,
-		params: { alternative?: string; period?: string; critical_high_only?: boolean } = {}
+		params: { alternative?: string; period?: string } = {}
 	): Promise<ComparisonData> {
 		return this.get<ComparisonData>(`/containers/${slug}/tags/${tagSlug}/comparison`, params)
 	}

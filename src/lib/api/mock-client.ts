@@ -148,7 +148,7 @@ export class MockApiClient {
 	async getTagComparison(
 		slug: string,
 		tagSlug: string,
-		params: { alternative?: string; period?: string; critical_high_only?: boolean } = {}
+		params: { alternative?: string; period?: string } = {}
 	): Promise<ComparisonData> {
 		await simulateDelay()
 		
@@ -156,8 +156,7 @@ export class MockApiClient {
 			slug,
 			tagSlug,
 			params.alternative,
-			params.period,
-			params.critical_high_only
+			params.period
 		)
 	}
 
