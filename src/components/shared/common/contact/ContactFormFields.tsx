@@ -27,22 +27,9 @@ export default function ContactFormFields({ formState }: ContactFormFieldsProps)
 
   return (
     <form 
-      name="contact" 
-      method="POST" 
-      data-netlify="true" 
-      netlify-honeypot="bot-field"
       onSubmit={handleSubmit} 
       className="space-y-6"
     >
-      {/* Hidden field for Netlify Forms */}
-      <input type="hidden" name="form-name" value="contact" />
-      
-      {/* Honeypot field for spam protection */}
-      <p className="hidden">
-        <label>
-          Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
-        </label>
-      </p>
 
       <Input
         type="email"

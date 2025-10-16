@@ -7,6 +7,21 @@
   NPM_VERSION = "9"
   NEXT_PUBLIC_API_BASE_URL = "https://cheerful-truffle-f285d5.netlify.app/api/v1"
 
+# Form handling
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

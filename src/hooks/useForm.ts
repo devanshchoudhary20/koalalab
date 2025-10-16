@@ -9,31 +9,48 @@ export function useForm() {
   const [isSuccess, setIsSuccess] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setIsSuccess(false)
-    
+    e.preventDefault() // Always prevent default to avoid page reload
     const formErrors = validateForm(email, inquiry)
     setErrors(formErrors)
     
     if (Object.keys(formErrors).length === 0) {
+      setIsSubmitting(true)
+      setIsSuccess(false)
+      
       try {
-        // For Netlify Forms, we let the form submit naturally
-        // The form will be handled by Netlify's servers
-        console.log('Form submitted to Netlify Forms:', { email, inquiry })
+        // Submit to Formspree
+        const formspreeEndpoint = 'https://formspree.io/f/mpwybprg'
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            inquiry,
+            _subject: 'New Contact Form Submission',
+            _replyto: email,
+          }),
+        })
         
-        // Show success message
-        setIsSuccess(true)
-        setEmail('')
-        setInquiry('')
-        setErrors({})
+        if (response.ok) {
+          console.log('Form submitted successfully to Formspree')
+          setIsSuccess(true)
+          setEmail('')
+          setInquiry('')
+          setErrors({})
+        } else {
+          const errorData = await response.json()
+          console.error('Form submission failed:', errorData)
+          throw new Error('Form submission failed')
+        }
       } catch (error) {
         console.error('Form submission error:', error)
         setErrors({ email: 'Failed to submit. Please try again.' })
       }
+      
+      setIsSubmitting(false)
     }
-    
-    setIsSubmitting(false)
   }
 
   return {
