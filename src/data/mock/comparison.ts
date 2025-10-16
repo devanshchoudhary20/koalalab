@@ -44,7 +44,7 @@ function generateDailyCVEData(days: number, isAlternative: boolean = false): Dai
 	}))
 }
 
-function generateNetNewCVEsTimeline(days: number, _criticalHighOnly: boolean = false): NetNewCVEsTimeline[] {
+function generateNetNewCVEsTimeline(days: number, criticalHighOnly: boolean = false): NetNewCVEsTimeline[] {
 	const data: NetNewCVEsTimeline[] = []
 	const baseDate = new Date()
 	baseDate.setDate(baseDate.getDate() - days)

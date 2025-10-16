@@ -2,15 +2,26 @@
 
 import React from 'react'
 import { Button, Input } from '@/components/shared/ui'
-import { useForm } from '@/hooks/useForm'
-import ThankYouMessage from './ThankYouMessage'
 
-export default function ContactFormFields() {
-  const { email, setEmail, inquiry, setInquiry, errors, isSubmitting, isSuccess, handleSubmit } = useForm()
+interface ContactFormFieldsProps {
+  formState: {
+    email: string
+    setEmail: (email: string) => void
+    inquiry: string
+    setInquiry: (inquiry: string) => void
+    errors: any
+    isSubmitting: boolean
+    isSuccess: boolean
+    handleSubmit: (e: React.FormEvent) => void
+  }
+}
 
-  // Show thank you message after successful submission
+export default function ContactFormFields({ formState }: ContactFormFieldsProps) {
+  const { email, setEmail, inquiry, setInquiry, errors, isSubmitting, isSuccess, handleSubmit } = formState
+
+  // Hide form fields after successful submission
   if (isSuccess) {
-    return <ThankYouMessage />
+    return null
   }
 
   return (
@@ -28,7 +39,7 @@ export default function ContactFormFields() {
       {/* Honeypot field for spam protection */}
       <p className="hidden">
         <label>
-          Don't fill this out if you're human: <input name="bot-field" />
+          Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
         </label>
       </p>
 

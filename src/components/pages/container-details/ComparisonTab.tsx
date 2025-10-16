@@ -3,7 +3,7 @@ import { useComparison } from '@/hooks/useComparison'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { TrendingDown, TrendingUp, Shield, Package } from 'lucide-react'
+import { TrendingDown, TrendingUp, Shield } from 'lucide-react'
 import { formatPercentage } from '@/lib/utils/formatters'
 
 interface ComparisonTabProps {

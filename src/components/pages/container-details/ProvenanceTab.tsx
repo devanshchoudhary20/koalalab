@@ -18,7 +18,7 @@ interface ProvenanceTabProps {
 	containerSlug: string
 }
 
-export default function ProvenanceTab({ containerSlug: _containerSlug }: ProvenanceTabProps) {
+export default function ProvenanceTab({ containerSlug }: ProvenanceTabProps) {
 	// Mock provenance data - in a real app this would come from an API
 	const provenanceData = {
 		build_id: 'build-12345-abcde',

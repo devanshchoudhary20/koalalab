@@ -27,7 +27,7 @@ const basePackages = [
 export function generatePackagesForTag(
 	containerSlug: string,
 	tagSlug: string,
-	_arch: string = 'x86_64'
+	arch: string = 'x86_64'
 ): { packages: Package[]; tag_metadata: TagMetadata } {
 	const packages: Package[] = []
 
