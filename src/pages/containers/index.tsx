@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { useRouter } from 'next/router'
 import { useContainers } from '@/hooks/useContainers'
 import { Header, Footer } from '@/components/shared/layout'
 import ContainerGrid from '@/components/pages/containers/ContainerGrid'
@@ -16,28 +17,79 @@ const categories = [
 ]
 
 export default function ContainersPage() {
+	const router = useRouter()
 	const [search, setSearch] = useState('')
 	const [selectedCategory, setSelectedCategory] = useState('featured')
 	const [page, setPage] = useState(1)
+	
 
-	const { data, loading, error } = useContainers({
+	// Initialize state from URL parameters on mount
+	useEffect(() => {
+		if (router.isReady) {
+			const { search: searchParam, category, page: pageParam } = router.query
+			
+			if (searchParam && typeof searchParam === 'string') {
+				setSearch(searchParam)
+			}
+			if (category && typeof category === 'string') {
+				setSelectedCategory(category)
+			}
+			if (pageParam && typeof pageParam === 'string') {
+				const pageNum = parseInt(pageParam, 10)
+				if (!isNaN(pageNum) && pageNum > 0) {
+					setPage(pageNum)
+				}
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [router.isReady])
+
+	const containerParams = useMemo(() => ({
 		search: search || undefined,
 		tags: selectedCategory !== 'featured' ? selectedCategory : undefined,
 		page,
-	})
+	}), [search, selectedCategory, page])
+
+	const { data, loading, error } = useContainers(containerParams)
+
+	const updateURL = (updates: Record<string, string | number | undefined>) => {
+		const newQuery = { ...router.query }
+		
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === undefined || value === '' || value === 'featured') {
+				delete newQuery[key]
+			} else {
+				newQuery[key] = String(value)
+			}
+		})
+
+		router.push({
+			pathname: router.pathname,
+			query: newQuery
+		}, undefined, { shallow: true })
+	}
 
 	const handleSearch = (value: string) => {
 		setSearch(value)
-		setPage(1)
+		// Only reset page and update URL if search value is not empty
+		if (value.trim() !== '') {
+			setPage(1)
+			updateURL({ search: value, page: 1 })
+		} else {
+			// If search is empty, just update the search param without resetting page
+			updateURL({ search: value })
+		}
 	}
 
 	const handleCategoryChange = (category: string) => {
 		setSelectedCategory(category)
 		setPage(1)
+		updateURL({ category, page: 1 })
 	}
 
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage)
+		updateURL({ page: newPage })
 	}
 
 	if (error) {
@@ -94,14 +146,9 @@ export default function ContainersPage() {
 				) : data ? (
 					<>
 						<ContainerGrid containers={data.results} />
-						{/* Debug info - remove in production */}
-						<div className="text-sm text-gray-500 mb-4">
-							Debug: Page {data.pagination.page} of {data.pagination.total_pages} 
-							({data.pagination.total_results} total results, {data.results.length} on this page)
-						</div>
 						{data.pagination.total_pages > 1 && (
 							<Pagination
-								currentPage={data.pagination.page}
+								currentPage={page}
 								totalPages={data.pagination.total_pages}
 								onPageChange={handlePageChange}
 								totalResults={data.pagination.total_results}

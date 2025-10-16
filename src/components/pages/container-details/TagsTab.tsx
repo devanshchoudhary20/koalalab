@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useContainerTags } from '@/hooks/useContainers'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -17,9 +18,30 @@ const variants = [
 ]
 
 export default function TagsTab({ containerSlug }: TagsTabProps) {
+	const router = useRouter()
 	const [variant, setVariant] = useState('all')
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
+
+	// Initialize state from URL parameters on mount
+	useEffect(() => {
+		if (router.isReady) {
+			const { variant: variantParam, search: searchParam, page: pageParam } = router.query
+			
+			if (variantParam && typeof variantParam === 'string') {
+				setVariant(variantParam)
+			}
+			if (searchParam && typeof searchParam === 'string') {
+				setSearch(searchParam)
+			}
+			if (pageParam && typeof pageParam === 'string') {
+				const pageNum = parseInt(pageParam, 10)
+				if (!isNaN(pageNum) && pageNum > 0) {
+					setPage(pageNum)
+				}
+			}
+		}
+	}, [router.isReady, router.query])
 
 	const { data, loading, error } = useContainerTags(containerSlug, {
 		variant: variant !== 'all' ? variant : undefined,
@@ -27,18 +49,38 @@ export default function TagsTab({ containerSlug }: TagsTabProps) {
 		page,
 	})
 
+	const updateURL = (updates: Record<string, string | number | undefined>) => {
+		const newQuery = { ...router.query }
+		
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === undefined || value === '' || value === 'all') {
+				delete newQuery[key]
+			} else {
+				newQuery[key] = String(value)
+			}
+		})
+
+		router.push({
+			pathname: router.pathname,
+			query: newQuery
+		}, undefined, { shallow: true })
+	}
+
 	const handleSearch = (value: string) => {
 		setSearch(value)
 		setPage(1)
+		updateURL({ search: value, page: 1 })
 	}
 
 	const handleVariantChange = (newVariant: string) => {
 		setVariant(newVariant)
 		setPage(1)
+		updateURL({ variant: newVariant, page: 1 })
 	}
 
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage)
+		updateURL({ page: newPage })
 	}
 
 	if (error) {

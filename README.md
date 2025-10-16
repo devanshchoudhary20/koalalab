@@ -18,7 +18,7 @@ A modern container security platform built with Next.js, TypeScript, and Tailwin
 - **State Management**: React Context + useReducer
 - **Data Fetching**: Custom hooks with Fetch API
 - **Icons**: Heroicons, Lucide React
-- **Mock APIs**: Express.js server with CORS
+- **API**: Netlify-hosted Mock API with offline fallback
 
 ## Getting Started
 
@@ -42,43 +42,27 @@ npm install
 
 3. Start the development server:
 ```bash
-# Start the Next.js app (uses mock data by default)
-npm run dev:app
-
-# Or start both API and frontend servers (if you want to use MockApis server)
 npm run dev
 ```
 
-### Mock Data vs Real API
+### API Configuration
 
-The application supports two modes:
+The application uses the Netlify-hosted Mock API by default:
 
-**Mock Data Mode (Default)**
-- Uses static mock data files
-- No server required
-- Faster development
-- Perfect for demos and development
+**Production API**
+- Uses Netlify-hosted API: `https://cheerful-truffle-f285d5.netlify.app/api/v1`
+- No local server required
+- Works in production and development
+- Automatic offline error handling
 
-**Real API Mode**
-- Uses MockApis server or real API
-- Requires server to be running
-- More realistic data flow
-
-To switch between modes, create a `.env.local` file:
+To use a different API endpoint, create a `.env.local` file:
 ```bash
-# For mock data (default)
-NEXT_PUBLIC_USE_MOCK_DATA=true
-
-# For real API
-NEXT_PUBLIC_USE_MOCK_DATA=false
-NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api/v1
+NEXT_PUBLIC_API_BASE_URL=https://your-api-endpoint.com/api/v1
 ```
 
 ### Development Scripts
 
-- `npm run dev` - Start both API and frontend servers concurrently
-- `npm run dev:api` - Start Mock APIs server on port 3000
-- `npm run dev:app` - Start Next.js development server on port 3001 (recommended)
+- `npm run dev` - Start Next.js development server
 - `npm run build` - Build the application for production
 - `npm run start` - Start the production server
 - `npm run lint` - Run ESLint
@@ -104,7 +88,7 @@ src/
 
 ## API Endpoints
 
-The platform integrates with Mock APIs providing the following endpoints:
+The platform integrates with the Netlify-hosted Mock API providing the following endpoints:
 
 ### Containers
 - `GET /api/v1/containers` - List containers with search and pagination

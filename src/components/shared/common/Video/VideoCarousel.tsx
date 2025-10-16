@@ -121,7 +121,7 @@ export default function VideoCarousel({
               />
 
               {/* Play badge */}
-              <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 bg-background/80 text-xs font-medium text-foreground backdrop-blur">
+              <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 text-xs font-medium text-foreground backdrop-blur">
                 <PlayIcon className="h-12 w-12" />
               </div>
 

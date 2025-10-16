@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/v1'
+import { API_BASE_URL } from './config'
 
 export interface ApiError {
 	error: string
@@ -36,6 +36,10 @@ export class ApiClient {
 			return await response.json()
 		} catch (error) {
 			if (error instanceof Error) {
+				// Handle network errors with user-friendly messages
+				if (error.message.includes('fetch')) {
+					throw new Error('Unable to connect to the API. Please check your internet connection.')
+				}
 				throw error
 			}
 			throw new Error('An unexpected error occurred')

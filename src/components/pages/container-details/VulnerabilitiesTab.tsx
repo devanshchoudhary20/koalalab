@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
 import { Input } from '@/components/ui/input'
 import { Search, Filter } from 'lucide-react'
@@ -24,11 +25,35 @@ const architectures = [
 ]
 
 export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTabProps) {
+	const router = useRouter()
 	const [selectedTag] = useState('latest')
+	
+	// Initialize state from URL parameters
 	const [severity, setSeverity] = useState('all')
 	const [arch, setArch] = useState('x86_64')
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
+
+	// Update state from URL on mount and when URL changes
+	useEffect(() => {
+		const { vuln_severity, vuln_arch, vuln_search, vuln_page } = router.query
+		
+		if (vuln_severity && typeof vuln_severity === 'string') {
+			setSeverity(vuln_severity)
+		}
+		if (vuln_arch && typeof vuln_arch === 'string') {
+			setArch(vuln_arch)
+		}
+		if (vuln_search && typeof vuln_search === 'string') {
+			setSearch(vuln_search)
+		}
+		if (vuln_page && typeof vuln_page === 'string') {
+			const pageNum = parseInt(vuln_page, 10)
+			if (!isNaN(pageNum) && pageNum > 0) {
+				setPage(pageNum)
+			}
+		}
+	}, [router.query])
 
 	const { data, loading, error } = useVulnerabilities(containerSlug, selectedTag, {
 		arch: arch !== 'x86_64' ? arch : undefined,
@@ -37,23 +62,56 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 		page,
 	})
 
+	// Helper function to update URL parameters
+	const updateUrlParams = (updates: Record<string, string | number | null>) => {
+		const newQuery = { ...router.query }
+		
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === null || value === '' || value === 'all' || value === 'x86_64' || value === 1) {
+				delete newQuery[key]
+			} else {
+				newQuery[key] = String(value)
+			}
+		})
+
+		router.push({
+			pathname: router.pathname,
+			query: newQuery
+		}, undefined, { shallow: true })
+	}
+
 	const handleSearch = (value: string) => {
 		setSearch(value)
 		setPage(1)
+		updateUrlParams({
+			vuln_search: value,
+			vuln_page: 1
+		})
 	}
 
 	const handleSeverityChange = (newSeverity: string) => {
 		setSeverity(newSeverity)
 		setPage(1)
+		updateUrlParams({
+			vuln_severity: newSeverity,
+			vuln_page: 1
+		})
 	}
 
 	const handleArchChange = (newArch: string) => {
 		setArch(newArch)
 		setPage(1)
+		updateUrlParams({
+			vuln_arch: newArch,
+			vuln_page: 1
+		})
 	}
 
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage)
+		updateUrlParams({
+			vuln_page: newPage
+		})
 	}
 
 	if (error) {

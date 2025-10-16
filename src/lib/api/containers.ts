@@ -1,6 +1,4 @@
 import { api } from './index'
-import { USE_MOCK_DATA } from './config'
-import type { MockApiClient } from './mock-client'
 import type { ApiClient } from './client'
 import type {
 	ContainerListResponse,
@@ -10,6 +8,8 @@ import type {
 	VulnerabilityListResponse,
 	AdvisoryListResponse,
 	ComparisonData,
+	VulnerabilityDetails,
+	AdvisoryDetails,
 } from '@/types/api'
 
 export interface ContainerParams {
@@ -51,16 +51,10 @@ export interface ComparisonParams {
 
 // Container endpoints
 export async function fetchContainers(params: ContainerParams = {}): Promise<ContainerListResponse> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getContainers(params)
-	}
 	return (api as ApiClient).get<ContainerListResponse>('/containers', params as Record<string, string | number | boolean>)
 }
 
 export async function fetchContainer(slug: string): Promise<Container> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getContainer(slug)
-	}
 	return (api as ApiClient).get<Container>(`/containers/${slug}`)
 }
 
@@ -68,9 +62,6 @@ export async function fetchContainerTags(
 	slug: string,
 	params: TagParams = {}
 ): Promise<TagListResponse> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getContainerTags(slug, params)
-	}
 	return (api as ApiClient).get<TagListResponse>(`/containers/${slug}/tags`, params as Record<string, string | number | boolean>)
 }
 
@@ -79,9 +70,6 @@ export async function fetchTagPackages(
 	tagSlug: string,
 	params: PackageParams = {}
 ): Promise<PackageListResponse> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getTagPackages(slug, tagSlug, params)
-	}
 	return (api as ApiClient).get<PackageListResponse>(`/containers/${slug}/tags/${tagSlug}/packages`, params as Record<string, string | number | boolean>)
 }
 
@@ -90,9 +78,6 @@ export async function fetchTagVulnerabilities(
 	tagSlug: string,
 	params: VulnerabilityParams = {}
 ): Promise<VulnerabilityListResponse> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getTagVulnerabilities(slug, tagSlug, params)
-	}
 	return (api as ApiClient).get<VulnerabilityListResponse>(`/containers/${slug}/tags/${tagSlug}/vulnerabilities`, params as Record<string, string | number | boolean>)
 }
 
@@ -100,9 +85,6 @@ export async function fetchContainerAdvisories(
 	slug: string,
 	params: AdvisoryParams = {}
 ): Promise<AdvisoryListResponse> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getContainerAdvisories(slug, params)
-	}
 	return (api as ApiClient).get<AdvisoryListResponse>(`/containers/${slug}/advisories`, params as Record<string, string | number | boolean>)
 }
 
@@ -111,8 +93,22 @@ export async function fetchTagComparison(
 	tagSlug: string,
 	params: ComparisonParams = {}
 ): Promise<ComparisonData> {
-	if (USE_MOCK_DATA) {
-		return (api as MockApiClient).getTagComparison(slug, tagSlug, params)
-	}
 	return (api as ApiClient).get<ComparisonData>(`/containers/${slug}/tags/${tagSlug}/comparison`, params as Record<string, string | number | boolean>)
+}
+
+// Vulnerability details endpoint
+export async function fetchVulnerabilityDetails(
+	packageSlug: string,
+	versionSlug: string,
+	cveSlug: string
+): Promise<VulnerabilityDetails> {
+	return (api as ApiClient).get<VulnerabilityDetails>(`/packages/${packageSlug}/versions/${versionSlug}/vulnerabilities/${cveSlug}`)
+}
+
+// Advisory details endpoint
+export async function fetchAdvisoryDetails(
+	packageSlug: string,
+	cveSlug: string
+): Promise<AdvisoryDetails> {
+	return (api as ApiClient).get<AdvisoryDetails>(`/packages/${packageSlug}/advisories/${cveSlug}`)
 }

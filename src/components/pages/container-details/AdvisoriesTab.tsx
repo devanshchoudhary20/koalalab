@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useAdvisories } from '@/hooks/useAdvisories'
 import { Input } from '@/components/ui/input'
 import { Search, Filter } from 'lucide-react'
@@ -19,9 +20,30 @@ const statuses = [
 ]
 
 export default function AdvisoriesTab({ containerSlug }: AdvisoriesTabProps) {
+	const router = useRouter()
+	
+	// Initialize state from URL parameters
 	const [search, setSearch] = useState('')
 	const [status, setStatus] = useState('all')
 	const [page, setPage] = useState(1)
+
+	// Update state from URL on mount and when URL changes
+	useEffect(() => {
+		const { adv_search, adv_status, adv_page } = router.query
+		
+		if (adv_search && typeof adv_search === 'string') {
+			setSearch(adv_search)
+		}
+		if (adv_status && typeof adv_status === 'string') {
+			setStatus(adv_status)
+		}
+		if (adv_page && typeof adv_page === 'string') {
+			const pageNum = parseInt(adv_page, 10)
+			if (!isNaN(pageNum) && pageNum > 0) {
+				setPage(pageNum)
+			}
+		}
+	}, [router.query])
 
 	const { data, loading, error } = useAdvisories(containerSlug, {
 		search: search || undefined,
@@ -29,18 +51,47 @@ export default function AdvisoriesTab({ containerSlug }: AdvisoriesTabProps) {
 		page,
 	})
 
+	// Helper function to update URL parameters
+	const updateUrlParams = (updates: Record<string, string | number | null>) => {
+		const newQuery = { ...router.query }
+		
+		Object.entries(updates).forEach(([key, value]) => {
+			if (value === null || value === '' || value === 'all' || value === 1) {
+				delete newQuery[key]
+			} else {
+				newQuery[key] = String(value)
+			}
+		})
+
+		router.push({
+			pathname: router.pathname,
+			query: newQuery
+		}, undefined, { shallow: true })
+	}
+
 	const handleSearch = (value: string) => {
 		setSearch(value)
 		setPage(1)
+		updateUrlParams({
+			adv_search: value,
+			adv_page: 1
+		})
 	}
 
 	const handleStatusChange = (newStatus: string) => {
 		setStatus(newStatus)
 		setPage(1)
+		updateUrlParams({
+			adv_status: newStatus,
+			adv_page: 1
+		})
 	}
 
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage)
+		updateUrlParams({
+			adv_page: newPage
+		})
 	}
 
 	if (error) {

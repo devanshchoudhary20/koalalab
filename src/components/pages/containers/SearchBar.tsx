@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
@@ -8,8 +8,15 @@ interface SearchBarProps {
 
 export default function SearchBar({ onSearch }: SearchBarProps) {
 	const [searchValue, setSearchValue] = useState('')
+	const isInitialMount = useRef(true)
 
 	useEffect(() => {
+		// Skip the initial mount to prevent infinite loops
+		if (isInitialMount.current) {
+			isInitialMount.current = false
+			return
+		}
+
 		const timer = setTimeout(() => {
 			onSearch(searchValue)
 		}, 300) // Debounce search

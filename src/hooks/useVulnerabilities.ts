@@ -30,7 +30,7 @@ export function useVulnerabilities(
 		}
 
 		loadVulnerabilities()
-	}, [slug, tagSlug, params.arch, params.severity, params.search, params.page, params])
+	}, [slug, tagSlug, params.arch, params.severity, params.search, params.page])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }
