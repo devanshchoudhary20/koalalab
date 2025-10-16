@@ -10,7 +10,6 @@ import {
 	Download,
 	ExternalLink,
 	CheckCircle,
-	AlertTriangle,
 	Info
 } from 'lucide-react'
 import { formatRelativeTime } from '@/lib/utils/formatters'
@@ -19,7 +18,7 @@ interface ProvenanceTabProps {
 	containerSlug: string
 }
 
-export default function ProvenanceTab({ containerSlug }: ProvenanceTabProps) {
+export default function ProvenanceTab({ containerSlug: _containerSlug }: ProvenanceTabProps) {
 	// Mock provenance data - in a real app this would come from an API
 	const provenanceData = {
 		build_id: 'build-12345-abcde',

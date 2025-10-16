@@ -1,12 +1,9 @@
 import { useState } from 'react'
 import { useAdvisories } from '@/hooks/useAdvisories'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Search, Filter, AlertCircle, ExternalLink } from 'lucide-react'
+import { Search, Filter } from 'lucide-react'
 import AdvisoryTable from './AdvisoryTable'
 import Pagination from '@/components/shared/Pagination'
-import { formatRelativeTime, getStatusColor } from '@/lib/utils/formatters'
 
 interface AdvisoriesTabProps {
 	containerSlug: string

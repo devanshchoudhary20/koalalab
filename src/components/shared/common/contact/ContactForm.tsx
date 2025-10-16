@@ -8,15 +8,6 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
           <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 font-heading">
-                Ask, plug in, <span className="text-gradient-fill-desktop">collaborate</span>
-              </h2>
-              <p className="text-lg text-gray-600 font-content">
-                Let us know how we can help you reduce CVEs, meet compliance, and ship safer code.
-              </p>
-            </div>
-
             <ContactFormFields />
           </div>
 

@@ -3,7 +3,7 @@ import { useComparison } from '@/hooks/useComparison'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { TrendingDown, TrendingUp, Shield, Package, HardDrive, AlertTriangle } from 'lucide-react'
+import { TrendingDown, TrendingUp, Shield, Package } from 'lucide-react'
 import { formatPercentage } from '@/lib/utils/formatters'
 
 interface ComparisonTabProps {
@@ -11,7 +11,7 @@ interface ComparisonTabProps {
 }
 
 export default function ComparisonTab({ containerSlug }: ComparisonTabProps) {
-	const [selectedTag, setSelectedTag] = useState('latest')
+	const [selectedTag] = useState('latest')
 	const [alternative, setAlternative] = useState('official-python')
 	const [period, setPeriod] = useState('30d')
 	const [criticalHighOnly, setCriticalHighOnly] = useState(false)

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Copy, Info } from 'lucide-react'
 import { Tag } from '@/types/api'
 import { formatRelativeTime, formatSize, formatArchitecture } from '@/lib/utils/formatters'
