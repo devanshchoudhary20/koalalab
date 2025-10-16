@@ -37,7 +37,7 @@ export default function ContactForm() {
                   <p className="text-lg text-gray-600 font-content">
                     <a href="#" className="text-primary-text_blue hover:underline">
                       Click here
-                    </a> to grab a quick slot and we'll take it from there.
+                    </a> to grab a quick slot and we&apos;ll take it from there.
                   </p>
                 </>
               )}

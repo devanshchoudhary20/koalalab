@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Button, Input } from '@/components/shared/ui'
+import { FormErrors } from '@/utils/validation'
 
 interface ContactFormFieldsProps {
   formState: {
@@ -9,7 +10,7 @@ interface ContactFormFieldsProps {
     setEmail: (email: string) => void
     inquiry: string
     setInquiry: (inquiry: string) => void
-    errors: any
+    errors: FormErrors
     isSubmitting: boolean
     isSuccess: boolean
     handleSubmit: (e: React.FormEvent) => void
