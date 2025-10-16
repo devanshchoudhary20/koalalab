@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:app\"",
-    "dev:app": "next dev -p 3001",
-    "dev:api": "cd MockApis && node src/server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "export": "next build && next export"
+    "export": "next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",

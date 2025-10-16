@@ -8,13 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary : {
-          background_green : '#E0FFF6',
-          testimonial_text : '#3548A2',
-          background_purple : '#F1F0FF',
-          background_brown : '#F2F2F2',
-          text_blue : '#394BA5',
-          text_gray : '#3D3D3D',
+        primary: {
+          background_green: '#E0FFF6',
+          testimonial_text: '#3548A2',
+          background_purple: '#F1F0FF',
+          background_brown: '#F2F2F2',
+          text_blue: '#394BA5',
+          text_gray: '#3D3D3D',
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         'gradient-fill': {
           mobile: '#4EF0D2',
@@ -27,10 +29,6 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
