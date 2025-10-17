@@ -70,7 +70,7 @@ export default function Header() {
             <span className="sr-only">Koala Lab</span>
             <Image
               alt="Company Logo"
-              src="/images/koalaLabLogo.webp"
+              src="/images/KoalaLogo.webp"
               width={100}
               height={100}
               className="h-8 w-auto"

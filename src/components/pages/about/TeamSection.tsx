@@ -17,9 +17,9 @@ export default function TeamSection() {
   ]
 
   return (
-    <section className="py-20 bg-primary-background_green">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-6xl font-bold text-center mb-16 font-heading">
+    <section className="section-padding bg-primary-background_green">
+      <div className="section-container">
+        <h2 className="text-heading-large text-center mb-16">
           Know the <span className="text-primary-text_blue">Team</span>
         </h2>
         
@@ -37,10 +37,10 @@ export default function TeamSection() {
               </div>
               
               {/* Team Member Info */}
-              <h3 className="text-2xl font-bold text-primary-text_blue mb-2">
+              <h3 className="text-heading-medium text-primary-text_blue mb-2">
                 {member.name}
               </h3>
-              <p className="text-lg text-primary-text_gray">
+              <p className="text-body-medium text-primary-text_gray">
                 {member.role}
               </p>
             </div>

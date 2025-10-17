@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import HowItWorksImage from '@/components/shared/HowItWorksImage'
 
 const HowItWorksSection = () => {
   const features = [
@@ -53,14 +54,7 @@ const HowItWorksSection = () => {
           ))}
         </div>
         </div>
-        <Image
-        src='/images/HowItWorks.webp' 
-        alt='How It Works' 
-        width={1000} 
-        height={1000} 
-        className='w-full h-full object-cover max-w-4xl mx-auto mt-20'
-        />
-        
+        <HowItWorksImage />
     </div>
   )
 }

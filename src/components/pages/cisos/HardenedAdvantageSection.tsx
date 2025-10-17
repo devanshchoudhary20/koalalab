@@ -8,7 +8,7 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, bullets }: FeatureCardProps) {
 	return (
-		<div className="bg-white rounded-lg shadow-md p-6 flex gap-4">
+		<div className="card-base flex gap-4">
 			<div className="flex-shrink-0">
 				<Image
 					src={icon}
@@ -19,10 +19,10 @@ function FeatureCard({ icon, title, bullets }: FeatureCardProps) {
 				/>
 			</div>
 			<div className="flex-1">
-				<h3 className="font-bold text-lg text-gray-800 mb-3">{title}</h3>
+				<h3 className="text-heading-medium text-gray-800 mb-3">{title}</h3>
 				<ul className="space-y-2">
 					{bullets.map((bullet, index) => (
-						<li key={index} className="text-sm text-gray-700 flex items-start">
+						<li key={index} className="text-body-small text-gray-700 flex items-start">
 							<span className="text-gray-400 mr-2">•</span>
 							<span>{bullet}</span>
 						</li>
@@ -93,16 +93,16 @@ export default function HardenedAdvantageSection() {
 	]
 
 	return (
-		<section className="bg-primary-background_green py-16 px-4">
+		<section className="bg-primary-background_green section-padding">
 			<div className="max-w-7xl mx-auto">
 				{/* Header Section */}
 				<div className="text-center mb-12">
-					<h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-heading">
+					<h2 className="text-heading-large text-gray-800 mb-6">
 						The hardened{' '}
 						<span className="text-primary-text_blue">"out-of-the-box" advantage</span>{' '}
 						
 					</h2>
-					<p className="text-lg text-primary-text_blue max-w-4xl mx-auto leading-relaxed">
+					<p className="text-body-medium text-primary-text_blue max-w-4xl mx-auto">
 						KoalaLab focusses on security of the whole software supply chain that builds the secure containers. Also, adds more hardening layers on top of base container images to make KoalaLab your extended{' '}
 						<span className="font-semibold">golden container images team</span>.
 					</p>

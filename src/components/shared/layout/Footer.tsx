@@ -14,6 +14,12 @@ export default function FooterSection() {
       })
     }
   }
+
+  // External arrow icon component
+  const ExternalArrowIcon = () => (
+    <span>↗</span>
+  )
+
   return (
     <footer className="bg-gray-900 text-white relative z-10">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-20">
@@ -22,10 +28,10 @@ export default function FooterSection() {
           <div className="mb-6 sm:mb-0 w-[200px]">
             <Link href="/">
               <Image
-                src="/images/FooterLogo.webp"
+                src="/images/KoalaFooterLogo.webp"
                 alt="KoalaLab Logo"
-                width={200}
-                height={40}
+                width={158}
+                height={42}
                 className="h-10 cursor-pointer"
               />
             </Link>
@@ -46,81 +52,112 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Main Content - 2 Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {/* Left Column */}
-          <div className="space-y-8">
-            {/* Products */}
+        {/* Main Content - Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] gap-8 mb-16">
+          {/* Left Column - Multi-section grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:grid-cols-[40%_30%_30%]">
+            {/* Why KoalaLab? */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Products</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Why KoalaLab?</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white">
-                    Koala Image directory
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Ensure continuous compliance
+                    <ExternalArrowIcon />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white">
-                    Compare Koala Images
+                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Hardened containers with familiar experience
+                    <ExternalArrowIcon />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Build secure software
+                    <ExternalArrowIcon />
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Solutions */}
+            {/* Solution */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Solutions</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Solution</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/solutions/platform-devops" className="text-sm text-gray-300 hover:text-white">
-                    For Platform/Devops teams
+                  <Link href="/solutions/cisos" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Security leaders
+                    <ExternalArrowIcon />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/solutions/cisos" className="text-sm text-gray-300 hover:text-white">
-                    For CISOs
+                  <Link href="/solutions/devops" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Platform Engineering
+                    <ExternalArrowIcon />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Documentation */}
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Documentation</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Docs
+                    <ExternalArrowIcon />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Github
+                    <ExternalArrowIcon />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Policies */}
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Policies</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Privacy Policy
+                    <ExternalArrowIcon />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                    Cookie Policy
+                    <ExternalArrowIcon />
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Right Column */}
+          {/* Right Column - Standalone sections */}
           <div className="space-y-8">
             {/* About Us */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">About Us</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/about" className="text-sm text-gray-300 hover:text-white">
-                    About KoalaLab
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about#team" className="text-sm text-gray-300 hover:text-white">
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about#advisors" className="text-sm text-gray-300 hover:text-white">
-                    Advisors
-                  </Link>
-                </li>
-              </ul>
+              <Link href="/about" className="text-lg font-semibold text-white mb-4">About Us</Link>
             </div>
 
             {/* Blogs */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Blogs</h3>
+              <Link href="/blog" className="text-lg font-semibold text-white mb-4">Blogs</Link>
             </div>
 
-            {/* Book Your Call */}
+            {/* Contact Us */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Book Your Call</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
               <a 
                 href="#contact" 
                 onClick={scrollToContact}
-                className="inline-block px-6 py-2 border border-white text-white rounded hover:bg-white hover:text-gray-900 transition-colors"
+                className="text-sm text-gray-300 hover:text-white"
               >
                 Contact Us
               </a>
@@ -130,13 +167,18 @@ export default function FooterSection() {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-700 pt-8">
-          <div className="flex space-x-6">
-            <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-white">
-              Privacy Policy
-            </a>
-            <a href="/cookie-policy" className="text-sm text-gray-400 hover:text-white">
-              Cookie policy
-            </a>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+            <div className="text-sm text-gray-400">
+              © 2025 KoalaLab
+            </div>
+            <div className="flex space-x-6">
+              <Link href="/" className="text-sm text-gray-400 hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link href="/" className="text-sm text-gray-400 hover:text-white">
+                Terms of Use
+              </Link>
+            </div>
           </div>
         </div>
       </div>

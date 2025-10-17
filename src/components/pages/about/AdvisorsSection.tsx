@@ -29,9 +29,9 @@ export default function AdvisorsSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-6xl font-bold text-center mb-16 font-heading">
+    <section className="section-padding bg-white">
+      <div className="section-container">
+        <h2 className="text-heading-large text-center mb-16">
           Our <span className="text-gradient-fill-mobile sm:text-gradient-desktop">Advisors</span>
         </h2>
         
@@ -49,10 +49,10 @@ export default function AdvisorsSection() {
               </div>
               
               {/* Advisor Info */}
-              <h3 className="text-2xl font-bold text-primary-text_blue mb-2">
+              <h3 className="text-heading-medium text-primary-text_blue mb-2">
                 {advisor.name}
               </h3>
-              <p className="text-lg text-blue-gray-600">
+              <p className="text-body-medium text-blue-gray-600">
                 {advisor.role}
               </p>
             </div>

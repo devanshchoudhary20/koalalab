@@ -20,7 +20,7 @@ export default function Hero({
 	className = ''
 }: HeroProps) {
 	return (
-		<section className={`relative py-20 sm:py-28 ${className}`}>
+		<section className={`relative section-padding ${className}`}>
 			<div className="absolute inset-0 overflow-hidden">
 				<Image
 					src={backgroundImage}
@@ -32,18 +32,18 @@ export default function Hero({
 					priority
 				/>
 			</div>
-			<div className="relative container mx-auto px-4">
-				<h1 className="text-6xl font-bold text-white text-center font-heading">
+			<div className="relative section-container">
+				<h1 className="text-heading-large text-white text-center">
 					{title}
 				</h1>
-				<p className="text-lg text-white text-center mt-7 max-w-3xl mx-auto font-content">
+				<p className="text-body-medium text-white text-center mt-7 max-w-3xl mx-auto">
 					{description}
 				</p>
 				{showButton && (
 					<div className="flex justify-center mt-8">
 						<a
 							href={buttonHref}
-							className="bg-gradient-fill-desktop text-primary-text_blue font-semibold py-3 px-6 rounded-lg transition-colors duration-200 inline-flex items-center gap-2"
+							className="button-primary"
 						>
 							{buttonText}
 						</a>
