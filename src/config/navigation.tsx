@@ -35,9 +35,9 @@ export const products: NavigationItem[] = [
 // Solutions navigation
 export const solutions: NavigationItem[] = [
   { 
-    name: 'For CISCOs', 
-    description: 'Tailored solutions for CISCO environments', 
-    href: '/solutions/cisco', 
+    name: 'For CISOs', 
+    description: 'Tailored solutions for CISO environments', 
+    href: '/solutions/cisos', 
     icon: BuildingOfficeIcon 
   },
   { 

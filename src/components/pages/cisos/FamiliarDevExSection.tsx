@@ -1,0 +1,82 @@
+import Link from 'next/link'
+
+export default function FamiliarDevExSection() {
+	return (
+		<section className="bg-white py-16 px-4">
+			<div className="max-w-6xl mx-auto">
+				{/* Main Title */}
+				<div className="text-center mb-8">
+					<h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 font-heading">
+						Familiar DevEx.{' '}
+						<span className="text-gradient-fill-desktop">easier adoption</span>
+					</h2>
+				</div>
+
+				{/* Introductory Paragraph */}
+				<div className="text-center mb-12">
+					<p className="text-lg text-primary-text_blue max-w-4xl mx-auto leading-relaxed">
+						Industry has known about minimal or distroless containers as an idea to reduce attack surface & make containers more secure but adoption across enterprises has been a huge challenge:
+					</p>
+				</div>
+
+				{/* Problem Statements - Two Columns */}
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+					{/* Section 1 */}
+					<div className="space-y-4">
+						<h3 className="text-xl font-bold text-gray-800">
+							1. Missing toolchain for distro-less containers:
+						</h3>
+						<p className="text-gray-700 leading-relaxed">
+							Platform engineering teams use toolchain like{' '}
+							<Link href="#" className="text-black underline hover:no-underline inline-flex items-center gap-1">
+								apt 
+							</Link><span aria-hidden="true" className='no-underline text-primary-text_blue'>↗</span>{' '}
+							to work on base containers for custom use-cases. Missing toolchains (for distro-less containers) and/or newer ecosystem ({' '}
+							<Link href="#" className="text-black underline hover:no-underline inline-flex items-center gap-1">
+								alpine-based containers
+							</Link>{' '}
+							) <span aria-hidden="true" className='no-underline text-primary-text_blue'>↗</span> made for tougher adoption.
+						</p>
+					</div>
+
+					{/* Section 2 */}
+					<div className="space-y-4">
+						<h3 className="text-xl font-bold text-gray-800">
+							2. Coverage across the whole cloud-native stack.
+						</h3>
+						<p className="text-gray-700 leading-relaxed">
+							Even in cases where developers learnt the newer tooling (or made do with a lack of it), coverage across the entire cloud-native stack remained rare & or has some{' '}
+							<Link href="#" className="text-black underline hover:no-underline inline-flex items-center gap-1">
+								edgecase bugs 
+							</Link>
+							.<span aria-hidden="true" className='no-underline text-primary-text_blue'>↗</span>
+						</p>
+					</div>
+				</div>
+
+				{/* Solution Paragraph */}
+				<div className="text-center mb-12">
+					<p className="text-lg text-primary-text_blue max-w-5xl mx-auto leading-relaxed">
+						Koala's containers are built on 0-deb, for the specific purpose to provide a familiar user experience for developers. c(apt)-ain is koala's adpation of apt & provides similar UX in both commands and dockerfiles; enabling a distro-like experience for enteprise centric custom use-cases while providing security of distroless philosophy.
+					</p>
+				</div>
+
+				{/* Call to Action Buttons */}
+				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<Link 
+						href="#" 
+						className="bg-gradient-fill-desktop text-primary-text_blue px-8 py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-colors inline-flex items-center gap-2"
+					>
+						Talk to us →
+					</Link>
+					<Link 
+						href="#" 
+						className="bg-white border border-primary-text_blue text-primary-text_blue px-4 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2"
+					>
+						Explore images →
+					</Link>
+				</div>
+			</div>
+		</section>
+	)
+}
