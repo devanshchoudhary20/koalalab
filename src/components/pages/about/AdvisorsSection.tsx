@@ -4,27 +4,27 @@ export default function AdvisorsSection() {
   const advisors = [
     {
       id: 1,
-      name: "Abhimanyu Dhamija",
-      role: "Co-founder and CEO",
-      image: "/images/male.webp"
+      name: "Ashish Bhadouria",
+      role: "Security, Engineering Manager  IKEA",
+      image: "/images/Ashish.avif"
     },
     {
       id: 2,
-      name: "Abhimanyu Dhamija",
-      role: "Co-founder and CEO",
-      image: "/images/male.webp"
+      name: "Adam Frankl",
+      role: "Ex-CMO at Jfrog, Neo4j",
+      image: "/images/Adam.avif"
     },
     {
       id: 3,
-      name: "Abhimanyu Dhamija",
-      role: "Co-founder and CEO",
-      image: "/images/male.webp"
+      name: "Helen Altshuler",
+      role: "Ex-Google Cloud, CEO at Engflow",
+      image: "/images/Helen.avif"
     },
     {
       id: 4,
-      name: "Abhimanyu Dhamija",
-      role: "Co-founder and CEO",
-      image: "/images/male.webp"
+      name: "Shiv Chandra Kumar",
+      role: "Engineering at Google Cloud",
+      image: "/images/ShivChandra.avif"
     }
   ];
 

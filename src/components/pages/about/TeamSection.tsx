@@ -6,13 +6,13 @@ export default function TeamSection() {
       id: 1,
       name: "Abhishek Anand",
       role: "Co-Founder and CTO",
-      image: "/images/male.webp"
+      image: "/images/AbhishekAnand.avif"
     },
     {
       id: 2,
       name: "Abhimanyu Dhamija",
       role: "Co-founder and CEO",
-      image: "/images/male.webp"
+      image: "/images/Abhimanyu.avif"
     }
   ]
 
@@ -27,7 +27,7 @@ export default function TeamSection() {
           {teamMembers.map((member) => (
             <div key={member.id} className="flex flex-col items-center text-center">
               {/* Team Member Image */}
-              <div className="relative w-64 h-64 mb-6">
+              <div className="relative w-[18rem] h-[18rem] mb-6">
                 <Image 
                   src={member.image} 
                   alt={member.name}

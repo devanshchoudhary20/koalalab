@@ -13,7 +13,7 @@ export default function EnterpriseOnboardingSection() {
 
 				{/* Body Text */}
 				<div className="mb-12">
-					<p className="text-body-large text-gray-800 text-center max-w-4xl mx-auto">
+					<p className="text-body-large text-primary-text_blue text-center max-w-4xl mx-auto">
 						Ready to onboard your enteprise onto koala's hardened container images. Ready to onboard your enteprise onto koala's hardened container imagesReady to onboard your enteprise onto koala's hardened container images
 					</p>
 				</div>
