@@ -80,25 +80,22 @@ export default function Header() {
         
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none">
+            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
               Product
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
             </PopoverButton>
 
-            <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 transform px-2">
+            <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-2">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative grid gap-6 bg-white p-6">
-                  {products.map((item) => (
+                <div className="relative bg-white p-4">
+                  {products.map((item, index) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="flex items-center rounded-lg p-3 transition duration-150 ease-in-out hover:bg-gray-50"
+                      className="block p-4 rounded-lg transition duration-150 ease-in-out text-gray-900 hover:bg-[#E0FFF6]"
                     >
-                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
-                        {item.icon && <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />}
-                      </div>
-                      <div className="ml-4">
-                        <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                      <div>
+                        <p className="text-sm font-bold">{item.name}</p>
                         <p className="text-sm text-gray-500">{item.description}</p>
                       </div>
                     </a>
@@ -109,25 +106,22 @@ export default function Header() {
           </Popover>
 
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none">
+            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
               Solution
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
             </PopoverButton>
 
-            <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-md -translate-x-1/2 transform px-2">
+            <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-2">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative grid gap-6 bg-white p-6">
+                <div className="relative bg-white p-4">
                   {solutions.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className="flex items-center rounded-lg p-3 transition duration-150 ease-in-out "
+                      className="block p-4 rounded-lg transition duration-150 ease-in-out text-gray-900 hover:bg-[#E0FFF6]"
                     >
-                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
-                        {item.icon && <item.icon className="h-6 w-6 text-gray-600" aria-hidden="true" />}
-                      </div>
-                      <div className="ml-4">
-                        <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                      <div>
+                        <p className="text-sm font-bold">{item.name}</p>
                         <p className="text-sm text-gray-500">{item.description}</p>
                       </div>
                     </a>
@@ -142,7 +136,7 @@ export default function Header() {
               key={item.name} 
               href={item.name === 'Contact Us' ? '#contact' : item.href} 
               onClick={item.name === 'Contact Us' ? scrollToContact : undefined}
-              className="text-sm/6 font-semibold text-gray-900"
+              className="text-sm/6 font-semibold text-gray-900 hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out"
             >
               {item.name}
             </a>
@@ -154,7 +148,7 @@ export default function Header() {
             onClick={scrollToContact}
             className="text-sm/6 font-semibold bg-gradient-fill-desktop px-4 py-2 rounded-md w-max"
           >
-            Contact Us
+            Request Trial
           </a>
         </div>
       </nav>

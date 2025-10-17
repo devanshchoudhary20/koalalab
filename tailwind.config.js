@@ -11,7 +11,7 @@ module.exports = {
         primary: {
           background_green: '#E0FFF6',
           testimonial_text: '#3548A2',
-          background_purple: '#F1F0FF',
+          background_purple: '#F4EDF9',
           background_brown: '#F2F2F2',
           text_blue: '#394BA5',
           text_gray: '#3D3D3D',

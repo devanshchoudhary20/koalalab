@@ -6,7 +6,6 @@ import {
   ExplainerSection,
   FeatureSection,
   TestimonialSection,
-  HowItWorksContentSection,
   HowItWorksImageSection,
 } from './index';
 
@@ -15,14 +14,12 @@ export default function HomePage() {
     <div>
       <Header />
       <HeroSection />
-      <CompanySection />
+      <HowItWorksImageSection />
+      <VideoCarousel />
       <ExplainerSection />
       <FeatureSection />
       <TestimonialSection />
-      <VideoCarousel />
-      <HowItWorksImageSection />
       <ContactForm />
-      <HowItWorksContentSection />
       <Footer />
     </div>
   );

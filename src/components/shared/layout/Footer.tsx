@@ -15,7 +15,7 @@ export default function FooterSection() {
     }
   }
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white relative z-10">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-20">
         {/* Top Section - Logo and Social Media */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-16">

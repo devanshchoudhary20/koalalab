@@ -9,22 +9,24 @@ import { NavigationItem, FooterNavigation } from '@/types/navigation'
 
 // Main navigation items
 export const mainNavigation: NavigationItem[] = [
+  
   { name: 'Blogs', href: '/blogs' },
   { name: 'About Us', href: '/about' },
+  { name: 'Docs', href: '/docs' },
   { name: 'Contact Us', href: '/contact' },
 ]
 
 // Product navigation
 export const products: NavigationItem[] = [
   { 
-    name: 'Koala Image Directory', 
-    description: 'Browse and manage your koala image collection', 
+    name: 'Koala images', 
+    description: 'Browse through our image directories', 
     href: '/containers', 
     icon: FolderIcon 
   },
   { 
-    name: 'Compare Koala Images', 
-    description: 'Compare your solutions with other alternatives', 
+    name: 'Koala compare', 
+    description: 'Compare Koala images with other solutions', 
     href: '/containers', 
     icon: ScaleIcon 
   },
