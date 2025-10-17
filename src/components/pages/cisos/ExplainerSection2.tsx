@@ -22,7 +22,7 @@ export default function ExplainerSection2() {
 				<div className="mx-auto max-w-fit px-6 py-16 sm:py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-24">
 					<div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto text-center lg:text-left">
 						<p className="mt-10 p-4 text-pretty text-4xl font-content font-light tracking-tight text-gray-900 md:text-5xl sm:text-6xl sm:leading-[1.3] leading-[1.2]">
-							Koala's enterprise plans offer competitive SLAs for all vulnerability management which means you will always have a version of each base container which is 0-CVE or vulnerability-free.
+							Koala&apos;s enterprise plans offer competitive SLAs for all vulnerability management which means you will always have a version of each base container which is 0-CVE or vulnerability-free.
 						</p>
 						<div className="relative z-10 mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-x-6">
 							<Link

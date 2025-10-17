@@ -88,7 +88,7 @@ export default function Header() {
             <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-2">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="relative bg-white p-4">
-                  {products.map((item, index) => (
+                  {products.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}

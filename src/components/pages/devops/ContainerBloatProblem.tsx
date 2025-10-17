@@ -32,7 +32,7 @@ export default function ContainerBloatProblem() {
 									Bloated Package Universe
 								</h3>
 								<p className="text-body-small text-gray-800">
-									Debian's package creation includes unnecessary maintainer scripts
+									Debian&apos;s package creation includes unnecessary maintainer scripts
 								</p>
 							</div>
 						</div>
@@ -63,10 +63,10 @@ export default function ContainerBloatProblem() {
 							</div>
 							<div>
 								<h3 className="text-heading-medium text-gray-800 mb-2 text-primary-text_blue">
-									Non-Essential "Essentials"
+									Non-Essential &quot;Essentials&quot;
 								</h3>
 								<p className="text-body-small text-gray-800">
-									Many packages marked as essential aren't actually needed in containers
+									Many packages marked as essential aren&apos;t actually needed in containers
 								</p>
 							</div>
 						</div>

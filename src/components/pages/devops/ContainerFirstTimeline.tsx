@@ -10,7 +10,7 @@ export default function ContainerFirstTimeline() {
 				{/* Main Title */}
 				<div className="mb-16 text-center">
 					<h2 className="text-heading-medium text-primary-text_blue ">
-						Koala's container-first approach, reimagined Debian for a container-first world:
+						Koala&apos;s container-first approach, reimagined Debian for a container-first world:
 					</h2>
 				</div>
 
@@ -61,7 +61,7 @@ export default function ContainerFirstTimeline() {
 							</h3>
 							<div className="w-3 h-3 bg-gradient-fill-desktop rounded-sm mb-4 relative z-10 transform -translate-y-0.5 shadow-[0px_0px_2px_8px_rgba(73,201,183,0.5)]"></div>
 							<p className="text-body-small text-gray-800 h-[45px]">
-								A portable Go-based package manager that's fully compatible with Debian
+								A portable Go-based package manager that&apos;s fully compatible with Debian
 							</p>
 						</div>
 
@@ -127,7 +127,7 @@ export default function ContainerFirstTimeline() {
 									</h3>
 									<div className="w-3 h-3 bg-gradient-fill-desktop rounded-sm mb-2 relative z-10 transform -translate-y-0.5 shadow-[0px_0px_2px_8px_rgba(73,201,183,0.5)]"></div>
 									<p className="text-body-small text-gray-800">
-										A portable Go-based package manager that's fully compatible with Debian
+										A portable Go-based package manager that&apos;s fully compatible with Debian
 									</p>
 								</div>
 							</div>

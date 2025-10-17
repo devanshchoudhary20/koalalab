@@ -2,7 +2,6 @@ import { Header, Footer } from '@/components/shared/layout';
 import { ContactForm, VideoCarousel, ExplainerSection } from '@/components/shared/common';
 import {
   HeroSection,
-  CompanySection,
   FeatureSection,
   TestimonialSection,
   HowItWorksImageSection,

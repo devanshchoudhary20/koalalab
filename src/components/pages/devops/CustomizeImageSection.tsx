@@ -24,7 +24,7 @@ export default function CustomizeImageSection() {
 					{/* Right Column */}
 					<div className="pr-0 sm:pr-8 text-center sm:text-left">
 						<p className="text-body-large text-gray-800">
-							Koala's enterprise plans offer C(CAPT)ain and our minimal package universe along with the Hardened "out-of-the-box" base container images. This combination helps with any enteprise-centric custom use-case your teams might have.
+							Koala&apos;s enterprise plans offer C(CAPT)ain and our minimal package universe along with the Hardened &quot;out-of-the-box&quot; base container images. This combination helps with any enteprise-centric custom use-case your teams might have.
 						</p>
 					</div>
 				</div>

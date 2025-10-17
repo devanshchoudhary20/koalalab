@@ -57,7 +57,7 @@ export default function FamiliarDevExSection() {
 				{/* Solution Paragraph */}
 				<div className="text-center mb-12">
 					<p className="text-body-medium text-primary-text_blue max-w-5xl mx-auto">
-						Koala's containers are built on 0-deb, for the specific purpose to provide a familiar user experience for developers. c(apt)-ain is koala's adpation of apt & provides similar UX in both commands and dockerfiles; enabling a distro-like experience for enteprise centric custom use-cases while providing security of distroless philosophy.
+						Koala&apos;s containers are built on 0-deb, for the specific purpose to provide a familiar user experience for developers. c(apt)-ain is koala&apos;s adpation of apt & provides similar UX in both commands and dockerfiles; enabling a distro-like experience for enteprise centric custom use-cases while providing security of distroless philosophy.
 					</p>
 				</div>
 

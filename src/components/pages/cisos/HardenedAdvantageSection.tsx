@@ -99,7 +99,7 @@ export default function HardenedAdvantageSection() {
 				<div className="text-center mb-12">
 					<h2 className="text-heading-large text-gray-800 mb-6">
 						The hardened{' '}
-						<span className="text-primary-text_blue">"out-of-the-box" advantage</span>{' '}
+						<span className="text-primary-text_blue">&quot;out-of-the-box&quot; advantage</span>{' '}
 						
 					</h2>
 					<p className="text-body-medium text-primary-text_blue max-w-4xl mx-auto">
