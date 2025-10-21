@@ -32,7 +32,7 @@ export default function AdvisorsSection() {
     <section className="section-padding bg-white">
       <div className="section-container">
         <h2 className="text-heading-large text-center mb-16">
-          Our <span className="text-gradient-fill-mobile sm:text-gradient-desktop">Advisors</span>
+          Our <span className="text-gradient-fill-mobile sm:text-gradient-desktop">Advisors</span> and Investors
         </h2>
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 max-w-6xl mx-auto">
