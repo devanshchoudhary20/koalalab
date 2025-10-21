@@ -29,7 +29,7 @@ export function useAdvisories(
 		}
 
 		loadAdvisories()
-	}, [slug, params.search, params.status, params.page])
+	}, [slug, params])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }

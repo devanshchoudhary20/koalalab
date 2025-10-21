@@ -38,7 +38,7 @@ export default function FeatureTabs() {
     const zoneEnd = viewportWidth * ((1 + SCROLL_ZONE_WIDTH) / 3);
     
     return clientX >= zoneStart && clientX <= zoneEnd;
-  }, []);
+  }, [sectionRef]);
 
   const changeTab = useCallback((direction: 1 | -1) => {
     const now = Date.now();
@@ -73,7 +73,7 @@ export default function FeatureTabs() {
     }
   }, [isMouseInScrollZone, changeTab, active]);
 
-  const handleScroll = debounce((e: Event) => {
+  const handleScroll = debounce(() => {
     const scrollDelta = window.scrollY - (scrollStateRef.current.lastScrollY || 0);
     if (Math.abs(scrollDelta) >= SCROLL_THRESHOLD) {
       changeTab(scrollDelta > 0 ? 1 : -1);
@@ -116,7 +116,7 @@ export default function FeatureTabs() {
       window.removeEventListener('scroll', handleScroll);
       handleScroll.cancel(); // Cancel any pending debounced calls
     };
-  }, [handleWheel, handleTouchMove, handleScroll]);
+  }, [handleWheel, handleTouchMove, handleScroll, sectionRef]);
 
   return (
     <div 

@@ -46,7 +46,7 @@ const ExplainerSection = () => {
             Secure Software. Unlock Revenue.
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-white">
-            Build your application on Koala's hardened base container images and give your developers a familiar linux experience.
+            Build your application on Koala&apos;s hardened base container images and give your developers a familiar linux experience.
           </p>
         </div>
 
