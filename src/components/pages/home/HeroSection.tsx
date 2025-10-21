@@ -20,13 +20,13 @@ export default function HeroSection() {
       <div className="relative isolate pt-0 overflow-hidden">
         <div className="mx-auto max-w-fit px-6 py-16 sm:py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto text-center lg:text-left">
-            <h1 className="mt-10 text-pretty text-4xl font-bold tracking-tight text-gray-900 md:text-5xl sm:text-6xl sm:leading-[1.3] leading-[1.2]">
-            Distro-less Containers with a 
-              <span className='text-gradient-fill-desktop'> Distro-like Experience</span>
+            <h1 className="mt-10 text-pretty text-4xl font-bold tracking-tight  md:text-5xl sm:text-6xl sm:leading-[1.3] leading-[1.2] text-gradient-fill-desktop">
+            Hardened distroless <br /> containers
+              <span className='text-gray-900'> with a <br /> distro experience.</span>
             </h1>
             <p className="mt-8 text-pretty text-lg  text-gray-500 sm:text-xl/8">
-              Secure your software stack with our <br />
-              open source containers.
+            Koala’s Hardened “out-of-the-box” containers enable <br />
+            continuous compliance & reduce CVE sprawl.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-x-6">
               <Link
@@ -34,7 +34,7 @@ export default function HeroSection() {
                 onClick={scrollToContact}
                 className="rounded-md bg-gradient-fill-desktop px-4 py-2.5 text-sm"
               >
-                Talk to an expert <span aria-hidden="true">→</span>
+                Talk to us <span aria-hidden="true">→</span>
               </Link>
               <Link href="/containers" className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md">
                 Explore images <span aria-hidden="true">→</span>

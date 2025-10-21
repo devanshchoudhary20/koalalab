@@ -1,6 +1,6 @@
 export interface Tab {
   id: string
-  label: "Accelerate" | "Manage" | "Secure"
+  label: "Accelerate" | "Unlock" | "Love"
   title: string
   description: string
   cta1: string
@@ -13,25 +13,25 @@ export const TAB_DATA: Tab[] = [
     id: "accelerate",
     label: "Accelerate",
     title: "Accelerate your compliance.",
-    description: "Get FedRAMP and PCI-DSS ready with hardened containers—cut compliance timelines and streamline your security posture.",
+    description: "Koala base container images enable continuous compliance across the increasing vulnerability management standards of FedRAMP, PCI, CRA compliances",
     cta1: "View libraries →",
     cta2: "Learn More →",
     image: "/images/Accelerate.webp",
   },
   {
-    id: "manage",
-    label: "Manage",
-    title: "Manage your infrastructure.",
-    description: "Centralized control and monitoring for all your containerized applications with enterprise-grade security and compliance.",
+    id: "unlock",
+    label: "Unlock",
+    title: "Unlock team productivity.",
+    description: "Unlock productivity for your security teams. With 90% less CVEs in your applications, koala container images reduce CVE patching & management overhead.",
     cta1: "View dashboard →",
     cta2: "Learn More →",
     image: "/images/Manage.webp",
   },
   {
-    id: "secure",
-    label: "Secure",
-    title: "Secure your applications.",
-    description: "Advanced security scanning and vulnerability management with real-time threat detection and automated remediation.",
+    id: "love",
+    label: "Love",
+    title: "Developers love this.",
+    description: "Koala's debloated containers ensure rare release blockers, familiar toolchain and efficient cloud infra; your developers will love these containers.",
     cta1: "Security features →",
     cta2: "Learn More →",
     image: "/images/Secure.webp", 

@@ -70,7 +70,7 @@ export default function FamiliarDevExSection() {
 						Talk to us →
 					</Link>
 					<Link 
-						href="#" 
+						href="/containers" 
 						className="button-secondary"
 					>
 						Explore images →

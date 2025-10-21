@@ -7,7 +7,7 @@ export default function CisosHero() {
 			description="Continuous compliance, productivity for your teams & container images that engineers will love."
 			showButton={true}
 			buttonText="Try Koala images →"
-			buttonHref="/try-koala"
+			buttonHref="/containers"
 		/>
 	)
 }

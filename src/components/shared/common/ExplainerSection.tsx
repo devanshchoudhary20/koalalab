@@ -2,24 +2,24 @@ import Image from 'next/image'
 
 const features = [
   {
-    title: '90% open source code',
-    description: 'From Python to NGINX, Postgres, Java, Node & more',
+    title: '88% less CVE accumulation',
+    description: 'Ensure continuous compliance',
     icon: '/images/openSourceCode.webp'
   },
   {
-    title: '42+ code hours saved',
-    description: 'Reduce costly engineering toil on vulnerability management',
-    icon: '/images/HoursSaved.webp'
+    title: 'Remove 90% of your CVEs',
+    description: 'Securely manage the tech sprawl',
+    icon: '/images/CVE_Reduced.webp'
   },
   {
-    title: '400+ FIP images hardened',
-    description: 'Build on Hardened Open-Source Components',
+    title: '95% less High+Critical CVEs',
+    description: 'Ensure no release blockers',
     icon: '/images/ImageHardened.webp'
   },
   {
-    title: '97.6% CVE Reduced',
-    description: 'Rely on trusted open source to improve your security posture',
-    icon: '/images/CVE_Reduced.webp'
+    title: 'Faster builds, faster boot time',
+    description: 'Containers your cloud team will love',
+    icon: '/images/hoursSaved.webp'
   }
 ]
 
@@ -43,10 +43,10 @@ const ExplainerSection = () => {
       <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-semibold mb-6 text-white">
-            Secure Your Software & Unlock Your Productivity
+            Secure Software. Unlock Revenue.
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-white">
-            Build your code on secure components and run hardened containers across your entire cloud-native stack.
+            Build your application on Koala's hardened base container images and give your developers a familiar linux experience.
           </p>
         </div>
 

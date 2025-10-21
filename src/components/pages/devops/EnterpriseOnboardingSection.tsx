@@ -27,7 +27,7 @@ export default function EnterpriseOnboardingSection() {
 						Talk to us →
 					</Link>
 					<Link
-						href="/images"
+						href="/containers"
 						className="button-secondary"
 					>
 						Explore images →

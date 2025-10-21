@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/shared/ui'
 import { TAB_DATA } from '@/data/featureTabs'
 
@@ -58,9 +59,11 @@ export default function TabContent({ active }: TabContentProps) {
                 <Button variant="primary" className="w-max-content mx-auto sm:w-full min-w-[188px]">
                   {t.cta1}
                 </Button>
-                <Button variant="outline" className="w-max-content mx-auto sm:w-full min-w-[188px]">
-                  {t.cta2}
-                </Button>
+                <Link href="/" className="w-max-content mx-auto sm:w-full min-w-[188px]">
+                  <Button variant="outline" className="w-full">
+                    {t.cta2}
+                  </Button>
+                </Link>
               </div>
             </div>
 
@@ -72,9 +75,11 @@ export default function TabContent({ active }: TabContentProps) {
                   <Button variant="primary">
                     {t.cta1}
                   </Button>
-                  <Button variant="outline">
-                    {t.cta2}
-                  </Button>
+                  <Link href="/">
+                    <Button variant="outline">
+                      {t.cta2}
+                    </Button>
+                  </Link>
                 </div>
               </div>
 

@@ -3,21 +3,55 @@
 import * as React from "react"
 import Image from "next/image"
 
-type VideoCarouselProps = {
-
-  videos?: string[]
+type VideoData = {
+  id: string
   thumbnailSrc?: string
+  badge: string
+  title: string
+  personName: string
+  role: string
+}
+
+type VideoCarouselProps = {
+  videos?: VideoData[]
   ariaLabel?: string
 }
 
 export default function VideoCarousel({
   videos = [
-    "1124157115",
-    "1124155632", 
-    "1124155590",
-    "1124155414",
+    {
+      id: "1124157115",
+      thumbnailSrc: "/images/VideoThumbnail.webp",
+      badge: "CMC",
+      title: "Container-first Linux Distro",
+      personName: "ABHIMANYU DHAMIJA",
+      role: "CEO, KoalaLab"
+    },
+    {
+      id: "1124155632",
+      thumbnailSrc: "/images/VideoThumbnail.webp",
+      badge: "CMC",
+      title: "Container-first Linux Distro",
+      personName: "ABHIMANYU DHAMIJA",
+      role: "CEO, KoalaLab"
+    },
+    {
+      id: "1124155590",
+      thumbnailSrc: "/images/VideoThumbnail.webp",
+      badge: "CMC",
+      title: "Container-first Linux Distro",
+      personName: "ABHIMANYU DHAMIJA",
+      role: "CEO, KoalaLab"
+    },
+    {
+      id: "1124155414",
+      thumbnailSrc: "/images/VideoThumbnail.webp",
+      badge: "CMC",
+      title: "Container-first Linux Distro",
+      personName: "ABHIMANYU DHAMIJA",
+      role: "CEO, KoalaLab"
+    },
   ],
-  thumbnailSrc = "/images/VideoThumbnail.webp",
   ariaLabel = "Video carousel",
 }: VideoCarouselProps) {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -94,11 +128,11 @@ export default function VideoCarousel({
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10 mx-4"
         role="listbox"
         aria-label="Video thumbnails"
       >
-        {videos.map((_, idx) => (
+        {videos.map((video, idx) => (
           <button
             key={idx}
             type="button"
@@ -109,9 +143,9 @@ export default function VideoCarousel({
             aria-selected="false"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden">
-              {/* Shared thumbnail */}
+              {/* Video thumbnail */}
               <Image
-                src={thumbnailSrc || "/placeholder.svg"}
+                src={video.thumbnailSrc || "/placeholder.svg"}
                 alt="Video thumbnail"
                 className="h-full w-full object-cover"
                 loading="lazy"
@@ -120,8 +154,8 @@ export default function VideoCarousel({
                 height={520}
               />
 
-              {/* Play badge */}
-              <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 text-xs font-medium text-foreground backdrop-blur">
+              {/* Play Button - Positioned in lower-right quadrant */}
+              <div className="absolute bottom-3 right-3">
                 <PlayIcon className="h-12 w-12" />
               </div>
 
@@ -151,7 +185,7 @@ export default function VideoCarousel({
             <div ref={videoContainerRef} className="relative aspect-video w-full overflow-hidden rounded-md bg-black">
               <iframe
                 ref={iframeRef}
-                src={`https://player.vimeo.com/video/${videos[activeIndex]}?badge=0&autopause=0&player_id=0&app_id=58479&muted=0`}
+                src={`https://player.vimeo.com/video/${videos[activeIndex].id}?badge=0&autopause=0&player_id=0&app_id=58479&muted=0`}
                 width="100%"
                 height="100%"
                 frameBorder="0"

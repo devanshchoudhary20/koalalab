@@ -10,7 +10,7 @@ import { NavigationItem, FooterNavigation } from '@/types/navigation'
 // Main navigation items
 export const mainNavigation: NavigationItem[] = [
   
-  { name: 'Blogs', href: '/blogs' },
+  { name: 'Blogs', href: '/' },
   { name: 'About Us', href: '/about' },
   { name: 'Docs', href: '/docs' },
   { name: 'Contact Us', href: '/contact' },
@@ -64,7 +64,7 @@ export const footerNavigation: FooterNavigation = {
   ],
   company: [
     { name: 'About', href: '/about' },
-    { name: 'Blog', href: '/blog' },
+    { name: 'Blog', href: '/' },
     { name: 'Jobs', href: '/careers' },
     { name: 'Press', href: '/press' },
   ],

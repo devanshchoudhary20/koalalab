@@ -72,7 +72,7 @@ export default function MinimalContainerDilemma() {
 						Talk to us →
 					</Link>
 					<Link
-						href="/images"
+						href="/containers"
 						className="button-secondary"
 					>
 						Explore images →

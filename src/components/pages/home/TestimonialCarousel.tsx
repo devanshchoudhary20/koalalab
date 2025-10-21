@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import { testimonials } from '@/data/testimonials'
 import { useCarousel } from '@/hooks/useCarousel'
+import LinkedInButton from '@/components/shared/common/LinkedInButton'
 
 export default function TestimonialCarousel() {
   const { currentIndex, goToSlide } = useCarousel(testimonials)
@@ -22,11 +23,12 @@ export default function TestimonialCarousel() {
   const currentTestimonial = testimonials[currentIndex]
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 sm:gap-8">
+    <div className="flex flex-col items-center justify-center gap-8 max-w-2xl mx-auto">
+      {/* Main Quote */}
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-4xl text-center">
+        <div className="w-full max-w-5xl text-center">
           <blockquote 
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-relaxed text-primary-testimonial_text font-heading"
+            className="text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-relaxed text-[#1E3A8A] font-medium"
             dangerouslySetInnerHTML={{
               __html: `"${formatQuote(currentTestimonial.quote, currentTestimonial.boldTexts)}"`
             }}
@@ -34,41 +36,53 @@ export default function TestimonialCarousel() {
         </div>
       </div>
 
+      {/* Attribution Section */}
       <div className="flex flex-col items-center gap-4">
-        <div className="flex flex-row items-center gap-2 p-2 bg-gradient-fill-desktop rounded-full">
-          <div className="rounded-full size-6 bg-black overflow-hidden flex-shrink-0 relative">
-            <Image
-              src={currentTestimonial.image}
-              alt={`${currentTestimonial.name} profile picture`}
-              fill
-              className="object-cover"
-              sizes="24px"
-            />
+        {/* Profile Picture, Name, and LinkedIn - Horizontal Layout */}
+        <div className="flex items-center gap-2">
+          {/* Teal pill-shaped banner with embedded profile picture */}
+          <div className="bg-gradient-fill-mobile rounded-full px-2 pr-4 py-1 flex items-center gap-2">
+            {/* Profile picture embedded in the teal banner */}
+            <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+              <Image
+                src={currentTestimonial.image}
+                alt={`${currentTestimonial.name} profile picture`}
+                width={32}
+                height={32}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            {/* Name within the teal banner */}
+            <span className="text-gray-900 text-sm font-medium">
+              {currentTestimonial.name}
+            </span>
           </div>
-          <p className='text-primary-testimonial_text font-content text-sm'>
-            {currentTestimonial.name}
-          </p>
+          
+          {/* LinkedIn button as separate dark blue circle */}
+          <LinkedInButton url={currentTestimonial.linkedinUrl} />
         </div>
         
-        <div className='flex flex-col items-center gap-2'>
-          <p className='text-primary-testimonial_text font-heading font-bold text-base '>
+        {/* Title and Company - Centered below */}
+        <div className="text-center">
+          <p className="text-[#1E3A8A] font-bold text-lg">
             {currentTestimonial.title}
           </p>
-          <p className='text-primary-testimonial_text font-content text-sm'>
+          <p className="text-[#1E3A8A] text-base">
             {currentTestimonial.company}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 mt-4" role="tablist" aria-label="Testimonial navigation">
+      {/* Pagination Dots */}
+      <div className="flex items-center justify-center gap-2 mt-8" role="tablist" aria-label="Testimonial navigation">
         {testimonials.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 focus:ring-gradient-fill-desktop ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentIndex 
-                ? 'bg-gradient-fill-desktop scale-125' 
-                : 'bg-gradient-fill-desktop/30 hover:bg-gradient-fill-desktop/60'
+                ? 'bg-[#4FD1C7] scale-110' 
+                : 'bg-[#4FD1C7]/30 hover:bg-[#4FD1C7]/60'
             }`}
             role="tab"
             aria-selected={index === currentIndex}

@@ -148,7 +148,7 @@ export default function FooterSection() {
 
             {/* Blogs */}
             <div>
-              <Link href="/blog" className="text-lg font-semibold text-white mb-4">Blogs</Link>
+              <Link href="/" className="text-lg font-semibold text-white mb-4">Blogs</Link>
             </div>
 
             {/* Contact Us */}
