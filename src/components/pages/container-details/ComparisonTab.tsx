@@ -13,7 +13,7 @@ interface ComparisonTabProps {
 export default function ComparisonTab({ containerSlug }: ComparisonTabProps) {
 	const [selectedTag] = useState('latest')
 	const [alternative, setAlternative] = useState('official-python')
-	const [period, setPeriod] = useState('30d')
+	const [period, setPeriod] = useState('last-30-days')
 	const [criticalHighOnly, setCriticalHighOnly] = useState(false)
 
 	const { data, loading, error } = useComparison(containerSlug, selectedTag, {

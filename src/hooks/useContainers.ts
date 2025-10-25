@@ -24,7 +24,7 @@ export function useContainers(params: ContainerParams = {}) {
 		}
 
 		loadContainers()
-	}, [params])
+	}, [JSON.stringify(params)])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }
@@ -80,7 +80,7 @@ export function useContainerTags(slug: string, params: TagParams = {}) {
 		}
 
 		loadTags()
-	}, [slug, params])
+	}, [slug, JSON.stringify(params)])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }

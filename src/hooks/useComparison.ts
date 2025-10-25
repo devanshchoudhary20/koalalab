@@ -30,7 +30,7 @@ export function useComparison(
 		}
 
 		loadComparison()
-	}, [slug, tagSlug, params])
+	}, [slug, tagSlug, JSON.stringify(params)])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }
