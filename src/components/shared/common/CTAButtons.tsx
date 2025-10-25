@@ -31,7 +31,7 @@ export default function CTAButtons({
 			<Link
 				href={talkToUsHref}
 				onClick={talkToUsHref === "#contact" ? scrollToContact : undefined}
-				className={`rounded-md bg-gradient-fill-desktop ${primaryButtonPadding} py-2.5 text-sm`}
+				className={`rounded-md bg-gradient-fill-desktop ${primaryButtonPadding} py-2.5 text-sm text-gradient-fill-submitButton`}
 			>
 				Talk to us <span aria-hidden="true">→</span>
 			</Link>
