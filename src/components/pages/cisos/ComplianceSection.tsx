@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { CTAButtons } from '@/components/shared/common'
 
 export default function ComplianceSection() {
 	return (
@@ -13,7 +14,7 @@ export default function ComplianceSection() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
 					{/* Left Column */}
 					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
 						<p className="text-body-large text-gray-800">
@@ -52,27 +53,14 @@ export default function ComplianceSection() {
 					<div className="pr-0 sm:pr-8 text-center sm:text-left">
 						<p className="text-body-large text-gray-800">
 							With over 90% of your application code being open-source,{' '}
-							<span className="text-primary-text_blue font-bold">CVE sprawl is real reality</span>{' '}
+							<span className="text-primary-text_blue font-medium">CVE sprawl is real reality</span>{' '}
 							& managing the ever-increasing software stack makes it even tougher.
 						</p>
 					</div>
 				</div>
 
 				{/* Call-to-Action Buttons */}
-				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<Link
-						href="/contact"
-						className="button-primary"
-					>
-						Talk to us →
-					</Link>
-					<Link
-						href="/containers"
-						className="button-secondary"
-					>
-						Explore images →
-					</Link>
-				</div>
+				<CTAButtons />
 			</div>
 		</section>
 	)

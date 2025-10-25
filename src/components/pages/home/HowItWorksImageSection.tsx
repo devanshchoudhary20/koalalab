@@ -25,7 +25,7 @@ const HowItWorksSection = () => {
     <div className='w-full bg-primary-background_purple px-6 py-20'>
         <h1 className='text-center text-4xl font-bold text-primary-text_blue font-size-[40px] sm:font-size-[56px]'>0-Deb: Our container-first <span className='text-black'>linux distro <br /> for hardened containers.</span></h1>
         <div className='max-w-5xl mx-auto mt-10'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto'>
           {features.map((feature, index) => (
             <div 
               key={index}

@@ -1,19 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { CTAButtons } from '@/components/shared/common'
 
 export default function HeroSection() {
-  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const contactSection = document.getElementById('contact')
-    if (contactSection) {
-      const headerHeight = 80 // Approximate header height
-      const targetPosition = contactSection.offsetTop - headerHeight
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      })
-    }
-  }
   return (
     <div className="bg-white relative">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-green-50/30"></div>
@@ -28,17 +16,8 @@ export default function HeroSection() {
             Koala’s Hardened “out-of-the-box” containers enable <br />
             continuous compliance & reduce CVE sprawl.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-x-6">
-              <Link
-                href="#contact"
-                onClick={scrollToContact}
-                className="rounded-md bg-gradient-fill-desktop px-4 py-2.5 text-sm"
-              >
-                Talk to us <span aria-hidden="true">→</span>
-              </Link>
-              <Link href="/containers" className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md">
-                Explore images <span aria-hidden="true">→</span>
-              </Link>
+            <div className="mt-10">
+              <CTAButtons className="justify-center lg:justify-start" />
             </div>
           </div>
           <div className="mt-16 sm:mt-24 lg:mt-0 lg:grow relative">

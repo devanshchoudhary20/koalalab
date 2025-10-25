@@ -49,10 +49,10 @@ export default function AdvisorsSection() {
               </div>
               
               {/* Advisor Info */}
-              <h3 className="text-heading-medium text-primary-text_blue mb-2">
+              <h3 className="text-heading-medium text-bold text-primary-text_blue mb-2">
                 {advisor.name}
               </h3>
-              <p className="text-body-medium text-blue-gray-600">
+              <p className="text-body-small text-primary-text_blue">
                 {advisor.role}
               </p>
             </div>

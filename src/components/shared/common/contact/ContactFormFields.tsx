@@ -53,8 +53,8 @@ export default function ContactFormFields({ formState }: ContactFormFieldsProps)
         required
       />
 
-      <div className="text-sm text-gray-600 font-content">
-        Let&apos;s chat. <a href="#" className="text-gradient-fill-blueText hover:underline">Click here</a> to grab a quick slot and we&apos;ll take it from there.
+      <div className="text-sm text-primary-text_blue font-content font-light">
+        Let&apos;s chat. <a href="#" className="text-gradient-fill-blueText hover:underline font-medium">Click here</a> to grab a quick slot and we&apos;ll take it from there.
       </div>
 
       <Button

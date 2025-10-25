@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 interface HeroProps {
 	title: string
+	subtitle?: string
 	description: string
 	showButton?: boolean
 	buttonText?: string
@@ -12,6 +13,7 @@ interface HeroProps {
 
 export default function Hero({
 	title,
+	subtitle,
 	description,
 	showButton = false,
 	buttonText = 'Try Koala images →',
@@ -36,7 +38,12 @@ export default function Hero({
 				<h1 className="text-heading-large text-white text-center">
 					{title}
 				</h1>
-				<p className="text-body-medium text-white text-center mt-7 max-w-3xl mx-auto">
+				{subtitle && (
+					<h2 className="text-heading-small text-white text-center mt-4 font-bold">
+						{subtitle}
+					</h2>
+				)}
+				<p className="text-body-medium text-white text-center max-w-2xl mx-auto">
 					{description}
 				</p>
 				{showButton && (

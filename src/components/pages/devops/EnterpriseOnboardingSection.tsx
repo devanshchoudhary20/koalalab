@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { CTAButtons } from '@/components/shared/common'
 
 export default function EnterpriseOnboardingSection() {
 	return (
@@ -13,26 +13,13 @@ export default function EnterpriseOnboardingSection() {
 
 				{/* Body Text */}
 				<div className="mb-12">
-					<p className="text-body-large text-primary-text_blue text-center max-w-4xl mx-auto">
+					<p className="text-body-large text-primary-text_blue text-center max-w-3xl mx-auto">
 						Ready to onboard your enteprise onto koala&apos;s hardened container images. Ready to onboard your enteprise onto koala&apos;s hardened container imagesReady to onboard your enteprise onto koala&apos;s hardened container images
 					</p>
 				</div>
 
 				{/* Call-to-Action Buttons */}
-				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<Link
-						href="/contact"
-						className="button-primary"
-					>
-						Talk to us →
-					</Link>
-					<Link
-						href="/containers"
-						className="button-secondary"
-					>
-						Explore images →
-					</Link>
-				</div>
+				<CTAButtons />
 			</div>
 		</section>
 	)

@@ -53,9 +53,9 @@ export default function FooterSection() {
         </div>
 
         {/* Main Content - Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[85%_15%] gap-8 mb-16">
           {/* Left Column - Multi-section grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:grid-cols-[40%_30%_30%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:grid-cols-[35%_20%_20%_20%]">
             {/* Why KoalaLab? */}
             <div>
               <h3 className="text-lg font-semibold text-white mb-4">Why KoalaLab?</h3>
@@ -167,7 +167,7 @@ export default function FooterSection() {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row justify-start gap-8 items-start sm:items-center space-y-4 sm:space-y-0">
             <div className="text-sm text-gray-400">
               © 2025 KoalaLab
             </div>

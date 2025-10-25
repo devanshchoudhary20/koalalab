@@ -13,7 +13,7 @@ module.exports = {
           testimonial_text: '#3548A2',
           background_purple: '#F4EDF9',
           background_brown: '#F2F2F2',
-          text_blue: '#394BA5',
+          text_blue: '#3547A2',
           text_gray: '#3D3D3D',
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -23,6 +23,7 @@ module.exports = {
           desktop: '#4EF0D2',
           blueText: '#394CA9',
           submitButton: '#3547A1',
+          buttonText: '#394BA5',
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -61,7 +62,7 @@ module.exports = {
       },
       fontFamily: {
         'heading': ['var(--font-nunito-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        'content': ['var(--font-noto-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        'content': ['var(--font-noto-sans-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
 
     },
@@ -89,25 +90,31 @@ module.exports = {
           'font-weight': '700',
           'font-family': 'var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif',
         },
+        '.text-heading-small': {
+          'font-size': '1rem',
+          'line-height': '1.2',
+          'font-weight': '700',
+          'font-family': 'var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif',
+        },
         '.text-body-large': {
           'font-size': '1.5rem',
           'line-height': '1.6',
           'font-weight': '300',
-          'font-family': 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif',
+          'font-family': 'var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif',
           'letter-spacing': '-0.025em',
         },
         '.text-body-medium': {
           'font-size': '1.125rem',
           'line-height': '1.6',
           'font-weight': '300',
-          'font-family': 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif',
+          'font-family': 'var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif',
           'letter-spacing': '-0.025em',
         },
         '.text-body-small': {
           'font-size': '0.875rem',
           'line-height': '1.6',
           'font-weight': '300',
-          'font-family': 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif',
+          'font-family': 'var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif',
           'letter-spacing': '-0.025em',
         },
         // Common layout patterns
@@ -126,7 +133,7 @@ module.exports = {
         '.card-base': {
           'background-color': 'white',
           'border-radius': '0.5rem',
-          'padding': '1.5rem',
+          'padding': '1rem',
           'box-shadow': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
         },
         '.link-external': {
@@ -157,7 +164,7 @@ module.exports = {
         '.button-secondary': {
           'background': 'white',
           'color': '#394BA5',
-          'border': '1px solid #394BA5',
+          'border': '1px solid #3547A2',
           'font-weight': '600',
           'padding': '0.75rem 1rem',
           'border-radius': '0.5rem',

@@ -20,7 +20,8 @@ export default function Input({
       {label && (
         <label 
           htmlFor={inputId} 
-          className="block text-sm font-medium text-gray-700 font-content"
+          className="block text-sm font-light font-content"
+          style={{ color: '#3547A1' }}
         >
           {label}
         </label>

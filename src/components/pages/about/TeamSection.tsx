@@ -23,7 +23,7 @@ export default function TeamSection() {
           Know the <span className="text-primary-text_blue">Team</span>
         </h2>
         
-        <div className="flex flex-col md:flex-row justify-between items-center gap-12 max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-12 max-w-4xl mx-auto">
           {teamMembers.map((member) => (
             <div key={member.id} className="flex flex-col items-center text-center">
               {/* Team Member Image */}
@@ -37,10 +37,10 @@ export default function TeamSection() {
               </div>
               
               {/* Team Member Info */}
-              <h3 className="text-heading-medium text-primary-text_blue mb-2">
+              <h3 className="text-heading-medium text-bold text-primary-text_blue mb-2">
                 {member.name}
               </h3>
-              <p className="text-body-medium text-primary-text_gray">
+              <p className="text-body-medium text-primary-text_blue">
                 {member.role}
               </p>
             </div>

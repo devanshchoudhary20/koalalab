@@ -53,7 +53,7 @@ export default function ContactForm() {
                 alt="Contact illustration"
                 width={500}
                 height={500}
-                className="w-full h-auto object-contain max-w-2xl mx-auto sm:my-0 mb-[-140px]"
+                className="w-full h-auto object-contain max-w-2xl mx-auto md:my-0 mb-[-140px]"
                 priority
               />
             </div>

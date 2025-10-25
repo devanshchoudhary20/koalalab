@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Nunito_Sans, Noto_Sans } from "next/font/google";
+import { Nunito_Sans, Noto_Sans, Noto_Sans_Display } from "next/font/google";
 
 // Configure Nunito Sans for headings
 const nunitoSans = Nunito_Sans({
@@ -18,9 +18,17 @@ const notoSans = Noto_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+// Configure Noto Sans Display for display text
+const notoSansDisplay = Noto_Sans_Display({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-display",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${nunitoSans.variable} ${notoSans.variable}`}>
+    <main className={`${nunitoSans.variable} ${notoSans.variable} ${notoSansDisplay.variable}`}>
       <Component {...pageProps} />
     </main>
   );

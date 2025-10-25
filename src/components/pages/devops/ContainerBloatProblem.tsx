@@ -14,13 +14,13 @@ export default function ContainerBloatProblem() {
 
 				{/* Introductory Paragraph */}
 				<div className="mb-12">
-					<p className="text-body-large text-primary-text_blue max-w-4xl mx-auto">
+					<p className="text-body-large text-primary-text_blue max-w-3xl mx-auto">
 						KoalaLab started with understanding where the container bloat stemmed from & those issue came from
 					</p>
 				</div>
 
 				{/* Three Column Cards */}
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-fit mx-auto">
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-3xl mx-auto">
 					{/* Card 1 */}
 					<div className="card-base max-w-xs mx-auto text-center sm:text-left">
 						<div className="flex items-start gap-4">
@@ -28,9 +28,9 @@ export default function ContainerBloatProblem() {
 								1
 							</div>
 							<div>
-								<h3 className="text-heading-medium text-gray-800 mb-2 text-primary-text_blue">
+								<h4 className="text-heading-small text-gray-800 mb-2 text-primary-text_blue">
 									Bloated Package Universe
-								</h3>
+								</h4>
 								<p className="text-body-small text-gray-800">
 									Debian&apos;s package creation includes unnecessary maintainer scripts
 								</p>
@@ -45,9 +45,9 @@ export default function ContainerBloatProblem() {
 								2
 							</div>
 							<div>
-								<h3 className="text-heading-medium text-gray-800 mb-2 text-primary-text_blue">
+								<h4 className="text-heading-small text-gray-800 mb-2 text-primary-text_blue">
 									Package Manager Footprint
-								</h3>
+								</h4>
 								<p className="text-body-small text-gray-800">
 									APT leaves behind significant overhead
 								</p>
@@ -62,9 +62,9 @@ export default function ContainerBloatProblem() {
 								3
 							</div>
 							<div>
-								<h3 className="text-heading-medium text-gray-800 mb-2 text-primary-text_blue">
+								<h4 className="text-heading-small text-gray-800 mb-2 text-primary-text_blue">
 									Non-Essential &quot;Essentials&quot;
-								</h3>
+								</h4>
 								<p className="text-body-small text-gray-800">
 									Many packages marked as essential aren&apos;t actually needed in containers
 								</p>
@@ -75,7 +75,7 @@ export default function ContainerBloatProblem() {
 
 				{/* Concluding Paragraph */}
 				<div className="mb-12">
-					<p className="text-body-large text-primary-text_blue max-w-4xl mx-auto">
+					<p className="text-body-large text-primary-text_blue max-w-3xl mx-auto">
 						This bloat creates a larger attack surface with more CVEs, while consuming extra resources and slowing deployments.
 					</p>
 				</div>

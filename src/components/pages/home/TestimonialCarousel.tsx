@@ -28,7 +28,7 @@ export default function TestimonialCarousel() {
       <div className="w-full flex justify-center">
         <div className="w-full max-w-5xl text-center">
           <blockquote 
-            className="text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-relaxed text-[#1E3A8A] font-medium"
+            className="text-xl sm:text-2xl md:text-2xl lg:text-2xl leading-relaxed text-[#1E3A8A] font-heading"
             dangerouslySetInnerHTML={{
               __html: `"${formatQuote(currentTestimonial.quote, currentTestimonial.boldTexts)}"`
             }}

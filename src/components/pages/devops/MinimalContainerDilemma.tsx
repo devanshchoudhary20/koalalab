@@ -1,5 +1,5 @@
+import { CTAButtons } from '@/components/shared/common'
 import Link from 'next/link'
-
 export default function MinimalContainerDilemma() {
 	return (
 		<section className="bg-white section-padding">
@@ -14,7 +14,7 @@ export default function MinimalContainerDilemma() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
 					{/* Left Column */}
 					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
 						<p className="text-body-large text-gray-800">
@@ -50,7 +50,7 @@ export default function MinimalContainerDilemma() {
 
 				{/* Full Width Bottom Paragraph */}
 				<div className="mb-12">
-					<p className="text-body-large text-gray-800 max-w-4xl mx-auto">
+					<p className="text-body-large text-gray-800 max-w-3xl mx-auto">
 						KoalaLab understood these issues and tackled on modernising legacy linux distro(debian) for a container-first design to provide same security(of distroless containers) with a{' '}
 						<Link 
 							href="https://www.debian.org/doc/manuals/debian-faq/pkgtools.en.html"
@@ -64,20 +64,7 @@ export default function MinimalContainerDilemma() {
 				</div>
 
 				{/* Call-to-Action Buttons */}
-				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<Link
-						href="/contact"
-						className="button-primary"
-					>
-						Talk to us →
-					</Link>
-					<Link
-						href="/containers"
-						className="button-secondary"
-					>
-						Explore images →
-					</Link>
-				</div>
+				<CTAButtons />
 			</div>
 		</section>
 	)

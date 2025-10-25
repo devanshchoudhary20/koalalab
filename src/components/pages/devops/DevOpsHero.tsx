@@ -4,7 +4,8 @@ export default function DevOpsHero() {
 	return (
 		<Hero
 			title="For platform engineering teams"
-			description="Koala Base Container Images. Drop-in replacement with a familiar Debian-like toolchain. Built with precise SBOM control for security and transparency."
+			subtitle="Koala Base Container Images"
+			description="Drop-in replacement with a familiar Debian-like toolchain. Built with precise SBOM control for security and transparency."
 			showButton={true}
 			buttonText="Try Koala images →"
 			buttonHref="/containers"

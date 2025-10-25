@@ -8,19 +8,19 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, bullets }: FeatureCardProps) {
 	return (
-		<div className="card-base flex gap-4">
-			<div className="flex-shrink-0">
+		<div className="card-base flex gap-4 flex items-center">
+			<div className="flex-shrink-0 w-16 h-16">
 				<Image
 					src={icon}
 					alt={title}
 					width={48}
 					height={48}
-					className="w-12 h-12 object-contain"
+					className="w-16 h-16 object-contain"
 				/>
 			</div>
 			<div className="flex-1">
 				<h3 className="text-heading-medium text-gray-800 mb-3">{title}</h3>
-				<ul className="space-y-2">
+				<ul className="space-y-0">
 					{bullets.map((bullet, index) => (
 						<li key={index} className="text-body-small text-gray-700 flex items-start">
 							<span className="text-gray-400 mr-2">•</span>
@@ -109,7 +109,7 @@ export default function HardenedAdvantageSection() {
 				</div>
 
 				{/* Feature Cards Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
 					{features.map((feature, index) => (
 						<FeatureCard
 							key={index}

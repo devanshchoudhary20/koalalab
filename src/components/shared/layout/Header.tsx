@@ -78,7 +78,7 @@ export default function Header() {
           </Link>
         </div>
         
-        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+        <PopoverGroup className="hidden lg:flex lg:gap-x-4">
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
               Product
@@ -146,7 +146,7 @@ export default function Header() {
           <a 
             href="#contact" 
             onClick={scrollToContact}
-            className="text-sm/6 font-semibold bg-gradient-fill-desktop px-4 py-2 rounded-md w-max"
+            className="text-sm/6 font-semibold bg-gradient-fill-desktop px-4 py-2 rounded-md w-max text-gradient-fill-buttonText"
           >
             Request Trial
           </a>

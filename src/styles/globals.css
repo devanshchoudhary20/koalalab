@@ -55,17 +55,23 @@
 }
 
 .font-content {
-  font-family: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif;
 }
+
 
 /* Base font settings */
 body {
-  font-family: var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Heading elements default to Nunito Sans */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Paragraph and blockquote elements use Noto Sans Display */
+p, blockquote {
+  font-family: var(--font-noto-sans-display), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Hide scrollbar utility */

@@ -13,7 +13,7 @@ export default function CustomizeImageSection() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
 					{/* Left Column */}
 					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
 						<p className="text-body-large text-gray-800">
@@ -30,7 +30,7 @@ export default function CustomizeImageSection() {
 				</div>
 
 				{/* Call-to-Action Link */}
-				<div className="flex justify-center">
+				<div className="flex justify-center max-w-2xl mx-auto">
 					<Link
 						href="#"
 						className="text-blue-600 hover:text-blue-800 text-body-large"
