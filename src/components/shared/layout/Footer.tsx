@@ -153,11 +153,10 @@ export default function FooterSection() {
 
             {/* Contact Us */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
               <a 
                 href="#contact" 
                 onClick={scrollToContact}
-                className="text-sm text-gray-300 hover:text-white"
+                className="text-lg font-semibold text-white mb-4"
               >
                 Contact Us
               </a>
