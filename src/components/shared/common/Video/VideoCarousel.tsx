@@ -109,7 +109,7 @@ export default function VideoCarousel({
   }
 
   return (
-    <section aria-label={ariaLabel} className="w-full relative py-24">
+    <section aria-label={ariaLabel} className="w-full relative py-24 overflow-scroll scrollbar-hide">
       {/* Background Image */}
       <div 
         className="absolute bottom-0 bg-contain bg-no-repeat bg-bottom inset-0"
@@ -128,7 +128,7 @@ export default function VideoCarousel({
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10 mx-4"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10 mx-4 w-min ml-auto"
         role="listbox"
         aria-label="Video thumbnails"
       >
