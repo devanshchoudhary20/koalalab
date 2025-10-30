@@ -22,14 +22,6 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 		setTimeout(() => setCopiedTag(null), 2000)
 	}
 
-	const getVulnerabilityColor = (count: number, severity: string) => {
-		if (count === 0) return 'text-green-600'
-		if (severity === 'critical') return 'text-severity-critical'
-		if (severity === 'high') return 'text-severity-high'
-		if (severity === 'medium') return 'text-severity-medium'
-		return 'text-severity-low'
-	}
-
 	const handleTagClick = (tag: Tag) => {
 		setSelectedTag(tag)
 		setIsDrawerOpen(true)
@@ -42,9 +34,9 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 					<TableHeader>
 						<TableRow>
 							<TableHead>Tag</TableHead>
-							<TableHead>Vulnerabilities</TableHead>
-							<TableHead>Size</TableHead>
-							<TableHead>Last Changed</TableHead>
+							<TableHead className="hidden md:table-cell">Vulnerabilities</TableHead>
+							<TableHead className="hidden md:table-cell">Size</TableHead>
+							<TableHead className="hidden md:table-cell">Last Changed</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
@@ -61,53 +53,148 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 										</Button>
 										<Info className="h-4 w-4 text-muted-foreground" />
 									</div>
+									{/* Mobile: Show size below tag */}
+									<div className="text-muted-foreground text-xs mt-1 md:hidden">
+										{formatSize(tag.size.total_mb)} • {formatArchitecture(tag.size.architectures)}
+									</div>
 								</TableCell>
-								<TableCell>
-									<div className="flex items-center space-x-2">
-										<div className="flex space-x-1">
-											<span className={`text-xs font-medium ${getVulnerabilityColor(tag.vulnerabilities.critical, 'critical')}`}>
-												{tag.vulnerabilities.critical}
-											</span>
-											<span className={`text-xs font-medium ${getVulnerabilityColor(tag.vulnerabilities.high, 'high')}`}>
-												{tag.vulnerabilities.high}
-											</span>
-											<span className={`text-xs font-medium ${getVulnerabilityColor(tag.vulnerabilities.medium, 'medium')}`}>
-												{tag.vulnerabilities.medium}
-											</span>
-											<span className={`text-xs font-medium ${getVulnerabilityColor(tag.vulnerabilities.low, 'low')}`}>
-												{tag.vulnerabilities.low}
-											</span>
-											<span className={`text-xs font-medium ${getVulnerabilityColor(tag.vulnerabilities.negligible, 'negligible')}`}>
-												{tag.vulnerabilities.negligible}
-											</span>
+							<TableCell className="hidden md:table-cell">
+								<div className="w-full max-w-xs">
+									<div className="h-6 bg-gray-100 rounded overflow-hidden">
+										<div className="h-full flex">
+											{/* critical */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
+												{tag.vulnerabilities.critical > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.critical}
+													</span>
+												)}
+											</div>
+											{/* high */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
+												{tag.vulnerabilities.high > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.high}
+													</span>
+												)}
+											</div>
+											{/* medium */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
+												{tag.vulnerabilities.medium > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.medium}
+													</span>
+												)}
+											</div>
+											{/* low */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
+												{tag.vulnerabilities.low > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.low}
+													</span>
+												)}
+											</div>
+											{/* negligible */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
+												{tag.vulnerabilities.negligible > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.negligible}
+													</span>
+												)}
+											</div>
 										</div>
 									</div>
-								</TableCell>
-								<TableCell>
-									<div className="text-sm">
-										<div className="font-medium">{formatSize(tag.size.total_mb)}</div>
-										<div className="text-muted-foreground text-xs">
-											{formatArchitecture(tag.size.architectures)}
+								</div>
+							</TableCell>
+							<TableCell className="hidden md:table-cell">
+								<div className="text-sm">
+									<div className="font-medium">{formatSize(tag.size.total_mb)}</div>
+									<div className="text-muted-foreground text-xs">
+										{formatArchitecture(tag.size.architectures)}
+									</div>
+								</div>
+							</TableCell>
+							<TableCell className="hidden md:table-cell">
+								<div className="text-sm">
+									<div>{formatRelativeTime(tag.last_changed)}</div>
+									<Button
+										variant="ghost"
+										size="sm"
+										onClick={() => copyToClipboard(`docker pull kla.dev/KoalaLab/${tag.tag_name}`, tag.tag_name)}
+										className="h-6 w-6 p-0"
+									>
+										{copiedTag === tag.tag_name ? (
+											<span className="text-green-600">✓</span>
+										) : (
+											<Copy className="h-3 w-3" />
+										)}
+									</Button>
+								</div>
+							</TableCell>
+							{/* Mobile: Show vulnerabilities and last changed in second column */}
+							<TableCell className="md:hidden">
+								<div className="w-full max-w-xs">
+									<div className="h-6 bg-gray-100 rounded overflow-hidden">
+										<div className="h-full flex">
+											{/* critical */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
+												{tag.vulnerabilities.critical > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.critical}
+													</span>
+												)}
+											</div>
+											{/* high */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
+												{tag.vulnerabilities.high > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.high}
+													</span>
+												)}
+											</div>
+											{/* medium */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
+												{tag.vulnerabilities.medium > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.medium}
+													</span>
+												)}
+											</div>
+											{/* low */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
+												{tag.vulnerabilities.low > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.low}
+													</span>
+												)}
+											</div>
+											{/* negligible */}
+											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
+												{tag.vulnerabilities.negligible > 0 && (
+													<span className="text-xs font-semibold text-black">
+														{tag.vulnerabilities.negligible}
+													</span>
+												)}
+											</div>
 										</div>
 									</div>
-								</TableCell>
-								<TableCell>
-									<div className="text-sm">
-										<div>{formatRelativeTime(tag.last_changed)}</div>
-										<Button
-											variant="ghost"
-											size="sm"
-											onClick={() => copyToClipboard(`docker pull kla.dev/KoalaLab/${tag.tag_name}`, tag.tag_name)}
-											className="h-6 w-6 p-0"
-										>
-											{copiedTag === tag.tag_name ? (
-												<span className="text-green-600">✓</span>
-											) : (
-												<Copy className="h-3 w-3" />
-											)}
-										</Button>
-									</div>
-								</TableCell>
+								</div>
+								<div className="text-muted-foreground text-xs mt-1">
+									{formatRelativeTime(tag.last_changed)}
+								</div>
+								<Button
+									variant="ghost"
+									size="sm"
+									onClick={() => copyToClipboard(`docker pull kla.dev/KoalaLab/${tag.tag_name}`, tag.tag_name)}
+									className="h-6 w-6 p-0 mt-1"
+								>
+									{copiedTag === tag.tag_name ? (
+										<span className="text-green-600">✓</span>
+									) : (
+										<Copy className="h-3 w-3" />
+									)}
+								</Button>
+							</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
