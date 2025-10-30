@@ -33,7 +33,7 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 				<Table>
 					<TableHeader>
 						<TableRow>
-							<TableHead>Tag</TableHead>
+							<TableHead className="w-40">Tag</TableHead>
 							<TableHead className="hidden md:table-cell">Vulnerabilities</TableHead>
 							<TableHead className="hidden md:table-cell">Size</TableHead>
 							<TableHead className="hidden md:table-cell">Last Changed</TableHead>
@@ -42,8 +42,9 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 					<TableBody>
 						{tags.map((tag, index) => (
 							<TableRow key={index} className="hover:bg-muted/50">
-								<TableCell>
-									<div className="flex items-center space-x-2">
+							<TableCell className="w-40">
+								<div className="flex items-center space-x-2">
+									<div className="truncate ">
 										<Button
 											variant="link"
 											className="p-0 h-auto text-blue-600 hover:text-blue-800 font-medium text-left justify-start font-mono text-sm"
@@ -51,6 +52,7 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 										>
 											{tag.tag_name}
 										</Button>
+									</div>
 										<Info className="h-4 w-4 text-muted-foreground" />
 									</div>
 									{/* Mobile: Show size below tag */}
@@ -58,50 +60,40 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 										{formatSize(tag.size.total_mb)} • {formatArchitecture(tag.size.architectures)}
 									</div>
 								</TableCell>
-							<TableCell className="hidden md:table-cell">
-								<div className="w-full max-w-xs">
+						<TableCell className="hidden md:table-cell pr-6">
+							<div className="w-full max-w-[300px] max-w-md">
 									<div className="h-6 bg-gray-100 rounded overflow-hidden">
 										<div className="h-full flex">
 											{/* critical */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
-												{tag.vulnerabilities.critical > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.critical}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.critical}
+								</span>
+							</div>
 											{/* high */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
-												{tag.vulnerabilities.high > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.high}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.high}
+								</span>
+							</div>
 											{/* medium */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
-												{tag.vulnerabilities.medium > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.medium}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.medium}
+								</span>
+							</div>
 											{/* low */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
-												{tag.vulnerabilities.low > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.low}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.low}
+								</span>
+							</div>
 											{/* negligible */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
-												{tag.vulnerabilities.negligible > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.negligible}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.negligible}
+								</span>
+							</div>
 										</div>
 									</div>
 								</div>
@@ -137,45 +129,35 @@ export default function TagTable({ tags, containerSlug }: TagTableProps) {
 									<div className="h-6 bg-gray-100 rounded overflow-hidden">
 										<div className="h-full flex">
 											{/* critical */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
-												{tag.vulnerabilities.critical > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.critical}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#E07171' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.critical}
+								</span>
+							</div>
 											{/* high */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
-												{tag.vulnerabilities.high > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.high}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFA071' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.high}
+								</span>
+							</div>
 											{/* medium */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
-												{tag.vulnerabilities.medium > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.medium}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FEC98F' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.medium}
+								</span>
+							</div>
 											{/* low */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
-												{tag.vulnerabilities.low > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.low}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FCE1A9' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.low}
+								</span>
+							</div>
 											{/* negligible */}
-											<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
-												{tag.vulnerabilities.negligible > 0 && (
-													<span className="text-xs font-semibold text-black">
-														{tag.vulnerabilities.negligible}
-													</span>
-												)}
-											</div>
+							<div className="h-full flex items-center justify-center" style={{ width: '20%', backgroundColor: '#FFF1C1' }}>
+								<span className="text-xs font-semibold text-black">
+									{tag.vulnerabilities.negligible}
+								</span>
+							</div>
 										</div>
 									</div>
 								</div>
