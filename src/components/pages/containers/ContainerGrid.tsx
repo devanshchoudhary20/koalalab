@@ -7,8 +7,8 @@ interface ContainerGridProps {
 
 export default function ContainerGrid({ containers }: ContainerGridProps) {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-			{containers.map((container) => (
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+			{containers.slice(0, 9).map((container) => (
 				<ContainerCard key={container.slug} container={container} />
 			))}
 		</div>

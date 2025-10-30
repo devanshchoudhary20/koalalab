@@ -14,16 +14,16 @@ export default function MinimalContainerDilemma() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-12 text-left max-w-5xl mx-auto">
 					{/* Left Column */}
-					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
+					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							While Hardened distroless container images may have been a much talked about buzzword in the last few years, changing your infrastructure to move to hardened images has been a hard challenge across the industry.
 						</p>
 					</div>
 
 					{/* Right Column */}
-					<div className="pr-0 sm:pr-8 text-center sm:text-left">
+					<div className="pr-0 sm:pr-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							Primary challenge stems from the lack of familiarity with newer toolchain (most hardened images are built on some fork of{' '}
 							<Link 

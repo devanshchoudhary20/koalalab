@@ -119,24 +119,7 @@ export default function FooterSection() {
               </ul>
             </div>
 
-            {/* Policies */}
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Policies</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
-                    Privacy Policy
-                    <ExternalArrowIcon />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
-                    Cookie Policy
-                    <ExternalArrowIcon />
-                  </Link>
-                </li>
-              </ul>
-            </div>
+           
           </div>
 
           {/* Right Column - Standalone sections */}

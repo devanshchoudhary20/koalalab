@@ -19,7 +19,7 @@ const features = [
   {
     title: 'Faster builds, faster boot time',
     description: 'Containers your cloud team will love',
-    icon: '/images/hoursSaved.webp'
+    icon: '/images/HoursSaved.webp'
   }
 ]
 

@@ -31,13 +31,13 @@ export default function CTAButtons({
 			<Link
 				href={talkToUsHref}
 				onClick={talkToUsHref === "#contact" ? scrollToContact : undefined}
-				className={`rounded-md bg-gradient-fill-desktop ${primaryButtonPadding} py-2.5 text-sm text-gradient-fill-submitButton`}
+				className={`rounded-md bg-gradient-fill-desktop ${primaryButtonPadding} py-2.5 text-sm text-gradient-fill-submitButton min-w-[132px]`}
 			>
 				Talk to us <span aria-hidden="true">→</span>
 			</Link>
 			<Link 
 				href={exploreImagesHref} 
-				className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md"
+				className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md min-w-[132px]"
 			>
 				Explore images <span aria-hidden="true">→</span>
 			</Link>

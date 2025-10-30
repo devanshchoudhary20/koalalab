@@ -32,16 +32,6 @@ const PreviousAssociation = () => {
             id: 6,
             name: "Amber",
             image: "/images/Amber.webp"
-        },
-        {
-            id: 7,
-            name: "Holonym",
-            image: "/images/Holonym.webp"
-        },
-        {
-            id: 8,
-            name: "Kalypso",
-            image: "/images/Kalypso.webp"
         }
     ]
 
@@ -52,11 +42,11 @@ const PreviousAssociation = () => {
                     Previous Associations
                 </h2>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
                     {previousAssociations.map((association) => (
                         <div 
                             key={association.id}
-                            className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center min-h-[120px]"
+                            className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center min-h-[150px]"
                         >
                             <div className="relative w-full h-16">
                                 <Image 

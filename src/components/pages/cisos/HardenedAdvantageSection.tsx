@@ -8,7 +8,7 @@ interface FeatureCardProps {
 
 function FeatureCard({ icon, title, bullets }: FeatureCardProps) {
 	return (
-		<div className="card-base flex gap-4 flex items-center">
+		<div className="card-base flex gap-4 flex items-center min-h-[165px]">
 			<div className="flex-shrink-0 w-16 h-16">
 				<Image
 					src={icon}
@@ -74,13 +74,6 @@ export default function HardenedAdvantageSection() {
 				'Image Signing & Verification',
 				'Provenance attestation for full supply chain transparency',
 				'Images signed with Cosign, verifiable against KoalaLab\'s GitHub identity'
-			]
-		},
-		{
-			icon: '/images/cisos_customize.webp',
-			title: 'Bespoke usecases/Customize your image',
-			bullets: [
-				'Koala\'s tight control over the SBOM of the containers & custom minimal package registry allows us to provide customized images for any bespoke usecases.'
 			]
 		},
 		{

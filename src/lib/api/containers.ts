@@ -16,6 +16,7 @@ export interface ContainerParams {
 	search?: string
 	tags?: string
 	page?: number
+	per_page?: number
 }
 
 export interface TagParams {

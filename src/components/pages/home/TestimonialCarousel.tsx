@@ -41,7 +41,7 @@ export default function TestimonialCarousel() {
         {/* Profile Picture, Name, and LinkedIn - Horizontal Layout */}
         <div className="flex items-center gap-2">
           {/* Teal pill-shaped banner with embedded profile picture */}
-          <div className="bg-gradient-fill-mobile rounded-full px-2 pr-4 py-1 flex items-center gap-2">
+          <div className="bg-gradient-fill-mobile rounded-full px-2 py-1 flex items-center gap-2">
             {/* Profile picture embedded in the teal banner */}
             <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
               <Image
@@ -56,10 +56,11 @@ export default function TestimonialCarousel() {
             <span className="text-gray-900 text-sm font-medium">
               {currentTestimonial.name}
             </span>
+            <LinkedInButton url={currentTestimonial.linkedinUrl} />
           </div>
           
           {/* LinkedIn button as separate dark blue circle */}
-          <LinkedInButton url={currentTestimonial.linkedinUrl} />
+         
         </div>
         
         {/* Title and Company - Centered below */}

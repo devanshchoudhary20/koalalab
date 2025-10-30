@@ -18,21 +18,31 @@ export default function Hero({
 	showButton = false,
 	buttonText = 'Try Koala images →',
 	buttonHref = '#',
-	backgroundImage = '/images/ExplainerBackground.webp',
 	className = ''
 }: HeroProps) {
 	return (
 		<section className={`relative section-padding ${className}`}>
+			{/* Gradient Background */}
+			<div className="absolute inset-0 bg-gradient-to-b from-[#38BDB6] to-[#B5B3FF]" />
+			
+			{/* Panda Layer with Overlay Light */}
 			<div className="absolute inset-0 overflow-hidden">
-				<Image
-					src={backgroundImage}
-					alt="Background"
-					fill
-					className="object-cover"
-					quality={85}
-					sizes="100vw"
-					priority
-				/>
+				<div className="absolute right-0 top-0 bottom-0 w-full max-w-2xl h-full">
+					<div className="relative w-full h-full">
+						{/* Light Overlay Gradient */}
+						<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-white/30 z-10" />
+						{/* Panda Image */}
+						<Image
+							src="/images/PandaLayer.webp"
+							alt="Panda Layer"
+							fill
+							className="sm:object-fill object- object-bottom opacity-10"
+							quality={90}
+							sizes="(max-width: 768px) 0vw, 50vw"
+							priority
+						/>
+					</div>
+				</div>
 			</div>
 			<div className="relative section-container">
 				<h1 className="text-heading-large text-white text-center">

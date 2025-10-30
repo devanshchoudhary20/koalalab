@@ -59,9 +59,13 @@ export default function Pagination({
 					size="sm"
 					onClick={() => onPageChange(currentPage - 1)}
 					disabled={currentPage === 1}
-					className="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+					className={`flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${
+						currentPage === 1
+							? 'border border-[#C8F8E8] text-gray-400'
+							: 'border border-gray-300 text-[#14003D]'
+					}`}
 				>
-					<ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+					<ChevronLeft className={`h-3 w-3 sm:h-4 sm:w-4 ${currentPage === 1 ? 'text-gray-400' : ''}`} />
 					<span className="hidden xs:inline">Previous</span>
 					<span className="xs:hidden">Prev</span>
 				</Button>
@@ -73,11 +77,13 @@ export default function Pagination({
 						size="sm"
 						onClick={() => typeof page === 'number' && onPageChange(page)}
 						disabled={typeof page !== 'number'}
-						className={`w-6 h-6 sm:w-8 sm:h-8 p-0 text-xs sm:text-sm font-medium ${
+						className={`w-8 h-8 sm:w-10 sm:h-10 p-0 text-xs sm:text-sm font-medium rounded-full ${
 							page === currentPage
-								? 'bg-green-600 text-white border-green-600 hover:bg-green-700'
-								: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-						} ${typeof page !== 'number' ? 'cursor-default' : 'cursor-pointer'}`}
+								? 'bg-[#C8F8E8] text-[#14003D] border-[#C8F8E8] hover:bg-[#C8F8E8]'
+								: typeof page === 'number'
+									? 'bg-white text-[#14003D] border-transparent hover:bg-gray-50'
+									: 'bg-white text-gray-400 border-transparent cursor-default'
+						}`}
 					>
 						{page}
 					</Button>
@@ -88,11 +94,17 @@ export default function Pagination({
 					size="sm"
 					onClick={() => onPageChange(currentPage + 1)}
 					disabled={currentPage === totalPages}
-					className="flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+					className={`flex items-center gap-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${
+						currentPage === totalPages
+							? 'border border-[#C8F8E8] text-gray-400'
+							: 'border border-[#00E0A0] text-[#14003D]'
+					}`}
 				>
 					<span className="hidden xs:inline">Next</span>
 					<span className="xs:hidden">Next</span>
-					<ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+					<ChevronRight className={`h-3 w-3 sm:h-4 sm:w-4 ${
+						currentPage === totalPages ? 'text-gray-400' : 'text-[#00E0A0]'
+					}`} />
 				</Button>
 			</div>
 

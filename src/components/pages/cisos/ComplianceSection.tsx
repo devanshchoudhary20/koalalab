@@ -14,9 +14,9 @@ export default function ComplianceSection() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-12 text-center max-w-5xl mx-auto">
 					{/* Left Column */}
-					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
+					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							Global compliance frameworks are tightening vulnerability management norms.
 						</p>
@@ -50,7 +50,7 @@ export default function ComplianceSection() {
 					</div>
 
 					{/* Right Column */}
-					<div className="pr-0 sm:pr-8 text-center sm:text-left">
+					<div className="pr-0 sm:pr-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							With over 90% of your application code being open-source,{' '}
 							<span className="text-primary-text_blue font-medium">CVE sprawl is real reality</span>{' '}

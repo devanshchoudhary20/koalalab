@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
 
 interface Company {
   name: string
@@ -13,52 +12,19 @@ interface CompaniesScrollContainerProps {
 }
 
 export default function CompaniesScrollContainer({ companies }: CompaniesScrollContainerProps) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      scrollContainer.scrollLeft += e.deltaY
-    }
-
-    // Auto-scroll functionality
-    const autoScroll = () => {
-      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-        scrollContainer.scrollLeft = 0
-      } else {
-        scrollContainer.scrollLeft += 1
-      }
-    }
-
-    const interval = setInterval(autoScroll, 30)
-
-    scrollContainer.addEventListener('wheel', handleWheel, { passive: false })
-
-    return () => {
-      scrollContainer.removeEventListener('wheel', handleWheel)
-      clearInterval(interval)
-    }
-  }, [])
-
   return (
-    <div 
-      ref={scrollRef}
-      className="flex space-x-6 overflow-x-auto scrollbar-hide px-6 pb-4"
-    >
+    <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-12 px-4 sm:px-6 pb-4">
       {companies.map((company) => (
         <div 
           key={company.name}
-          className="inline-flex w-56 h-20 relative flex-shrink-0"
+          className="relative w-32 h-16 sm:w-40 sm:h-20 md:w-56 md:h-28 flex-shrink-0"
         >
           <Image
             src={company.src}
             alt={company.name}
             fill
-            className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-            sizes="224px"
+            className="object-contain filter grayscale "
+            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 224px"
           />
         </div>
       ))}

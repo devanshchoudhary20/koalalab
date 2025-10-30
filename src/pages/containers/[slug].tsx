@@ -60,7 +60,7 @@ export default function ContainerDetailsPage() {
 	return (
 		<>
 			<Header />
-			<main className="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
+			<main className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 ">
 				<div className="space-y-6">
 					<ContainerHeader container={container} />
 					<TabNavigation 

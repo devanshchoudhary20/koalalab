@@ -120,15 +120,17 @@ export default function VideoCarousel({
         }}
       />
       
-      {/* Header (optional) */}
-      <div className="mb-3 flex items-center justify-between relative z-10">
-       
+      {/* Main Heading */}
+      <div className="mb-12 flex justify-center relative z-10">
+        <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold text-center text-[#374A9D] max-w-4xl px-4 text-heading-medium">
+          Hear us talk about 0-deb&apos;s container-first design
+        </h2>
       </div>
 
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10 mx-4 w-min ml-auto"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 scrollbar-hide lg:flex-row-reverse relative z-10 mx-4 ml-auto w-[80%] "
         role="listbox"
         aria-label="Video thumbnails"
       >

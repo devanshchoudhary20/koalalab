@@ -24,7 +24,7 @@ export function useContainers(params: ContainerParams = {}) {
 		}
 
 		loadContainers()
-	}, [JSON.stringify(params)])
+	}, [params.search, params.tags, params.page, params.per_page])
 
 	return { data, loading, error, refetch: () => setData(null) }
 }

@@ -1,4 +1,61 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
 export default function ContainerFirstTimeline() {
+	const scrollContainerRef = useRef<HTMLDivElement>(null)
+	const [canScrollLeft, setCanScrollLeft] = useState(false)
+	const [canScrollRight, setCanScrollRight] = useState(false)
+
+	const checkScrollability = () => {
+		if (!scrollContainerRef.current) return
+		const container = scrollContainerRef.current
+		setCanScrollLeft(container.scrollLeft > 0)
+		setCanScrollRight(
+			container.scrollLeft < container.scrollWidth - container.clientWidth - 1
+		)
+	}
+
+	const scroll = (direction: 'left' | 'right') => {
+		if (!scrollContainerRef.current) return
+		const container = scrollContainerRef.current
+		const scrollAmount = container.clientWidth * 0.7
+		const newScrollLeft =
+			direction === 'left'
+				? container.scrollLeft - scrollAmount
+				: container.scrollLeft + scrollAmount
+
+		container.scrollTo({
+			left: newScrollLeft,
+			behavior: 'smooth',
+		})
+	}
+
+	useEffect(() => {
+		const container = scrollContainerRef.current
+		if (!container) return
+
+		// Check scrollability on mount with delay to ensure layout is ready
+		const timeoutId = setTimeout(() => {
+			checkScrollability()
+		}, 0)
+
+		checkScrollability()
+		container.addEventListener('scroll', checkScrollability)
+
+		const resizeObserver = new ResizeObserver(() => {
+			checkScrollability()
+		})
+		resizeObserver.observe(container)
+
+		return () => {
+			clearTimeout(timeoutId)
+			container.removeEventListener('scroll', checkScrollability)
+			resizeObserver.disconnect()
+		}
+	}, [])
+
 	return (
 		<section 
 			className="section-padding" 
@@ -78,8 +135,21 @@ export default function ContainerFirstTimeline() {
 					</div>
 
 					{/* Mobile Timeline - Horizontal Scrollable */}
-					<div className="md:hidden">
-						<div className="flex overflow-x-auto pb-4 space-x-8 snap-x snap-mandatory scrollbar-hide">
+					<div className="md:hidden relative">
+						{canScrollLeft && (
+							<button
+								type="button"
+								onClick={() => scroll('left')}
+								className="absolute left-0 top-[30%] -translate-y-1/2 z-20 h-8 w-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white/90 transition-colors"
+								aria-label="Scroll left"
+							>
+								<ChevronLeft className="h-6 w-6 text-primary-text_blue" />
+							</button>
+						)}
+						<div 
+							ref={scrollContainerRef}
+							className="flex overflow-x-auto pb-4 space-x-8 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+						>
 							{/* Point 1: Bootstrapped Debian-like Distro */}
 							<div className="flex-shrink-0 w-64 snap-center">
 								<div className="flex flex-col items-center text-center">
@@ -145,6 +215,16 @@ export default function ContainerFirstTimeline() {
 								</div>
 							</div>
 						</div>
+						{canScrollRight && (
+							<button
+								type="button"
+								onClick={() => scroll('right')}
+								className="absolute right-0 top-[30%] -translate-y-1/2 z-20 h-8 w-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white/90 transition-colors"
+								aria-label="Scroll right"
+							>
+								<ChevronRight className="h-6 w-6 text-primary-text_blue" />
+							</button>
+						)}
 					</div>
 				</div>
 

@@ -13,58 +13,64 @@ interface ContainerCardProps {
 
 export default function ContainerCard({ container }: ContainerCardProps) {
 	return (
-		<Link href={`/containers/${container.slug}`}>
-			<Card className="h-full hover:shadow-lg transition-all duration-200 cursor-pointer bg-white border-gray-200 hover:bg-[#1CE8AB]">
+		<Link href={`/containers/${container.slug}`} className="h-full">
+			<Card className="h-full hover:shadow-lg transition-all duration-200 cursor-pointer bg-white border-[#1CE8AB] hover:bg-[#E0FFF6] flex flex-col">
 				<CardHeader className="pb-3">
-					<div className="flex items-start justify-between">
-						<div className="flex items-center space-x-3 flex-1 min-w-0">
-							<div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+					<div className="flex flex-col space-y-2">
+						{/* Icon and FIPS badge on same line */}
+						<div className="flex items-center justify-between">
+							<div className="w-6 h-6 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
 								<Image
 									src={container.logo_url}
 									alt={container.name}
-									width={32}
-									height={32}
+									width={18}
+									height={18}
 									className="object-contain"
 								/>
 							</div>
-							<div className="flex-1 min-w-0">
-								<h3 className="font-semibold text-base sm:text-lg truncate">{container.name}</h3>
-								<p className="text-xs sm:text-sm text-muted-foreground">
-									{formatRelativeTime(container.last_changed)}
-								</p>
-							</div>
+							{container.fips_available && (
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Badge 
+												variant="secondary" 
+												className="text-[#3443F4] bg-white border-[#3548A2] hover:text-[#3443F4] hover:bg-white text-xs flex-shrink-0 flex items-center gap-1 transition-all duration-200"
+											>
+												<Shield className="w-3 h-3 text-[#3443F4]" />
+												<Check className="w-3 h-3 text-[#3443F4]" />
+												FIPS available
+											</Badge>
+										</TooltipTrigger>
+										<TooltipContent side="top" className="bg-green-600 text-white border-green-600">
+											<p>A FIPS validated version of this image is available for S140-2 compliance. S140 is published with FIPS 140-3.</p>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
+							)}
 						</div>
-						{container.fips_available && (
-							<TooltipProvider>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Badge 
-											variant="secondary" 
-											className="text-[#3548A2] bg-inherit border-[#3548A2] hover:text-white hover:bg-[#3548A2] text-xs flex-shrink-0 ml-2 flex items-center gap-1 transition-all duration-200"
-										>
-											<Shield className="w-3 h-3" />
-											<Check className="w-3 h-3" />
-											FIPS available
-										</Badge>
-									</TooltipTrigger>
-									<TooltipContent side="top" className="bg-green-600 text-white border-green-600">
-										<p>A FIPS validated version of this image is available for S140-2 compliance. S140 is published with FIPS 140-3.</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
-						)}
+						{/* Heading on next line */}
+						<h3 className="text-[14px] font-bold truncate" style={{ fontFamily: 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif' }}>
+							{container.name}
+						</h3>
+						{/* Last changed on next line */}
+						<p className="text-[11px] font-normal text-[#14003D]/50" style={{ fontFamily: 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif' }}>
+							Last changed {formatRelativeTime(container.last_changed)}
+						</p>
 					</div>
 				</CardHeader>
-				<CardContent className="pt-0">
-					<p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+				<CardContent className="pt-0 flex-1 flex flex-col">
+					<p className="text-[12px] font-normal text-muted-foreground mb-3 line-clamp-2 flex-shrink-0" style={{ fontFamily: 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif' }}>
 						{container.description}
 					</p>
-					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm space-y-1 sm:space-y-0">
-						<span className="text-muted-foreground truncate">
-							Latest: {container.latest_tag}
+					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-start text-[11px] font-normal space-y-1 sm:space-y-0 sm:gap-1 mt-auto" style={{ fontFamily: 'var(--font-noto-sans), ui-sans-serif, system-ui, sans-serif' }}>
+						<span className="text-[#14003D]/50 truncate">
+							Latest tag:{' '}
+							<span className="text-black">
+								{container.latest_tag}
+							</span>
 						</span>
-						<span className="text-muted-foreground">
-							+{container.additional_tags_count} tags
+						<span className="text-[#14003D]/50 w-1/2">
+							+ {container.additional_tags_count} more tags
 						</span>
 					</div>
 				</CardContent>

@@ -1,4 +1,3 @@
-import Link from 'next/link'
 
 export default function CustomizeImageSection() {
 	return (
@@ -13,31 +12,22 @@ export default function CustomizeImageSection() {
 				</div>
 
 				{/* Two Column Content */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 text-left max-w-3xl mx-auto">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-12 text-left max-w-35xl mx-auto">
 					{/* Left Column */}
-					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-left">
+					<div className="space-y-6 pl-0 sm:pl-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							The combination of C(APT)ain & minimal package universe allows for a very precise control over the SBOM of the containers; enabling security and allowing for custom use-cases when required.
 						</p>
 					</div>
 
 					{/* Right Column */}
-					<div className="pr-0 sm:pr-8 text-center sm:text-left">
+					<div className="pr-0 sm:pr-8 text-center sm:text-center">
 						<p className="text-body-large text-gray-800">
 							Koala&apos;s enterprise plans offer C(CAPT)ain and our minimal package universe along with the Hardened &quot;out-of-the-box&quot; base container images. This combination helps with any enteprise-centric custom use-case your teams might have.
 						</p>
 					</div>
 				</div>
 
-				{/* Call-to-Action Link */}
-				<div className="flex justify-center max-w-2xl mx-auto">
-					<Link
-						href="#"
-						className="text-blue-600 hover:text-blue-800 text-body-large"
-					>
-						See our founders talk about 0-deb and modernising linux for container-first design
-					</Link>
-				</div>
 			</div>
 		</section>
 	)

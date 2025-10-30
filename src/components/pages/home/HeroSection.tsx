@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     <div className="bg-white relative">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-green-50/30"></div>
-      <div className="relative isolate pt-0 overflow-hidden">
+      <div className="relative isolate pt-0 overflow-hidden min-h-[70vh]">
         <div className="mx-auto max-w-fit px-6 py-16 sm:py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto text-center lg:text-left">
             <h1 className="mt-10 text-pretty text-4xl font-bold tracking-tight  md:text-5xl sm:text-6xl sm:leading-[1.3] leading-[1.2] text-gradient-fill-desktop">
@@ -39,7 +39,7 @@ export default function HeroSection() {
             </div>
 
             {/* Main hero graph image */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-[500px] h-[421px]">
               {/* Mobile image */}
               <Image 
                 src="/images/heroGraphMob.webp" 
@@ -51,10 +51,10 @@ export default function HeroSection() {
               />
               {/* Desktop image */}
               <Image 
-                src="/images/heroGraph.webp" 
+                src="/images/heroGraph.png" 
                 alt="Hero" 
                 width={500} 
-                height={500} 
+                height={421} 
                 className='w-full h-full object-cover hidden sm:block'
                 priority
               />

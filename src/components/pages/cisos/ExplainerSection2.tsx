@@ -6,7 +6,7 @@ export default function ExplainerSection2() {
 	return (
 		<div className="bg-white relative">
 			<div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-green-50/30"></div>
-			<div className="relative isolate pt-0 overflow-hidden">
+			<div className="relative isolate pt-0 overflow-hidden min-h-[80vh]">
 				<div className="mx-auto max-w-fit px-6 py-16 sm:py-16 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-16">
 					<div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto text-center lg:text-left">
 						<p className="p-4 text-pretty text-2xl font-content font-light tracking-tight text-gray-900 md:text-3xl sm:text-4xl sm:leading-[1.3] leading-[1.2] max-w-xl">

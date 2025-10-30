@@ -6,20 +6,49 @@ import ContainerGrid from '@/components/pages/containers/ContainerGrid'
 import SearchBar from '@/components/pages/containers/SearchBar'
 import CategoryFilter from '@/components/pages/containers/CategoryFilter'
 import Pagination from '@/components/shared/Pagination'
+import { Container } from '@/types/api'
 
 const categories = [
-	{ id: 'featured', label: 'Python' },
-	{ id: 'starter', label: 'Keyword2' },
-	{ id: 'ai', label: 'Keyword3' },
-	{ id: 'application', label: 'Application' },
+	{ id: 'all', label: 'All' },
 	{ id: 'base', label: 'Base' },
 	{ id: 'fips', label: 'FIPS' },
 ]
 
+function sortContainersByRelevance(containers: Container[], searchTerm: string): Container[] {
+	if (!searchTerm.trim()) return containers
+	
+	const lowerSearch = searchTerm.toLowerCase()
+	
+	return [...containers].sort((a, b) => {
+		const aNameLower = a.name.toLowerCase()
+		const bNameLower = b.name.toLowerCase()
+		const aDescLower = a.description.toLowerCase()
+		const bDescLower = b.description.toLowerCase()
+		
+		// Exact name match
+		if (aNameLower === lowerSearch && bNameLower !== lowerSearch) return -1
+		if (bNameLower === lowerSearch && aNameLower !== lowerSearch) return 1
+		
+		// Name starts with search term
+		if (aNameLower.startsWith(lowerSearch) && !bNameLower.startsWith(lowerSearch)) return -1
+		if (bNameLower.startsWith(lowerSearch) && !aNameLower.startsWith(lowerSearch)) return 1
+		
+		// Name contains search term
+		if (aNameLower.includes(lowerSearch) && !bNameLower.includes(lowerSearch)) return -1
+		if (bNameLower.includes(lowerSearch) && !aNameLower.includes(lowerSearch)) return 1
+		
+		// Description contains search term
+		if (aDescLower.includes(lowerSearch) && !bDescLower.includes(lowerSearch)) return -1
+		if (bDescLower.includes(lowerSearch) && !aDescLower.includes(lowerSearch)) return 1
+		
+		return 0
+	})
+}
+
 export default function ContainersPage() {
 	const router = useRouter()
 	const [search, setSearch] = useState('')
-	const [selectedCategory, setSelectedCategory] = useState('featured')
+	const [selectedCategory, setSelectedCategory] = useState('all')
 	const [page, setPage] = useState(1)
 	
 
@@ -46,17 +75,38 @@ export default function ContainersPage() {
 
 	const containerParams = useMemo(() => ({
 		search: search || undefined,
-		tags: selectedCategory !== 'featured' ? selectedCategory : undefined,
 		page,
-	}), [search, selectedCategory, page])
+		per_page: 9,
+	}), [search, page])
 
 	const { data, loading, error } = useContainers(containerParams)
+	
+	// Filter containers by FIPS availability if needed
+	const filteredContainers = useMemo(() => {
+		if (!data?.results) return []
+		
+		let filtered = data.results
+		
+		// Apply client-side filtering for Base/FIPS
+		if (selectedCategory === 'base') {
+			filtered = filtered.filter(container => !container.fips_available)
+		} else if (selectedCategory === 'fips') {
+			filtered = filtered.filter(container => container.fips_available)
+		}
+		
+		// Sort by relevance if search is active
+		if (search.trim()) {
+			filtered = sortContainersByRelevance(filtered, search)
+		}
+		
+		return filtered
+	}, [data?.results, selectedCategory, search])
 
 	const updateURL = (updates: Record<string, string | number | undefined>) => {
 		const newQuery = { ...router.query }
 		
 		Object.entries(updates).forEach(([key, value]) => {
-			if (value === undefined || value === '' || value === 'featured') {
+			if (value === undefined || value === '' || value === 'all') {
 				delete newQuery[key]
 			} else {
 				newQuery[key] = String(value)
@@ -110,7 +160,7 @@ export default function ContainersPage() {
 	return (
 		<>
 			<Header />
-			<main className="container mx-auto px-4 py-4 sm:py-6 lg:py-8">
+			<main className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-5xl mx-auto">
 				<div className="space-y-6">
 				{/* Header */}
 				<div className="text-center space-y-4">
@@ -139,13 +189,19 @@ export default function ContainersPage() {
 				{/* Container Grid */}
 				{loading ? (
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-						{Array.from({ length: 8 }).map((_, i) => (
-							<div key={i} className="h-48 bg-white border border-gray-200 animate-pulse rounded-lg" />
+						{Array.from({ length: 9 }).map((_, i) => (
+							<div key={i} className="aspect-[5/4] bg-white border border-gray-200 animate-pulse rounded-lg" />
 						))}
 					</div>
 				) : data ? (
 					<>
-						<ContainerGrid containers={data.results} />
+						{filteredContainers.length > 0 ? (
+							<ContainerGrid containers={filteredContainers} />
+						) : (
+							<div className="text-center py-12">
+								<p className="text-muted-foreground">No containers found matching your criteria.</p>
+							</div>
+						)}
 						{data.pagination.total_pages > 1 && (
 							<Pagination
 								currentPage={page}

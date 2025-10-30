@@ -54,6 +54,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'container-border': '#1CE8AB',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -125,8 +126,8 @@ module.exports = {
           'text-align': 'center',
         },
         '.section-padding': {
-          'padding-top': '4rem',
-          'padding-bottom': '4rem',
+          'padding-top': '5rem',
+          'padding-bottom': '5rem',
           'padding-left': '1rem',
           'padding-right': '1rem',
         },

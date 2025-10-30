@@ -47,7 +47,7 @@ export const testimonials: Testimonial[] = [
     name: "Sandip Pradhan",
     title: "Devops Lead",
     company: "Deutsche Bank",
-    image: "/images/sandipLinkedIn.webp",
+    image: "/images/SandipLinkedIn.webp",
     linkedinUrl: "https://www.linkedin.com/in/sandippradhan/b"
   }
 ]
