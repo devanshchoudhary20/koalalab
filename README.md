@@ -50,7 +50,7 @@ npm run dev
 The application uses the Netlify-hosted Mock API by default:
 
 **Production API**
-- Uses Netlify-hosted API: `https://cheerful-truffle-f285d5.netlify.app/api/v1`
+- Uses Netlify-hosted API: `https://koalalab-registry-api.netlify.app/api/v1`
 - No local server required
 - Works in production and development
 - Automatic offline error handling
