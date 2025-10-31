@@ -123,12 +123,12 @@ export default function VideoCarousel({
       {/* Main Heading */}
       <div className="mb-12 flex justify-center relative z-10">
         <div className="text-center max-w-4xl px-4">
-          <h2 className="text-heading-large text-gray-800 mb-4">
-            Our views.{' '}
-            <span className="text-gradient-fill-desktop">Our Thoughts</span>
+          <h2 className="text-gradient-fill-desktop">
+            Engineering container security.{' '}
+            <span className="text-heading-large text-gray-800 mb-4">from first principles</span>
           </h2>
           <p className="text-body-medium text-primary-text_blue">
-            Hear us talk about 0-deb&apos;s container first design. Stream through conversations with our founders on how Koala enables continuous compliance & reduces CVE sprawl.
+           From OpenSSF to top security podcasts, hear how we built 0-deb <br /> to reimagine secure containers.
           </p>
         </div>
       </div>
@@ -221,5 +221,6 @@ function PlayIcon(props: React.SVGProps<SVGSVGElement>) {
 </svg>
   )
 }
+
 
 
