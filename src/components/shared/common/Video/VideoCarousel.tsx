@@ -123,9 +123,9 @@ export default function VideoCarousel({
       {/* Main Heading */}
       <div className="mb-12 flex justify-center relative z-10">
         <div className="text-center max-w-4xl px-4">
-          <h2 className="text-gradient-fill-desktop">
-            Engineering container security.{' '}
-            <span className="text-heading-large text-gray-800 mb-4">from first principles</span>
+          <h2 className="text-heading-large text-gradient-fill-desktop mb-4">
+            Engineering container security.{' '} <br />
+            <span className="text-gray-800">from first principles</span>
           </h2>
           <p className="text-body-medium text-primary-text_blue">
            From OpenSSF to top security podcasts, hear how we built 0-deb <br /> to reimagine secure containers.
@@ -221,6 +221,7 @@ function PlayIcon(props: React.SVGProps<SVGSVGElement>) {
 </svg>
   )
 }
+
 
 
 
