@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAdvisories } from '@/hooks/useAdvisories'
 import { Input } from '@/components/ui/input'
-import { Search, Filter } from 'lucide-react'
+import { Search, ChevronDown } from 'lucide-react'
 import AdvisoryTable from './AdvisoryTable'
 import Pagination from '@/components/shared/Pagination'
 
@@ -97,76 +97,47 @@ export default function AdvisoriesTab({ containerSlug }: AdvisoriesTabProps) {
 	if (error) {
 		return (
 			<div className="text-center py-12">
-				<h2 className="text-2xl font-bold text-destructive mb-2">Error</h2>
-				<p className="text-muted-foreground">{error}</p>
+				<h2 className="text-2xl font-bold text-destructive mb-2 font-content">Error</h2>
+				<p className="text-muted-foreground font-content">{error}</p>
 			</div>
 		)
 	}
 
 	return (
 		<div className="space-y-6">
-			{/* Header with Summary */}
-			{data && (
-				<div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6 bg-muted/50 rounded-lg">
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-high">
-							{data.results.filter(adv => adv.status === 'Under Investigation').length}
-						</div>
-						<div className="text-sm text-muted-foreground">Under Investigation</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-medium">
-							{data.results.filter(adv => adv.status === 'Pending Upstream Fix').length}
-						</div>
-						<div className="text-sm text-muted-foreground">Pending Fix</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-green-600">
-							{data.results.filter(adv => adv.status === 'Fixed').length}
-						</div>
-						<div className="text-sm text-muted-foreground">Fixed</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-gray-600">
-							{data.results.filter(adv => adv.status === 'Not Affected').length}
-						</div>
-						<div className="text-sm text-muted-foreground">Not Affected</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-critical">
-							{data.results.filter(adv => adv.status === 'Fix Not Planned').length}
-						</div>
-						<div className="text-sm text-muted-foreground">Fix Not Planned</div>
-					</div>
-				</div>
-			)}
-
 			{/* Filters */}
-			<div className="flex flex-col lg:flex-row gap-4">
+			<div className="flex flex-col lg:flex-row gap-3">
+				{/* Search Input - Left */}
 				<div className="flex-1">
 					<div className="relative">
 						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
 						<Input
-							placeholder="Search advisories by CVE ID or package"
+							placeholder="Search by Package or CVE"
 							value={search}
 							onChange={(e) => handleSearch(e.target.value)}
-							className="pl-10"
+							className="pl-10 font-content"
 						/>
 					</div>
 				</div>
-				<div className="flex items-center space-x-2">
-					<Filter className="h-4 w-4 text-muted-foreground" />
-					<select
-						value={status}
-						onChange={(e) => handleStatusChange(e.target.value)}
-						className="px-3 py-2 border border-input rounded-md bg-background text-sm"
-					>
-						{statuses.map((status) => (
-							<option key={status.value} value={status.value}>
-								{status.label}
-							</option>
-						))}
-					</select>
+
+				{/* Status Dropdown - Right */}
+				<div className="flex-1 lg:flex-initial lg:w-auto">
+					<div className="relative">
+						<select
+							value={status}
+							onChange={(e) => handleStatusChange(e.target.value)}
+							className="w-full lg:w-auto px-3 py-2 pr-20 border border-input rounded-md bg-background text-sm font-content appearance-none cursor-pointer"
+							style={{ color: 'transparent' }}
+						>
+							{statuses.map((status) => (
+								<option key={status.value} value={status.value} className='text-black'>
+									{status.label}
+								</option>
+							))}
+						</select>
+						<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm font-content pointer-events-none">Status: {status === 'all' ? 'All' : statuses.find(s => s.value === status)?.label || status}</span>
+						<ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+					</div>
 				</div>
 			</div>
 

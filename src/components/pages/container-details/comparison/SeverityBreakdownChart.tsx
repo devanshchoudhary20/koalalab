@@ -258,7 +258,7 @@ export default function SeverityBreakdownChart({
 
 
 	return (
-		<Card className="w-full h-full">
+		<Card className="w-full h-full border-[#1CE8AB]">
 			<CardHeader>
 				<CardTitle className="text-lg font-semibold">CVEs by Severity</CardTitle>
 				{/* Legend */}
@@ -282,7 +282,7 @@ export default function SeverityBreakdownChart({
 							<div className="w-3 h-3 bg-blue-600 rounded-sm transform rotate-45" />
 							<span className="text-sm font-medium">KoalaLab</span>
 						</div>
-						<div className="h-80">
+						<div className="h-56">
 							<ResponsiveContainer width="100%" height="100%">
 								<ComposedChart 
 									data={chartData} 
@@ -324,7 +324,7 @@ export default function SeverityBreakdownChart({
 							<div className="w-3 h-3 bg-purple-400 rounded-sm transform rotate-45" />
 							<span className="text-sm font-medium">{alternativeName}</span>
 						</div>
-						<div className="h-80">
+						<div className="h-56">
 							<ResponsiveContainer width="100%" height="100%">
 								<ComposedChart 
 									data={chartData} 

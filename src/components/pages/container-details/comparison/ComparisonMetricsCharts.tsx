@@ -174,37 +174,33 @@ function MetricRow({
 
 export default function ComparisonMetricsCharts({ data }: ComparisonMetricsChartsProps) {
 	return (
-		<Card className="w-full h-full">
+		<Card className="w-full h-full border-[#1CE8AB]">
 			<CardHeader>
 				
 				{/* Header with KoalaLab and Alternative labels */}
-				<div className="flex items-center justify-center space-x-8 mt-4">
-					<div className="flex items-center space-x-2">
-						<div className="w-4 h-4 bg-blue-600 rounded-sm transform rotate-45"></div>
-						<span className="text-sm font-medium text-gray-700">KoalaLab</span>
+				<div className="flex items-center justify-center space-x-8 mt-4 border-b pb-4">
+					<div className="flex items-center space-x-2 gap-2">
+					<span className="text-sm font-medium text-gray-700 text-end">KoalaLab <br />kla.dev/python:latest </span>
+						<div>
+						<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M6.82688 13.5431L0 8.23875L0.777292 7.65208L6.82688 12.3444L12.8765 7.65208L13.6538 8.23875L6.82688 13.5431ZM6.82688 10.6088L0 5.30438L6.82688 0L13.6538 5.30438L6.82688 10.6088ZM6.82688 9.41021L12.109 5.30438L6.82688 1.20667L1.54479 5.30438L6.82688 9.41021Z" fill="#3443F4"/>
+						</svg>
+						</div>
+						
 					</div>
-					<div className="flex items-center space-x-2">
-						<div className="w-4 h-4 bg-purple-400 rounded-sm transform rotate-45"></div>
-						<span className="text-sm font-medium text-gray-700">Alternative</span>
+					<div className="flex items-center space-x-2 gap-2">
+						<div>
+						<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M6.82688 13.5431L0 8.23875L0.777292 7.65208L6.82688 12.3444L12.8765 7.65208L13.6538 8.23875L6.82688 13.5431ZM6.82688 10.6088L0 5.30438L6.82688 0L13.6538 5.30438L6.82688 10.6088ZM6.82688 9.41021L12.109 5.30438L6.82688 1.20667L1.54479 5.30438L6.82688 9.41021Z" fill="#F236F6"/>
+						</svg>
+						</div>
+						<span className="text-sm font-medium text-gray-700 text-start">Alternative <br />python:latest</span>
 					</div>
 				</div>
 			</CardHeader>
 			<CardContent className="p-4 flex-1">
 				<div className="divide-y divide-gray-100 mx-auto">
-					{/* Header Row */}
-					<div className="flex flex-col sm:flex-row items-start sm:items-center py-3 bg-gray-50 font-medium text-sm text-gray-600 gap-4 sm:gap-0">
-						<div className="w-full sm:w-48 flex-shrink-0">Metric</div>
-						<div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full">
-							<div className="w-full sm:w-20 text-left sm:text-right">KoalaLab</div>
-							<div className="flex-1 max-w-xs w-full"></div>
-							<div className="w-full sm:w-20"></div>
-						</div>
-						<div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full">
-							<div className="w-full sm:w-20 text-left sm:text-right">Alternative</div>
-							<div className="flex-1 max-w-xs w-full"></div>
-							<div className="w-full sm:w-20"></div>
-						</div>
-					</div>
+					
 
 					{/* Metric Rows */}
 					<MetricRow

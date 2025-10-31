@@ -96,20 +96,22 @@ export default function TagsTab({ containerSlug }: TagsTabProps) {
 		<div className="space-y-6">
 			{/* Filters */}
 			<div className="flex flex-col sm:flex-row gap-4">
-				<div className="flex-1">
-					<div className="relative">
+				<div className="flex-1 flex gap-4">
+					<div className="relative w-1/2">
 						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
 						<Input
 							placeholder="Filter tags"
 							value={search}
 							onChange={(e) => handleSearch(e.target.value)}
-							className="pl-10"
+							className="pl-10 w"
+							id="search"
+							name="search"
 						/>
 					</div>
-				</div>
-				<div className="flex items-center space-x-2">
-					<Filter className="h-4 w-4 text-muted-foreground" />
 					<select
+					    id="variant"
+					    name="variant"
+					    aria-label="Variant"
 						value={variant}
 						onChange={(e) => handleVariantChange(e.target.value)}
 						className="px-3 py-2 border border-input rounded-md bg-background text-sm"
@@ -120,7 +122,11 @@ export default function TagsTab({ containerSlug }: TagsTabProps) {
 							</option>
 						))}
 					</select>
-					<Button variant="outline" size="sm">
+				</div>
+				<div className="flex items-center space-x-2 ">
+					
+					
+					<Button variant="outline" size="sm" className="border-[#1CE8AB] rounded-full font-content">
 						Customize image
 					</Button>
 				</div>

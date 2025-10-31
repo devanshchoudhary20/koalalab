@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
+import { useContainerTags } from '@/hooks/useContainers'
 import { Input } from '@/components/ui/input'
-import { Search, Filter } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Search, ChevronDown, Tag } from 'lucide-react'
 import VulnerabilityTable from './VulnerabilityTable'
 import Pagination from '@/components/shared/Pagination'
 
@@ -11,7 +13,7 @@ interface VulnerabilitiesTabProps {
 }
 
 const severities = [
-	{ value: 'all', label: 'All Severities' },
+	{ value: 'all', label: 'All' },
 	{ value: 'Critical', label: 'Critical' },
 	{ value: 'High', label: 'High' },
 	{ value: 'Medium', label: 'Medium' },
@@ -19,14 +21,9 @@ const severities = [
 	{ value: 'Unspecified', label: 'Unspecified' },
 ]
 
-const architectures = [
-	{ value: 'x86_64', label: 'x86_64' },
-	{ value: 'arm64', label: 'arm64' },
-]
-
 export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTabProps) {
 	const router = useRouter()
-	const [selectedTag] = useState('latest')
+	const [selectedTag, setSelectedTag] = useState('latest')
 	
 	// Initialize state from URL parameters
 	const [severity, setSeverity] = useState('all')
@@ -34,10 +31,16 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
 
+	// Fetch available tags
+	const { data: tagsData } = useContainerTags(containerSlug, {})
+
 	// Update state from URL on mount and when URL changes
 	useEffect(() => {
-		const { vuln_severity, vuln_arch, vuln_search, vuln_page } = router.query
+		const { vuln_severity, vuln_arch, vuln_search, vuln_page, vuln_tag } = router.query
 		
+		if (vuln_tag && typeof vuln_tag === 'string') {
+			setSelectedTag(vuln_tag)
+		}
 		if (vuln_severity && typeof vuln_severity === 'string') {
 			setSeverity(vuln_severity)
 		}
@@ -98,6 +101,15 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 		})
 	}
 
+	const handleTagChange = (newTag: string) => {
+		setSelectedTag(newTag)
+		setPage(1)
+		updateUrlParams({
+			vuln_tag: newTag,
+			vuln_page: 1
+		})
+	}
+
 	const handleArchChange = (newArch: string) => {
 		setArch(newArch)
 		setPage(1)
@@ -125,79 +137,62 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 
 	return (
 		<div className="space-y-6">
-			{/* Header with Summary */}
-			{data && (
-				<div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6 bg-muted/50 rounded-lg">
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-critical">
-							{data.results?.filter(v => v.severity === 'Critical').length || 0}
-						</div>
-						<div className="text-sm text-muted-foreground">Critical</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-high">
-							{data.results?.filter(v => v.severity === 'High').length || 0}
-						</div>
-						<div className="text-sm text-muted-foreground">High</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-medium">
-							{data.results?.filter(v => v.severity === 'Medium').length || 0}
-						</div>
-						<div className="text-sm text-muted-foreground">Medium</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-low">
-							{data.results?.filter(v => v.severity === 'Low').length || 0}
-						</div>
-						<div className="text-sm text-muted-foreground">Low</div>
-					</div>
-					<div className="text-center">
-						<div className="text-2xl font-bold text-severity-negligible">
-							{data.results?.filter(v => v.severity === 'Unspecified').length || 0}
-						</div>
-						<div className="text-sm text-muted-foreground">Negligible</div>
+			{/* Filters */}
+			<div className="flex flex-col lg:flex-row gap-3">
+				{/* Tag Dropdown - Left */}
+				<div className="flex-1 lg:flex-initial lg:w-auto">
+					<div className="relative">
+						<Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-600 pointer-events-none z-10" />
+						<select
+							value={selectedTag}
+							onChange={(e) => handleTagChange(e.target.value)}
+							className="w-full lg:w-auto px-3 py-2 pl-10 pr-10 border border-input rounded-md bg-background text-sm font-content appearance-none cursor-pointer"
+							style={{ color: 'transparent' }}
+						>
+							{tagsData?.results.map((tag) => (
+								<option key={tag.tag_name} value={tag.tag_name} className='text-black'>
+									{tag.tag_name}
+								</option>
+							)) || (
+								<option value="latest">latest</option>
+							)}
+						</select>
+						<span className="absolute left-10 top-1/2 transform -translate-y-1/2 text-sm font-content pointer-events-none">Tag: {selectedTag}</span>
+						<ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
 					</div>
 				</div>
-			)}
 
-			{/* Filters */}
-			<div className="flex flex-col lg:flex-row gap-4">
+				{/* Search Input - Middle */}
 				<div className="flex-1">
 					<div className="relative">
 						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
 						<Input
-							placeholder="Search vulnerabilities by CVE ID, package, or version"
+							placeholder="Filter vulnerabilities"
 							value={search}
 							onChange={(e) => handleSearch(e.target.value)}
-							className="pl-10"
+							className="pl-10 font-content"
 						/>
 					</div>
 				</div>
-				<div className="flex items-center space-x-2">
-					<Filter className="h-4 w-4 text-muted-foreground" />
-					<select
-						value={severity}
-						onChange={(e) => handleSeverityChange(e.target.value)}
-						className="px-3 py-2 border border-input rounded-md bg-background text-sm"
-					>
-						{severities.map((sev) => (
-							<option key={sev.value} value={sev.value}>
-								{sev.label}
-							</option>
-						))}
-					</select>
-					<select
-						value={arch}
-						onChange={(e) => handleArchChange(e.target.value)}
-						className="px-3 py-2 border border-input rounded-md bg-background text-sm"
-					>
-						{architectures.map((arch) => (
-							<option key={arch.value} value={arch.value}>
-								{arch.label}
-							</option>
-						))}
-					</select>
+
+				{/* Severity Dropdown - Right */}
+				<div className="flex-1 lg:flex-initial lg:w-auto">
+					<div className="relative">
+						<select
+							value={severity}
+							onChange={(e) => handleSeverityChange(e.target.value)}
+							className="w-full lg:w-auto px-3 py-2 pr-20 border border-input rounded-md bg-background text-sm font-content appearance-none cursor-pointer"
+							style={{ color: 'transparent' }}
+						>
+							{severities.map((sev) => (
+								<option key={sev.value} value={sev.value} className='text-black'>
+									{sev.label}
+								</option>
+							))}
+						</select>
+						<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm font-content pointer-events-none">Severity: {severity === 'all' ? 'All' : severity}</span>
+						<ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+					</div>
 				</div>
 			</div>
 

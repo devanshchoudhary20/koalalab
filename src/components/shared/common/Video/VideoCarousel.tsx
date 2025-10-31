@@ -122,9 +122,15 @@ export default function VideoCarousel({
       
       {/* Main Heading */}
       <div className="mb-12 flex justify-center relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold text-center text-[#374A9D] max-w-4xl px-4 text-heading-medium">
-          Hear us talk about 0-deb&apos;s container-first design
-        </h2>
+        <div className="text-center max-w-4xl px-4">
+          <h2 className="text-heading-large text-gray-800 mb-4">
+            Our views.{' '}
+            <span className="text-gradient-fill-desktop">Our Thoughts</span>
+          </h2>
+          <p className="text-body-medium text-primary-text_blue">
+            Hear us talk about 0-deb&apos;s container first design. Stream through conversations with our founders on how Koala enables continuous compliance & reduces CVE sprawl.
+          </p>
+        </div>
       </div>
 
       {/* Carousel */}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { usePackages } from '@/hooks/usePackages'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
+import { useContainer } from '@/hooks/useContainers'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { 
 	X, 
 	Search, 
@@ -12,15 +12,17 @@ import {
 	Copy, 
 	Package,
 	ChevronDown,
-	Plus,
-	AlertTriangle
+	AlertTriangle,
+	Tag
 } from 'lucide-react'
-import { Tag } from '@/types/api'
+import { Tag as TagType } from '@/types/api'
 import { formatRelativeTime, formatSize } from '@/lib/utils/formatters'
+import PackageTable from './PackageTable'
+import VulnerabilityTable from './VulnerabilityTable'
 
 interface TagPackagesDrawerProps {
 	containerSlug: string
-	tag: Tag
+	tag: TagType
 	isOpen: boolean
 	onClose: () => void
 }
@@ -34,9 +36,10 @@ export default function TagPackagesDrawer({
 	const [activeTab, setActiveTab] = useState<'packages' | 'vulnerabilities'>('packages')
 	const [search, setSearch] = useState('')
 	const [selectedArch, setSelectedArch] = useState('x86_64')
-	const [selectedVuln, setSelectedVuln] = useState<string | null>(null)
 	const [isAnimating, setIsAnimating] = useState(false)
 	const [severityFilter, setSeverityFilter] = useState('all')
+
+	const { data: containerData } = useContainer(containerSlug)
 
 	const { data: packagesData, loading: packagesLoading, error: packagesError } = usePackages(containerSlug, tag.tag_name, {
 		arch: selectedArch !== 'x86_64' ? selectedArch : undefined,
@@ -46,6 +49,7 @@ export default function TagPackagesDrawer({
 
 	const { data: vulnerabilitiesData, loading: vulnerabilitiesLoading, error: vulnerabilitiesError } = useVulnerabilities(containerSlug, tag.tag_name, {
 		arch: selectedArch !== 'x86_64' ? selectedArch : undefined,
+		severity: severityFilter !== 'all' ? severityFilter : undefined,
 		search: search || undefined,
 		page: 1,
 	})
@@ -120,11 +124,18 @@ export default function TagPackagesDrawer({
 		e.stopPropagation()
 	}
 
-	// Filter vulnerabilities by severity
-	const filteredVulnerabilities = vulnerabilitiesData?.results.filter(vuln => {
-		if (severityFilter === 'all') return true
-		return vuln.severity.toLowerCase() === severityFilter
-	}) || []
+	const handleSeverityChange = (newSeverity: string) => {
+		setSeverityFilter(newSeverity)
+	}
+
+	const severities = [
+		{ value: 'all', label: 'All' },
+		{ value: 'Critical', label: 'Critical' },
+		{ value: 'High', label: 'High' },
+		{ value: 'Medium', label: 'Medium' },
+		{ value: 'Low', label: 'Low' },
+		{ value: 'Unspecified', label: 'Unspecified' },
+	]
 
 	if (!isOpen) return null
 
@@ -146,7 +157,7 @@ export default function TagPackagesDrawer({
 			<div className="fixed inset-0 z-50 pointer-events-none">
 				<div 
 					data-drawer
-					className={`fixed right-0 top-0 h-full w-full md:w-[40%] md:max-w-2xl bg-background shadow-xl transform transition-transform duration-300 ease-in-out rounded-none md:rounded-l-lg overflow-hidden flex flex-col ${isAnimating ? 'translate-x-0' : 'translate-x-full'}`}
+					className={`fixed right-0 top-0 h-full w-full md:w-[60%] md:max-w-2xl bg-background shadow-xl transform transition-transform duration-300 ease-in-out rounded-none md:rounded-l-lg overflow-hidden flex flex-col ${isAnimating ? 'translate-x-0' : 'translate-x-full'}`}
 					onClick={handleDrawerClick}
 					onWheel={(e) => e.stopPropagation()}
 					onTouchMove={(e) => e.stopPropagation()}
@@ -157,13 +168,27 @@ export default function TagPackagesDrawer({
 				>
 				{/* Header */}
 				<div className="flex items-center justify-between p-4 sm:p-6 border-b">
-					<div className="flex items-center space-x-4">
-						<div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-							<Package className="h-6 w-6 text-muted-foreground" />
-						</div>
-						<div>
-							<h2 className="text-xl sm:text-2xl font-bold">{containerSlug}</h2>
-							<p className="text-sm text-muted-foreground">
+					<div className="flex items-center space-x-3 sm:space-x-4">
+						{containerData?.logo_url ? (
+							<div className="w-12 h-12 sm:w-16 sm:h-16 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+								<Image
+									src={containerData.logo_url}
+									alt={containerData.name || containerSlug}
+									width={64}
+									height={64}
+									className="object-contain"
+								/>
+							</div>
+						) : (
+							<div className="w-12 h-12 sm:w-16 sm:h-16 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
+								<Package className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
+							</div>
+						)}
+						<div className="flex-1 min-w-0">
+							<h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-1 break-words">
+								{containerData?.name || containerSlug}
+							</h2>
+							<p className="text-sm sm:text-base text-[#14003D]/70">
 								Last changed {formatRelativeTime(tag.last_changed)}
 							</p>
 						</div>
@@ -174,297 +199,204 @@ export default function TagPackagesDrawer({
 				</div>
 
 				{/* Docker Pull Command */}
-				<div className="px-4 sm:px-6 py-4 bg-muted/50">
+				<div className="px-4 sm:px-6 py-4">
 					<div className="flex items-center space-x-2">
-						<code className="flex-1 bg-background border border-input px-3 py-2 rounded text-sm font-mono">
+						<code 
+							className="flex-1 bg-background border border-[#1CE8AB] px-3 py-2 rounded text-sm font-mono"
+							style={{ borderColor: '#1CE8AB' }}
+						>
 							docker pull kla.dev/KoalaLab/{containerSlug}:{tag.tag_name}
 						</code>
 						<Button
 							variant="outline"
 							size="sm"
 							onClick={() => copyToClipboard(`docker pull kla.dev/KoalaLab/${containerSlug}:${tag.tag_name}`)}
+							className="border-[#1CE8AB]"
+							style={{ borderColor: '#1CE8AB' }}
 						>
 							<Copy className="h-4 w-4" />
 						</Button>
 					</div>
 				</div>
 
-				{/* Tag Dropdown */}
-				<div className="px-4 sm:px-6 py-3 border-b">
-					<div className="flex items-center space-x-2">
-						<span className="text-sm font-medium">Tag:</span>
-						<div className="relative">
-							<Button variant="outline" size="sm" className="h-8 px-3">
-								{tag.tag_name}
-								<ChevronDown className="h-4 w-4 ml-1" />
-							</Button>
-						</div>
-					</div>
-				</div>
-
 				{/* Architecture Selection */}
-				<div className="px-4 sm:px-6 py-4 border-b">
-					<h3 className="text-sm font-medium mb-3">Architecture</h3>
-					<div className="flex flex-wrap gap-2">
-						{tag.size.architectures.map((arch, index) => (
-							<Button
-								key={index}
-								variant={selectedArch === arch ? 'default' : 'outline'}
-								size="sm"
-								onClick={() => setSelectedArch(arch)}
-								className="text-sm"
-							>
-								{arch}: {formatSize(tag.size.total_mb)}
-							</Button>
-						))}
+				<div className="px-4 sm:px-6 pb-4">
+					<div className="flex items-center gap-2">
+						<span className="text-sm font-medium">Architecture</span>
+						<div className="flex flex-wrap gap-2">
+							{tag.size.architectures.map((arch, index) => (
+								<Button
+									key={index}
+									variant="outline"
+									size="sm"
+									onClick={() => setSelectedArch(arch)}
+									className={`text-sm rounded-full ${
+										selectedArch === arch
+											? 'bg-[#E0FFF6] border-[#1CE8AB] hover:bg-[#E0FFF6]'
+											: 'bg-white border-[#1CE8AB]'
+									}`}
+									style={{
+										backgroundColor: selectedArch === arch ? '#E0FFF6' : 'white',
+										borderColor: '#1CE8AB'
+									}}
+								>
+									{arch}: {formatSize(tag.size.total_mb)}
+								</Button>
+							))}
+						</div>
 					</div>
 				</div>
 
 				{/* Navigation Tabs */}
-				<div className="px-4 sm:px-6 py-4 border-b">
+				<div className="px-4 sm:px-6 border-b">
 					<div className="flex items-center space-x-4 sm:space-x-6">
-						<Button 
-							variant={activeTab === 'packages' ? 'default' : 'ghost'}
+						<button
 							onClick={() => setActiveTab('packages')}
-							className={activeTab === 'packages' ? 'bg-blue-600 hover:bg-blue-700' : ''}
+							className={`flex items-center gap-2 bg-transparent border-0 rounded-none text-[#3548A2] transition-opacity whitespace-nowrap ${
+								activeTab === 'packages'
+									? 'opacity-100 border-b-2 border-[#3548A2] pb-2'
+									: 'opacity-70 hover:opacity-100'
+							}`}
+							style={{
+								borderBottom: activeTab === 'packages' ? '2px solid #3548A2' : 'none',
+								paddingBottom: activeTab === 'packages' ? '0.5rem' : '0'
+							}}
 						>
-							<Package className="h-4 w-4 mr-2" />
-							Packages
-						</Button>
-						<Button 
-							variant={activeTab === 'vulnerabilities' ? 'default' : 'ghost'}
+							<Package className="h-4 w-4" color="currentColor" />
+							<span>Packages</span>
+						</button>
+						<button
 							onClick={() => setActiveTab('vulnerabilities')}
-							className={activeTab === 'vulnerabilities' ? 'bg-blue-600 hover:bg-blue-700' : ''}
+							className={`flex items-center gap-2 bg-transparent border-0 rounded-none text-[#3548A2] transition-opacity whitespace-nowrap ${
+								activeTab === 'vulnerabilities'
+									? 'opacity-100 border-b-2 border-[#3548A2] pb-2'
+									: 'opacity-70 hover:opacity-100'
+							}`}
+							style={{
+								borderBottom: activeTab === 'vulnerabilities' ? '2px solid #3548A2' : 'none',
+								paddingBottom: activeTab === 'vulnerabilities' ? '0.5rem' : '0'
+							}}
 						>
-							<AlertTriangle className="h-4 w-4 mr-2" />
-							Vulnerabilities
-						</Button>
+							<AlertTriangle className="h-4 w-4" color="currentColor" />
+							<span>Vulnerabilities</span>
+						</button>
 					</div>
 				</div>
 
 				{/* Content */}
-				<div className="flex-1 overflow-hidden flex flex-col min-h-0">
-					{/* Search and Download */}
-					<div className="px-4 sm:px-6 py-4 border-b flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
-						<div className="flex-1 relative w-full">
-							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-							<Input
-								placeholder={activeTab === 'packages' ? 'Filter Packages' : 'Filter Vulnerabilities'}
-								value={search}
-								onChange={(e) => setSearch(e.target.value)}
-								className="pl-10"
-							/>
-						</div>
-						{activeTab === 'vulnerabilities' && (
-							<div className="flex items-center space-x-2">
-								<span className="text-sm font-medium">Severity:</span>
-								<Button 
-									variant="outline" 
-									size="sm" 
-									className="h-8 px-3"
-									onClick={() => setSeverityFilter(severityFilter === 'all' ? 'critical' : 'all')}
+				<div className="flex-1 overflow-hidden flex flex-col min-h-0 scrollbar-hide">
+					{/* Filters and Actions */}
+					<div className="px-4 sm:px-6 py-4 border-b">
+						{activeTab === 'packages' ? (
+							<div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+								{/* Search */}
+								<div className="flex-1 w-full">
+									<div className="relative">
+										<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+										<Input
+											placeholder="Filter Packages"
+											value={search}
+											onChange={(e) => setSearch(e.target.value)}
+											className="pl-10 font-content"
+										/>
+									</div>
+								</div>
+								{/* Download SBOM */}
+								<Button
+									onClick={handleDownloadSBOM}
+									className="bg-transparent text-foreground border border-[#1CE8AB] hover:bg-[#E0FFF6] font-content rounded-full"
 								>
-									{severityFilter === 'all' ? 'All' : severityFilter.charAt(0).toUpperCase() + severityFilter.slice(1)}
-									<ChevronDown className="h-4 w-4 ml-1" />
+									<Download className="h-4 w-4 mr-2 text-[#1CE8AB]" />
+									Download SBOM
 								</Button>
 							</div>
-						)}
-						{activeTab === 'packages' && (
-							<Button onClick={handleDownloadSBOM} className="bg-teal-600 hover:bg-teal-700 text-white">
-								<Download className="h-4 w-4 mr-2" />
-								Download SBOM
-							</Button>
+						) : (
+							<div className="flex flex-col lg:flex-row gap-3">
+								{/* Tag Dropdown - Left */}
+								<div className="flex-1 lg:flex-initial lg:w-auto">
+									<div className="relative">
+										<Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-600 pointer-events-none z-10" />
+										<select
+											value={tag.tag_name}
+											disabled
+											className="w-full lg:w-auto px-3 py-2 pl-10 pr-10 border border-input rounded-md bg-background text-sm font-content appearance-none cursor-pointer"
+											style={{ color: 'transparent' }}
+										>
+											<option value={tag.tag_name}>{tag.tag_name}</option>
+										</select>
+										<span className="absolute left-10 top-1/2 transform -translate-y-1/2 text-sm font-content pointer-events-none">Tag: {tag.tag_name}</span>
+										<ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+									</div>
+								</div>
+
+								{/* Search Input - Middle */}
+								<div className="flex-1">
+									<div className="relative">
+										<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+										<Input
+											placeholder="Filter vulnerabilities"
+											value={search}
+											onChange={(e) => setSearch(e.target.value)}
+											className="pl-10 font-content"
+										/>
+									</div>
+								</div>
+
+								{/* Severity Dropdown - Right */}
+								<div className="flex-1 lg:flex-initial lg:w-auto">
+									<div className="relative">
+										<select
+											value={severityFilter}
+											onChange={(e) => handleSeverityChange(e.target.value)}
+											className="w-full lg:w-auto px-3 py-2 pr-20 border border-input rounded-md bg-background text-sm font-content appearance-none cursor-pointer"
+											style={{ color: 'transparent' }}
+										>
+											{severities.map((sev) => (
+												<option key={sev.value} value={sev.value} className='text-black'>
+													{sev.label}
+												</option>
+											))}
+										</select>
+										<span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm font-content pointer-events-none">Severity: {severityFilter === 'all' ? 'All' : severityFilter}</span>
+										<ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+									</div>
+								</div>
+							</div>
 						)}
 					</div>
-
-					
 
 					{/* Content Table */}
 					<div className="flex-1 overflow-auto min-h-0" onScroll={handleScroll}>
 						{activeTab === 'packages' ? (
 							packagesLoading ? (
-								<div className="p-4 sm:p-6 text-center">
-									<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-									<p className="mt-2 text-muted-foreground">Loading packages...</p>
+								<div className="space-y-4 p-4">
+									{Array.from({ length: 5 }).map((_, i) => (
+										<div key={i} className="h-16 bg-muted animate-pulse rounded-lg" />
+									))}
 								</div>
 							) : packagesError ? (
 								<div className="p-4 sm:p-6 text-center">
 									<p className="text-destructive">Error loading packages: {packagesError}</p>
 								</div>
 							) : packagesData ? (
-								<div className="overflow-x-auto h-full">
-									<Table>
-										<TableHeader>
-											<TableRow>
-												<TableHead>Package</TableHead>
-												<TableHead>Version</TableHead>
-											</TableRow>
-										</TableHeader>
-										<TableBody>
-											{packagesData.results.map((pkg, index) => (
-												<TableRow key={index}>
-													<TableCell>
-														<div className="font-medium">{pkg.package}</div>
-													</TableCell>
-													<TableCell>
-														<div className="font-mono text-sm">{pkg.version}</div>
-													</TableCell>
-												</TableRow>
-											))}
-										</TableBody>
-									</Table>
+								<div className="p-4">
+									<PackageTable packages={packagesData.results} />
 								</div>
 							) : null
 						) : (
 							vulnerabilitiesLoading ? (
-								<div className="p-4 sm:p-6 text-center">
-									<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-									<p className="mt-2 text-muted-foreground">Loading vulnerabilities...</p>
+								<div className="space-y-4 p-4">
+									{Array.from({ length: 5 }).map((_, i) => (
+										<div key={i} className="h-16 bg-muted animate-pulse rounded-lg" />
+									))}
 								</div>
 							) : vulnerabilitiesError ? (
 								<div className="p-4 sm:p-6 text-center">
 									<p className="text-destructive">Error loading vulnerabilities: {vulnerabilitiesError}</p>
 								</div>
 							) : vulnerabilitiesData ? (
-								<div className="overflow-x-auto h-full">
-									<Table>
-										<TableHeader>
-											<TableRow>
-												<TableHead>CVE ID</TableHead>
-												<TableHead>Severity</TableHead>
-												<TableHead>Last detected</TableHead>
-											</TableRow>
-										</TableHeader>
-										<TableBody>
-											{filteredVulnerabilities.map((vuln) => (
-												<React.Fragment key={vuln.cve_id}>
-													<TableRow 
-														className="cursor-pointer hover:bg-muted/50"
-														onClick={() => setSelectedVuln(selectedVuln === vuln.cve_id ? null : vuln.cve_id)}
-													>
-														<TableCell>
-															<div className="flex items-center space-x-2">
-																{/* Icon changes based on expanded state */}
-																{selectedVuln === vuln.cve_id ? (
-																	<X className="h-4 w-4 text-gray-500" />
-																) : (
-																	<Plus className="h-4 w-4 text-green-600" />
-																)}
-																<div className="font-mono text-sm font-medium">{vuln.cve_id}</div>
-															</div>
-														</TableCell>
-														<TableCell>
-															<Badge 
-																className={`rounded-md px-2 py-1 text-sm font-medium ${
-																	vuln.severity === 'Critical' ? 'bg-severity-critical text-white' :
-																	vuln.severity === 'High' ? 'bg-severity-high text-white' :
-																	vuln.severity === 'Medium' ? 'bg-severity-medium text-white' :
-																	vuln.severity === 'Low' ? 'bg-severity-low text-white' :
-																	'bg-severity-negligible text-white'
-																}`}
-															>
-																{vuln.severity === 'Critical' ? 'Critical: 8.5' :
-																 vuln.severity === 'High' ? 'High: 5.9' :
-																 vuln.severity === 'Medium' ? 'Medium: 3.8' :
-																 vuln.severity === 'Low' ? 'Low: 2.1' :
-																 'Negligible: 0.5'}
-															</Badge>
-														</TableCell>
-														<TableCell>
-															<div className="text-sm text-muted-foreground">
-																Aug 27, 2025 03:23:47 AM GMT+0
-															</div>
-														</TableCell>
-													</TableRow>
-													{/* Expanded content row */}
-													{selectedVuln === vuln.cve_id && (
-														<TableRow>
-															<TableCell colSpan={3} className="p-0">
-																<div className="bg-muted/30 border-t">
-																	<div className="p-4 sm:p-6">
-																		{/* Description */}
-																		<div className="mb-4">
-																			<h3 className="font-semibold mb-2 text-sm">Description</h3>
-																			<p className="text-sm text-muted-foreground leading-relaxed">
-																				There is an issue in CPython when using &quot;bytes.decode(&quot;unicode_escape&quot;, error=&quot;ignore | replace&quot;). If you are not using the &quot;unicode_escape&quot; encoding or an error handler your usage is not affected. To work-around this issue you may stop using the error handler and instead wrap the bytes.decode() call in a try-except catching the DecodeError.
-																			</p>
-																		</div>
-																		
-																		{/* References */}
-																		<div>
-																			<h3 className="font-semibold mb-2 text-sm">References</h3>
-																			<ul className="space-y-1">
-																				<li>
-																					<a 
-																						href={`https://cve.mitre.org/cgi-bin/cvename.cgi?name=${vuln.cve_id}`}
-																						target="_blank"
-																						rel="noopener noreferrer"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Getting Started with the Python KoalaLab Image
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href={`https://nvd.nist.gov/vuln/detail/${vuln.cve_id}`}
-																						target="_blank"
-																						rel="noopener noreferrer"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Migrating to Python KoalaLab Images
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href="#"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Updating a Python Microservice for KoalaLab Images
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href="#"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Debugging Distroless Images
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href="#"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Blog Post: Securely Containerize a Python Application with KoalaLab Images
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href="#"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Video: How to containerize a Python application with a multi-stage build using KoalaLab Images
-																					</a>
-																				</li>
-																				<li>
-																					<a 
-																						href="#"
-																						className="text-blue-600 hover:underline text-sm block"
-																					>
-																						Learning Lab: Deploying a Flask App with Python and nginx KoalaLab Images
-																					</a>
-																				</li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</TableCell>
-														</TableRow>
-													)}
-												</React.Fragment>
-											))}
-										</TableBody>
-									</Table>
+								<div className="p-4">
+									<VulnerabilityTable vulnerabilities={vulnerabilitiesData.results} />
 								</div>
 							) : null
 						)}

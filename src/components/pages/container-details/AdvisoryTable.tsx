@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { AlertCircle, ExternalLink, Clock, Loader2 } from 'lucide-react'
+import { Plus, X, ChevronUp } from 'lucide-react'
 import { Advisory, AdvisoryDetails } from '@/types/api'
-import { formatRelativeTime, getStatusColor } from '@/lib/utils/formatters'
+import { formatVulnerabilityDate, formatAdvisoryDateForTimeline, getStatusBgColor } from '@/lib/utils/formatters'
 import { fetchAdvisoryDetails } from '@/lib/api/containers'
 
 interface AdvisoryTableProps {
@@ -12,240 +10,351 @@ interface AdvisoryTableProps {
 }
 
 export default function AdvisoryTable({ advisories }: AdvisoryTableProps) {
-	const [selectedAdvisory, setSelectedAdvisory] = useState<Advisory | null>(null)
-	const [advisoryDetails, setAdvisoryDetails] = useState<AdvisoryDetails | null>(null)
-	const [loadingDetails, setLoadingDetails] = useState(false)
-	const [detailsError, setDetailsError] = useState<string | null>(null)
+	const [expandedCve, setExpandedCve] = useState<string | null>(null)
+	const [advisoryDetails, setAdvisoryDetails] = useState<Record<string, AdvisoryDetails>>({})
+	const [loadingDetails, setLoadingDetails] = useState<Record<string, boolean>>({})
+	const [referencesExpanded, setReferencesExpanded] = useState<Record<string, boolean>>({})
 
-	const handleAdvisoryClick = async (advisory: Advisory) => {
-		setSelectedAdvisory(advisory)
-		setLoadingDetails(true)
-		setDetailsError(null)
-		setAdvisoryDetails(null)
+	const handleRowClick = async (advisory: Advisory) => {
+		const cveId = advisory.cve_id
+		
+		if (expandedCve === cveId) {
+			setExpandedCve(null)
+		} else {
+			setExpandedCve(cveId)
+			
+			// Fetch details if not already loaded
+			if (!advisoryDetails[cveId] && !loadingDetails[cveId]) {
+				setLoadingDetails(prev => ({ ...prev, [cveId]: true }))
+				try {
+					const details = await fetchAdvisoryDetails(
+						advisory.package_slug,
+						advisory.cve_slug
+					)
+					setAdvisoryDetails(prev => ({ ...prev, [cveId]: details }))
+				} catch (error) {
+					console.error('Failed to fetch advisory details:', error)
+				} finally {
+					setLoadingDetails(prev => ({ ...prev, [cveId]: false }))
+				}
+			}
+		}
+	}
 
-		try {
-			const details = await fetchAdvisoryDetails(
-				advisory.package_slug,
-				advisory.cve_slug
-			)
-			setAdvisoryDetails(details)
-		} catch (error) {
-			setDetailsError(error instanceof Error ? error.message : 'Failed to fetch advisory details')
-		} finally {
-			setLoadingDetails(false)
+	const toggleReferences = (cveId: string) => {
+		setReferencesExpanded(prev => ({
+			...prev,
+			[cveId]: !prev[cveId]
+		}))
+	}
+
+	const getStatusBadgeStyle = (status: string) => {
+		const bgColor = getStatusBgColor(status)
+		
+		if (status === 'Fixed') {
+			return {
+				backgroundColor: bgColor,
+				color: '#000000',
+				border: '1px solid #1CE8AB'
+			}
+		}
+		
+		if (status === 'Pending Upstream Fix') {
+			return {
+				backgroundColor: bgColor,
+				color: '#000000',
+				border: '1px solid #000000'
+			}
+		}
+		
+		if (status === 'Under Investigation') {
+			return {
+				backgroundColor: bgColor,
+				color: '#000000'
+			}
+		}
+		
+		if (status === 'Not Affected') {
+			return {
+				backgroundColor: bgColor,
+				color: '#000000'
+			}
+		}
+		
+		return {
+			backgroundColor: bgColor,
+			color: '#FFFFFF'
 		}
 	}
 
 	return (
-		<>
-			<div className="rounded-md border">
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>CVE ID</TableHead>
-							<TableHead>Package</TableHead>
-							<TableHead>Status</TableHead>
-							<TableHead>Date Detected</TableHead>
-							<TableHead>Actions</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{advisories.map((advisory, index) => (
-							<TableRow key={index} className="hover:bg-muted/50">
-								<TableCell>
-									<div className="flex items-center space-x-2">
-										<AlertCircle className="h-4 w-4 text-destructive" />
-										<span className="font-mono text-sm font-medium">
-											{advisory.cve_id}
-										</span>
-									</div>
-								</TableCell>
-								<TableCell>
-									<div className="font-medium">{advisory.package}</div>
-								</TableCell>
-								<TableCell>
-									<Badge 
-										variant="outline" 
-										className={getStatusColor(advisory.status)}
-									>
-										{advisory.status}
-									</Badge>
-								</TableCell>
-								<TableCell>
-									<div className="flex items-center space-x-2">
-										<Clock className="h-4 w-4 text-muted-foreground" />
-										<span className="text-sm">
-											{formatRelativeTime(advisory.date_detected)}
-										</span>
-									</div>
-								</TableCell>
-								<TableCell>
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => handleAdvisoryClick(advisory)}
-									>
-										<ExternalLink className="h-4 w-4" />
-									</Button>
-								</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</div>
-
-			{/* Advisory Details Modal */}
-			{selectedAdvisory && (
-				<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-					<div className="bg-background rounded-lg max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-						<div className="p-6">
-							<div className="flex items-center justify-between mb-4">
-								<h3 className="text-lg font-semibold">
-									{selectedAdvisory.cve_id}
-								</h3>
-								<Button
-									variant="ghost"
-									size="sm"
-									onClick={() => {
-										setSelectedAdvisory(null)
-										setAdvisoryDetails(null)
-										setDetailsError(null)
-									}}
-								>
-									×
-								</Button>
-							</div>
-							
-							<div className="space-y-4">
-								<div className="grid grid-cols-2 gap-4">
-									<div>
-										<label className="text-sm font-medium text-muted-foreground">Package</label>
-										<div className="mt-1 font-medium">{selectedAdvisory.package}</div>
-									</div>
-									<div>
-										<label className="text-sm font-medium text-muted-foreground">Status</label>
-										<div className="mt-1">
-											<Badge 
-												variant="outline" 
-												className={getStatusColor(selectedAdvisory.status)}
-											>
-												{selectedAdvisory.status}
-											</Badge>
-										</div>
-									</div>
-									<div>
-										<label className="text-sm font-medium text-muted-foreground">Date Detected</label>
-										<div className="mt-1 text-sm">
-											{formatRelativeTime(selectedAdvisory.date_detected)}
-										</div>
-									</div>
-									<div>
-										<label className="text-sm font-medium text-muted-foreground">CVE Slug</label>
-										<div className="mt-1 font-mono text-sm">{selectedAdvisory.cve_slug}</div>
-									</div>
-								</div>
-
-								{/* Advisory Details Section */}
-								{loadingDetails && (
-									<div className="flex items-center justify-center py-8">
-										<Loader2 className="h-6 w-6 animate-spin mr-2" />
-										<span className="text-muted-foreground">Loading advisory details...</span>
-									</div>
-								)}
-
-								{detailsError && (
-									<div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
-										<p className="text-destructive text-sm">{detailsError}</p>
-									</div>
-								)}
-
-								{advisoryDetails && (
-									<div className="space-y-4">
-										<div>
-											<label className="text-sm font-medium text-muted-foreground">Description</label>
-											<div className="mt-2 p-4 bg-muted/50 rounded-lg">
-												<p className="text-sm whitespace-pre-wrap">{advisoryDetails.description}</p>
-											</div>
-										</div>
-
-										{advisoryDetails.references && advisoryDetails.references.length > 0 && (
-											<div>
-												<label className="text-sm font-medium text-muted-foreground">References</label>
-												<div className="mt-2 space-y-2">
-													{advisoryDetails.references.map((reference, index) => (
-														<div key={index} className="flex items-center space-x-2">
-															<ExternalLink className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-															<a
-																href={reference}
-																target="_blank"
-																rel="noopener noreferrer"
-																className="text-sm text-blue-600 hover:text-blue-800 hover:underline break-all"
-															>
-																{reference}
-															</a>
-														</div>
-													))}
-												</div>
-											</div>
-										)}
-
-										{advisoryDetails.advisory_changes && advisoryDetails.advisory_changes.length > 0 && (
-											<div>
-												<label className="text-sm font-medium text-muted-foreground">Advisory Timeline</label>
-												<div className="mt-2 space-y-3">
-													{advisoryDetails.advisory_changes.map((change, index) => (
-														<div key={index} className="border-l-2 border-muted pl-4 pb-4">
-															<div className="flex items-center justify-between mb-2">
-																<div className="flex items-center space-x-2">
-																	<Badge 
-																		variant="outline" 
-																		className={getStatusColor(change.status)}
-																	>
-																		{change.status}
-																	</Badge>
-																	{change.fixed_version && (
-																		<span className="text-xs text-green-600 font-mono">
-																			Fixed in: {change.fixed_version}
-																		</span>
-																	)}
-																</div>
-																<span className="text-xs text-muted-foreground">
-																	{formatRelativeTime(change.date)}
-																</span>
-															</div>
-															{change.impact && (
-																<div className="text-sm text-muted-foreground mb-1">
-																	{change.impact}
-																</div>
-															)}
-															{change.clarification && (
-																<div className="text-xs text-blue-600 italic">
-																	{change.clarification}
-																</div>
-															)}
-														</div>
-													))}
-												</div>
-											</div>
-										)}
-									</div>
+		<div className="bg-white">
+			<Table>
+				<TableHeader>
+					<TableRow>
+						<TableHead className="font-content border-b">Date detected</TableHead>
+						<TableHead className="font-content border-b">CVE ID</TableHead>
+						<TableHead className="font-content border-b">Package</TableHead>
+						<TableHead className="font-content border-b">Status</TableHead>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{/* Spacer row after header */}
+					<TableRow className="border-0 h-3">
+						<TableCell colSpan={4} className="p-0 border-0" />
+					</TableRow>
+					{advisories.map((advisory, index) => {
+						const isExpanded = expandedCve === advisory.cve_id
+						const details = advisoryDetails[advisory.cve_id]
+						const isLoading = loadingDetails[advisory.cve_id]
+						const isReferencesExpanded = referencesExpanded[advisory.cve_id] ?? true
+						const prevAdvisory = index > 0 ? advisories[index - 1] : null
+						const prevExpanded = prevAdvisory ? expandedCve === prevAdvisory.cve_id : false
+						const dateParts = formatAdvisoryDateForTimeline(advisory.date_detected).split('\n')
+						
+						return (
+							<React.Fragment key={`${advisory.cve_id}-${index}`}>
+								{/* Spacer row for gap between rows */}
+								{index > 0 && !prevExpanded && (
+									<TableRow className="border-0 h-3">
+										<TableCell colSpan={4} className="p-0 border-0" />
+									</TableRow>
 								)}
 								
-								<div className="pt-4 border-t flex space-x-2">
-									<Button
-										variant="outline"
-										size="sm"
-										onClick={() => window.open(selectedAdvisory.advisory_details_url, '_blank')}
+								{isExpanded ? (
+									// Expanded row
+									<>
+										<TableRow>
+											{/* Date detected column with timeline - extends vertically */}
+											<TableCell 
+												className=" align-top" 
+												
+												rowSpan={2}
+											>
+												<div className="relative h-full pr-4" style={{ minHeight: '100%' }}>
+													{/* Vertical timeline line - extends through expanded content */}
+													<div className="absolute left-[1.125rem] top-0 bottom-0 w-0.5 bg-gray-300 h-[100vh]" />
+													{/* Circle marker */}
+													<div className="absolute left-[15px] top-4 w-2 h-2 bg-gray-300 rounded-full z-10" />
+													{/* Date text */}
+													<div className="ml-8 text-sm text-gray-600 font-content leading-tight">
+														<div>{dateParts[0]}</div>
+														<div>{dateParts[1]}</div>
+													</div>
+												</div>
+											</TableCell>
+											{/* CVE ID, Package, Status - wrapped in bordered container */}
+											<TableCell colSpan={3} className="p-0 border-0">
+												<div
+													className="rounded border-2"
+													style={{ borderColor: '#1CE8AB' }}
+												>
+													{/* Header Row */}
+													<Table>
+														<TableBody>
+															<TableRow
+																className="hover:bg-muted/50 cursor-pointer bg-white border-0"
+																onClick={() => handleRowClick(advisory)}
+															>
+																<TableCell className="rounded-tl rounded-bl border-l" style={{ borderWidth: '1px', borderColor: 'transparent', borderRight: '0px' }}>
+																	<div className="flex items-center space-x-2">
+																		<X className="sm:h-4 sm:w-4 h-8 w-8 text-gray-500" />
+																		<span className="font-mono text-sm font-medium font-content">
+																			{advisory.cve_id}
+																		</span>
+																	</div>
+																</TableCell>
+																<TableCell className="border-r" style={{ borderWidth: '1px', borderColor: 'transparent' }}>
+																	<div className="font-medium font-content">{advisory.package}</div>
+																</TableCell>
+																<TableCell className="rounded-tr rounded-br border-r " style={{ borderWidth: '1px', borderColor: 'transparent' }}>
+																	<div
+																		className="rounded-md px-2 py-1 text-sm font-medium font-content inline-block"
+																		style={getStatusBadgeStyle(advisory.status)}
+																	>
+																		{advisory.status}
+																	</div>
+																</TableCell>
+															</TableRow>
+														</TableBody>
+													</Table>
+													
+													{/* Divider */}
+													<div className="border-t border-gray-200" />
+													
+													{/* Detail Section */}
+													<div className="p-6 space-y-4">
+													{/* Description */}
+													<div>
+														<h3 className="font-semibold mb-2 text-sm font-content">Description</h3>
+														{isLoading ? (
+															<div className="text-sm text-muted-foreground font-content">Loading description...</div>
+														) : details ? (
+															<div className="space-y-2">
+																{details.description.split('\n\n').map((paragraph, pIndex) => (
+																	<p key={pIndex} className="text-sm text-muted-foreground leading-relaxed font-content">
+																		{paragraph}
+																	</p>
+																))}
+															</div>
+														) : (
+															<p className="text-sm text-muted-foreground leading-relaxed font-content">
+																No description available.
+															</p>
+														)}
+													</div>
+													
+													{/* References */}
+													{details && details.references && details.references.length > 0 && (
+														<div>
+															<button
+																onClick={(e) => {
+																	e.stopPropagation()
+																	toggleReferences(advisory.cve_id)
+																}}
+																className="flex items-center gap-2 mb-2 font-semibold text-sm font-content hover:text-foreground"
+															>
+																References
+																<ChevronUp
+																	className={`h-4 w-4 transition-transform ${isReferencesExpanded ? 'rotate-0' : 'rotate-180'}`}
+																/>
+															</button>
+															{isReferencesExpanded && (
+																<ul className="space-y-1 ml-4">
+																	{details.references.map((reference, refIndex) => (
+																		<li key={refIndex} className="list-disc">
+																			<a
+																				href={reference}
+																				target="_blank"
+																				rel="noopener noreferrer"
+																				className="text-blue-600 hover:underline text-sm font-content"
+																				onClick={(e) => e.stopPropagation()}
+																			>
+																				{reference}
+																			</a>
+																		</li>
+																	))}
+																</ul>
+															)}
+														</div>
+													)}
+
+													{/* Advisory Changes Timeline */}
+													{details && details.advisory_changes && details.advisory_changes.length > 0 && (
+														<div>
+															<h3 className="font-semibold mb-4 text-sm font-content">Advisory Changes</h3>
+															<div className="relative">
+																{/* Vertical timeline line */}
+																<div className="absolute left-[0.2rem] top-0 bottom-0 w-0.5 bg-gray-200" />
+																<div className="space-y-4 pl-8">
+																	{details.advisory_changes.map((change, changeIndex) => {
+																		const changeDate = new Date(change.date)
+																		const day = changeDate.getDate()
+																		const month = changeDate.toLocaleString('en-US', { month: 'long' })
+																		const year = changeDate.getFullYear()
+																		const ordinal = day === 1 || day === 21 || day === 31 ? 'st' : 
+																							day === 2 || day === 22 ? 'nd' : 
+																							day === 3 || day === 23 ? 'rd' : 'th'
+																		const formattedDate = `${day}${ordinal} ${month} ${year}`
+																		const isLatest = changeIndex === 0
+																		
+																		return (
+																			<div key={changeIndex} className="relative">
+																				{/* Circle marker */}
+																				<div className="absolute left-[-2rem] top-0 w-2 h-2 bg-gray-300 rounded-full z-10" />
+																				{/* Change card */}
+																				<div className="border border-gray-200 rounded-md p-4 bg-white">
+																					<div className="mb-2">
+																						<span className="text-sm text-gray-600 font-content">
+																							{isLatest ? 'Latest Update: ' : 'Past Update: '}
+																							{formattedDate}
+																						</span>
+																					</div>
+																					<div className="mb-2 flex items-center gap-2">
+																						<span className="text-sm text-gray-600 font-content">Status: </span>
+																						<div
+																							className="rounded-md px-2 py-1 text-sm font-medium font-content inline-block "
+																							style={getStatusBadgeStyle(change.status)}
+																						>
+																							{change.status}
+																						</div>
+																						{change.fixed_version && (
+																							<span className="text-sm text-gray-900 font-content">
+																								Fixed Version: {change.fixed_version}
+																							</span>
+																						)}
+																					</div>
+																					{change.impact && (
+																						<div className="mt-2">
+																							<span className="text-sm font-semibold text-gray-900 font-content">Impact: </span>
+																							<p className="text-sm text-gray-600 mt-1 font-content leading-relaxed">
+																								{change.impact}
+																							</p>
+																						</div>
+																					)}
+																				</div>
+																			</div>
+																		)
+																	})}
+																</div>
+															</div>
+														</div>
+													)}
+													</div>
+												</div>
+											</TableCell>
+										</TableRow>
+										{/* Spacer row after expanded row */}
+										<TableRow className="border-0 h-3">
+											<TableCell colSpan={4} className="p-0 border-0" />
+										</TableRow>
+									</>
+								) : (
+									// Collapsed row
+									<TableRow
+										className="hover:bg-muted/50 cursor-pointer"
+										onClick={() => handleRowClick(advisory)}
 									>
-										<ExternalLink className="h-4 w-4 mr-2" />
-										View Advisory Details
-									</Button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
-		</>
+										{/* Date detected column with timeline */}
+										<TableCell className="border-l border-b border-r" style={{ borderWidth: '0px', borderRight: 'none' }}>
+											<div className="relative pr-4">
+												{/* Vertical timeline line */}
+												<div className="absolute left-[1.125rem] top-0 bottom-0 w-0.5 bg-gray-300 h-[100px]" />
+												{/* Circle marker */}
+												<div className="absolute left-[15px] top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-300 rounded-full z-10" />
+												{/* Date text */}
+												<div className="ml-8 text-sm text-gray-600 font-content leading-tight">
+													<div>{dateParts[0]}</div>
+													<div>{dateParts[1]}</div>
+												</div>
+											</div>
+										</TableCell>
+										<TableCell className="border-b border-r border-l rounded-tl rounded-bl" style={{ borderWidth: '1px', borderRight: 'none' }}>
+											<div className="flex items-center space-x-2 ">
+												<Plus className="sm:h-4 sm:w-4 h-8 w-8" style={{ color: '#1CE8AB' }} />
+												<span className="font-mono text-sm font-medium font-content">
+													{advisory.cve_id}
+												</span>
+											</div>
+										</TableCell>
+										<TableCell className="border-b border-r " style={{ borderWidth: '1px', borderRight: 'none', borderLeft: 'none' }}>
+											<div className="font-medium font-content">{advisory.package}</div>
+										</TableCell>
+										<TableCell className="border-b border-r rounded-tr rounded-br" style={{ borderWidth: '1px', borderLeft: 'none' }}>
+											<div
+												className="rounded-md px-2 py-1 text-sm font-medium font-content inline-block"
+												style={getStatusBadgeStyle(advisory.status)}
+											>
+												{advisory.status}
+											</div>
+										</TableCell>
+									</TableRow>
+								)}
+							</React.Fragment>
+						)
+					})}
+				</TableBody>
+			</Table>
+		</div>
 	)
 }

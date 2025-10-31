@@ -202,7 +202,7 @@ export default function NetNewCVEsChart({ timelineData, alternativeName }: NetNe
 
 
 	return (
-		<Card>
+		<Card className="border-[#1CE8AB]">
 			<CardHeader>
 				<CardTitle className="text-lg font-semibold">Net New CVEs Identified</CardTitle>
 				<div className="flex items-center justify-between mt-2 flex-wrap">

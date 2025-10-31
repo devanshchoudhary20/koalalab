@@ -42,10 +42,7 @@ export default function ComparisonTab({ containerSlug }: ComparisonTabProps) {
 		<div className="space-y-6">
 			{/* Controls */}
 			<div className="flex flex-col lg:flex-row gap-4 max-w-4xl mr-auto">
-				<div className="flex-1">
-					<label className="text-sm font-medium text-muted-foreground mb-2 block">
-						Compare Against
-					</label>
+				<div className="flex-1">					
 					<select
 						value={alternative}
 						onChange={(e) => handleAlternativeChange(e.target.value)}
@@ -58,10 +55,7 @@ export default function ComparisonTab({ containerSlug }: ComparisonTabProps) {
 						))}
 					</select>
 				</div>
-				<div className="flex-1">
-					<label className="text-sm font-medium text-muted-foreground mb-2 block">
-						Time Period
-					</label>
+				<div className="flex-1">					
 					<select
 						value={period}
 						onChange={(e) => handlePeriodChange(e.target.value)}
@@ -79,10 +73,10 @@ export default function ComparisonTab({ containerSlug }: ComparisonTabProps) {
 
 			{/* First Row: Comparison Metrics (left) + Severity Breakdown (right) */}
 			{data && (
-				<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
-					<div className="w-full">
+				<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 ">
+					<div className="w-full ">
 						<ComparisonMetricsCharts data={data.comparison_metrics} />
-					</div>
+					</div>	
 					<div className="w-full">
 						<SeverityBreakdownChart 
 							koalalabData={data.cves_by_severity_timeline.koalalab}
