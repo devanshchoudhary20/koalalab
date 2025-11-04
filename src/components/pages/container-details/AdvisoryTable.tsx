@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Plus, X, ChevronUp } from 'lucide-react'
 import { Advisory, AdvisoryDetails } from '@/types/api'
-import { formatVulnerabilityDate, formatAdvisoryDateForTimeline, getStatusBgColor } from '@/lib/utils/formatters'
+import { formatAdvisoryDateForTimeline, getStatusBgColor } from '@/lib/utils/formatters'
 import { fetchAdvisoryDetails } from '@/lib/api/containers'
 
 interface AdvisoryTableProps {

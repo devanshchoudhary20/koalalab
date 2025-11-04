@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useContainerTags } from '@/hooks/useContainers'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Filter } from 'lucide-react'
+import { Search } from 'lucide-react'
 import TagTable from './TagTable'
 import Pagination from '@/components/shared/Pagination'
 

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useVulnerabilities } from '@/hooks/useVulnerabilities'
 import { useContainerTags } from '@/hooks/useContainers'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Search, ChevronDown, Tag } from 'lucide-react'
 import VulnerabilityTable from './VulnerabilityTable'
 import Pagination from '@/components/shared/Pagination'
@@ -110,14 +109,6 @@ export default function VulnerabilitiesTab({ containerSlug }: VulnerabilitiesTab
 		})
 	}
 
-	const handleArchChange = (newArch: string) => {
-		setArch(newArch)
-		setPage(1)
-		updateUrlParams({
-			vuln_arch: newArch,
-			vuln_page: 1
-		})
-	}
 
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage)
