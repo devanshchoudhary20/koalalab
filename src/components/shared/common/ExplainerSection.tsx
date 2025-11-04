@@ -23,7 +23,18 @@ const features = [
   }
 ]
 
-const ExplainerSection = () => {
+interface ExplainerSectionProps {
+  maxFeatures?: number
+}
+
+const ExplainerSection = ({ maxFeatures }: ExplainerSectionProps) => {
+  const displayedFeatures = maxFeatures 
+    ? features.slice(0, maxFeatures)
+    : features
+  
+  const gridCols = displayedFeatures.length === 3 
+    ? 'lg:grid-cols-3'
+    : 'lg:grid-cols-4'
   return (
     <section className="relative py-24 px-6 md:px-8">
       {/* Background Image */}
@@ -51,8 +62,8 @@ const ExplainerSection = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-fit mx-auto">
-          {features.map((feature) => (
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${gridCols} gap-4 max-w-fit mx-auto`}>
+          {displayedFeatures.map((feature) => (
             <div 
               key={feature.title}
               className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"

@@ -12,7 +12,7 @@ export default function CisosPage() {
 			<Header />
 			<CisosHero />
 			<ComplianceSection />
-			<ExplainerSection />
+			<ExplainerSection maxFeatures={3} />
 			<ExplainerSection2 />
 			<ContactForm />
 			<Footer />

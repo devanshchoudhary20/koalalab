@@ -21,7 +21,7 @@ export default function FamiliarDevExSection() {
 				</div>
 
 				{/* Problem Statements - Two Columns */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
 					{/* Section 1 */}
 					<div className="space-y-1">
 						<h3 className="text-heading-small text-gray-800">
