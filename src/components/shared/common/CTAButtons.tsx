@@ -35,12 +35,15 @@ export default function CTAButtons({
 			>
 				Talk to us <span aria-hidden="true">→</span>
 			</Link>
-			<Link 
-				href={exploreImagesHref} 
-				className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md min-w-[132px]"
-			>
-				Explore images <span aria-hidden="true">→</span>
-			</Link>
+			{
+				false &&
+				<Link 
+					href={exploreImagesHref} 
+					className="text-sm/6 text-gradient-fill-blueText border border-gradient-fill-blueText px-2.5 py-1.5 rounded-md min-w-[132px]"
+				>
+					Explore images <span aria-hidden="true">→</span>
+				</Link>
+			}
 		</div>
 	)
 }
