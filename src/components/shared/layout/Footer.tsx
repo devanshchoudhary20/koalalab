@@ -157,11 +157,15 @@ export default function FooterSection() {
               © 2025 KoalaLab
             </div>
             <div className="flex space-x-6">
-              <Link href="/" className="text-sm text-gray-400 hover:text-white">
+              <Link target="_blank" rel="noreferrer nofollow" 
+                href="https://docs.koalalab.com/legal/privacy-policy" 
+                className="text-sm text-gray-400 hover:text-white">
                 Privacy Policy
               </Link>
-              <Link href="/" className="text-sm text-gray-400 hover:text-white">
-                Terms of Use
+              <Link target="_blank" rel="noreferrer nofollow" 
+                href="https://docs.koalalab.com/legal/cookie-policy" 
+                className="text-sm text-gray-400 hover:text-white">
+                Cookie Policy
               </Link>
             </div>
           </div>

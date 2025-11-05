@@ -69,8 +69,8 @@ export const footerNavigation: FooterNavigation = {
     { name: 'Press', href: '/press' },
   ],
   legal: [
-    { name: 'Terms of service', href: '/legal/terms' },
-    { name: 'Privacy policy', href: '/legal/privacy' },
+    { name: 'Cookie policy', href: 'https://docs.koalalab.com/legal/cookie-policy' },
+    { name: 'Privacy policy', href: 'https://docs.koalalab.com/legal/privacy-policy' },
     { name: 'License', href: '/legal/license' },
   ],
   social: [
