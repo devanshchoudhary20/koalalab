@@ -1,0 +1,23 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "out",
+  "devCommand": "npm run dev",
+  "framework": null,
+  "env": {
+    "NODE_VERSION": "18",
+    "NEXT_PUBLIC_API_BASE_URL": "https://koalalab-registry-api.netlify.app/api/v1"
+  },
+  "redirects": [
+    {
+      "source": "/containers",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

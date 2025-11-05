@@ -8,6 +8,8 @@ export default function ContactForm() {
   const formState = useForm()
   const { isSuccess } = formState
 
+  const calendlyLink = "https://calendly.com/koalalab-abhi/30min"
+
   return (
     <section id="contact" className="w-full bg-gradient-to-br from-gray-50 to-blue-50/30 pb-0 pt-10 md:py-24 text-center md:text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,7 +37,7 @@ export default function ContactForm() {
                     you can always set up a quick chat with us.
                   </p>
                   <p className="text-lg text-gray-600 font-content">
-                    <a href="#" className="text-primary-text_blue hover:underline">
+                    <a href={calendlyLink} target="_blank" rel="noreferrer nofollow" className="text-primary-text_blue hover:underline">
                       Click here
                     </a> to grab a quick slot and we&apos;ll take it from there.
                   </p>

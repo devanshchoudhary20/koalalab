@@ -79,31 +79,34 @@ export default function Header() {
         </div>
         
         <PopoverGroup className="hidden lg:flex lg:gap-x-4">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
-              Product
-              <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
-            </PopoverButton>
+          {
+            false &&
+            <Popover className="relative">
+              <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
+                Product
+                <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
+              </PopoverButton>
 
-            <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-2">
-              <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                <div className="relative bg-white p-4">
-                  {products.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block p-4 rounded-lg transition duration-150 ease-in-out text-gray-900 hover:bg-[#E0FFF6]"
-                    >
-                      <div>
-                        <p className="text-sm font-bold">{item.name}</p>
-                        <p className="text-sm text-gray-500">{item.description}</p>
-                      </div>
-                    </a>
-                  ))}
+              <PopoverPanel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-2">
+                <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className="relative bg-white p-4">
+                    {products.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="block p-4 rounded-lg transition duration-150 ease-in-out text-gray-900 hover:bg-[#E0FFF6]"
+                        >
+                        <div>
+                          <p className="text-sm font-bold">{item.name}</p>
+                          <p className="text-sm text-gray-500">{item.description}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </PopoverPanel>
-          </Popover>
+              </PopoverPanel>
+            </Popover>
+          }
 
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900 outline-none hover:bg-[#E0FFF6] px-3 py-2 rounded transition duration-150 ease-in-out">
@@ -181,13 +184,16 @@ export default function Header() {
                 <Disclosure as="div" className="-mx-3">
                   {({ open }: { open: boolean }) => (
                     <>
-                      <DisclosureButton className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                        Product
-                        <ChevronDownIcon
-                          className={`h-5 w-5 flex-none ${open ? 'rotate-180' : ''}`}
-                          aria-hidden="true"
-                        />
-                      </DisclosureButton>
+                      { 
+                        false &&
+                        <DisclosureButton className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                          Product
+                          <ChevronDownIcon
+                            className={`h-5 w-5 flex-none ${open ? 'rotate-180' : ''}`}
+                            aria-hidden="true"
+                          />
+                        </DisclosureButton>
+                      }
                       <DisclosurePanel className="mt-2 space-y-2">
                         {products.map((item) => (
                           <DisclosureButton

@@ -20,6 +20,8 @@ interface ContactFormFieldsProps {
 export default function ContactFormFields({ formState }: ContactFormFieldsProps) {
   const { email, setEmail, inquiry, setInquiry, errors, isSubmitting, isSuccess, handleSubmit } = formState
 
+  const calendlyLink = "https://calendly.com/koalalab-abhi/30min"
+
   // Hide form fields after successful submission
   if (isSuccess) {
     return null
@@ -54,7 +56,7 @@ export default function ContactFormFields({ formState }: ContactFormFieldsProps)
       />
 
       <div className="text-sm text-primary-text_blue font-content font-light">
-        Let&apos;s chat. <a href="#" className="text-gradient-fill-blueText hover:underline font-medium">Click here</a> to grab a quick slot and we&apos;ll take it from there.
+        Let&apos;s chat. <a href={calendlyLink} target="_blank" rel="noreferrer nofollow" className="text-gradient-fill-blueText hover:underline font-medium">Click here</a> to grab a quick slot and we&apos;ll take it from there.
       </div>
 
       <Button
