@@ -9,7 +9,12 @@
   },
   "redirects": [
     {
-      "source": "/containers*",
+      "source": "/containers/(.*)",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/containers",
       "destination": "/",
       "permanent": false
     }
