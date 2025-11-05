@@ -105,13 +105,13 @@ export default function FooterSection() {
               <h3 className="text-lg font-semibold text-white mb-4">Documentation</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                  <Link target="_blank" rel="noreferrer nofollow" href="https://docs.koalalab.com" className="text-sm text-gray-300 hover:text-white flex items-center">
                     Docs
                     <ExternalArrowIcon />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                  <Link target="_blank" rel="noreferrer nofollow" href="https://github.com/koalalab-inc" className="text-sm text-gray-300 hover:text-white flex items-center">
                     Github
                     <ExternalArrowIcon />
                   </Link>
@@ -130,9 +130,12 @@ export default function FooterSection() {
             </div>
 
             {/* Blogs */}
-            <div>
-              <Link href="/" className="text-lg font-semibold text-white mb-4">Blogs</Link>
-            </div>
+            { 
+              false && 
+              <div>
+                <Link href="/" className="text-lg font-semibold text-white mb-4">Blogs</Link>
+              </div>
+            }
 
             {/* Contact Us */}
             <div>

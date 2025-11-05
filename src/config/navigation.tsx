@@ -10,9 +10,9 @@ import { NavigationItem, FooterNavigation } from '@/types/navigation'
 // Main navigation items
 export const mainNavigation: NavigationItem[] = [
   
-  { name: 'Blogs', href: '/' },
+  // { name: 'Blogs', href: '/' },
   { name: 'About Us', href: '/about' },
-  { name: 'Docs', href: '/docs' },
+  { name: 'Docs', href: 'https://docs.koalalab.com' },
   { name: 'Contact Us', href: '/contact' },
 ]
 
@@ -59,7 +59,7 @@ export const footerNavigation: FooterNavigation = {
   ],
   support: [
     { name: 'Submit ticket', href: '/support/ticket' },
-    { name: 'Documentation', href: '/docs' },
+    { name: 'Documentation', href: 'https://docs.koalalab.com' },
     { name: 'Guides', href: '/guides' },
   ],
   company: [
@@ -111,7 +111,7 @@ export const footerNavigation: FooterNavigation = {
     },
     {
       name: 'GitHub',
-      href: 'https://github.com/yourcompany',
+      href: 'https://github.com/koalalab-inc',
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
