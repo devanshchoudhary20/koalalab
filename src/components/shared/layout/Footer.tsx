@@ -61,19 +61,19 @@ export default function FooterSection() {
               <h3 className="text-lg font-semibold text-white mb-4">Why KoalaLab?</h3>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                  <Link href="/solutions/cisos/" className="text-sm text-gray-300 hover:text-white flex items-center">
                     Ensure continuous compliance
                     <ExternalArrowIcon />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/containers" className="text-sm text-gray-300 hover:text-white flex items-center">
+                  <Link href="/solutions/devops/" className="text-sm text-gray-300 hover:text-white flex items-center">
                     Hardened containers with familiar experience
                     <ExternalArrowIcon />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="text-sm text-gray-300 hover:text-white flex items-center">
+                  <Link href="/solutions/devops/" className="text-sm text-gray-300 hover:text-white flex items-center">
                     Build secure software
                     <ExternalArrowIcon />
                   </Link>
