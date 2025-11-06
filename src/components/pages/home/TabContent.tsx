@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -37,6 +37,8 @@ export default function TabContent({ active, onEmblaApi }: TabContentProps) {
     watchDrag: true,
     align: 'start'
   })
+  const containerRef = useRef<HTMLElement | null>(null)
+  const lastScrollY = useRef<number>(0)
 
   useEffect(() => {
     if (onEmblaApi) {
@@ -44,8 +46,96 @@ export default function TabContent({ active, onEmblaApi }: TabContentProps) {
     }
   }, [emblaApi, onEmblaApi])
 
+  const handleWheel = useCallback((e: WheelEvent) => {
+    if (!containerRef.current || !emblaApi) return
+
+    const scrollingDown = e.deltaY > 0
+    const scrollingUp = e.deltaY < 0
+
+    // Check if Embla can scroll in the requested direction
+    const canScrollPrev = emblaApi.canScrollPrev()
+    const canScrollNext = emblaApi.canScrollNext()
+
+    // On first tab and scrolling up - allow window scroll
+    if (!canScrollPrev && scrollingUp) {
+      e.stopPropagation()
+      // Let window handle the scroll naturally
+      return
+    }
+
+    // On last tab and scrolling down - allow window scroll
+    if (!canScrollNext && scrollingDown) {
+      e.stopPropagation()
+      // Let window handle the scroll naturally
+      return
+    }
+
+    // Otherwise, let Embla handle the scroll
+  }, [emblaApi])
+
+  const handleTouchStart = useCallback((e: TouchEvent) => {
+    if (!containerRef.current || !emblaApi) return
+
+    const touch = e.touches[0]
+    if (touch) {
+      lastScrollY.current = touch.clientY
+    }
+  }, [emblaApi])
+
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (!containerRef.current || !emblaApi) return
+
+    const touch = e.touches[0]
+    if (!touch) return
+
+    const currentY = touch.clientY
+    const deltaY = currentY - lastScrollY.current
+    const scrollingDown = deltaY < 0
+    const scrollingUp = deltaY > 0
+
+    // Check if Embla can scroll in the requested direction
+    const canScrollPrev = emblaApi.canScrollPrev()
+    const canScrollNext = emblaApi.canScrollNext()
+
+    // On first tab and scrolling up - allow window scroll
+    if (!canScrollPrev && scrollingUp) {
+      e.stopPropagation()
+      return
+    }
+
+    // On last tab and scrolling down - allow window scroll
+    if (!canScrollNext && scrollingDown) {
+      e.stopPropagation()
+      return
+    }
+
+    lastScrollY.current = currentY
+  }, [emblaApi])
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    container.addEventListener('touchstart', handleTouchStart, { passive: true })
+    container.addEventListener('touchmove', handleTouchMove, { passive: false })
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel)
+      container.removeEventListener('touchstart', handleTouchStart)
+      container.removeEventListener('touchmove', handleTouchMove)
+    }
+  }, [handleWheel, handleTouchStart, handleTouchMove])
+
   return (
-    <main className="relative min-h-screen sm:pt-0 overflow-hidden" style={{ height: '100vh' }} ref={emblaRef}>
+    <main 
+      className="relative min-h-screen sm:pt-0 overflow-hidden" 
+      style={{ height: '100vh' }} 
+      ref={(node) => {
+        emblaRef(node)
+        containerRef.current = node
+      }}
+    >
       <div className="flex flex-col" style={{ height: '100%' }}>
         {TAB_DATA.map((t, i) => (
           <section
