@@ -21,14 +21,14 @@ export default function Document() {
         <meta property="og:url" content="https://koalalab.com/" />
         <meta property="og:title" content="KoalaLab | Secure OSS Container Images for Enterprise Compliance" />
         <meta property="og:description" content="Koala's Hardened OSS container images accelerate compliance & unlocking developer productivity. Built on proprietary debian-compatible distro with a container-first design" />
-        <meta property="og:image" content="https://koalalab.com/images/KoalaLogoSquare" />
+        <meta property="og:image" content="https://koalalab.com/images/KoalaLogoSquare.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://koalalab.com/" />
         <meta property="twitter:title" content="KoalaLab | Secure OSS Container Images for Enterprise Compliance" />
         <meta property="twitter:description" content="Koala's Hardened OSS container images accelerate compliance & unlocking developer productivity. Built on proprietary debian-compatible distro with a container-first design" />
-        <meta property="twitter:image" content="https://koalalab.com/images/KoalaLogoSquare" />
+        <meta property="twitter:image" content="https://koalalab.com/images/KoalaLogoSquare.png" />
 
       </Head>
       <body className="antialiased">
