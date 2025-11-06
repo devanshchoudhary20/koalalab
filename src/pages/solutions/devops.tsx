@@ -8,10 +8,13 @@ import CustomizeImageSection from '@/components/pages/devops/CustomizeImageSecti
 import VideoCarousel from '@/components/shared/common/Video/VideoCarousel'
 import EnterpriseOnboardingSection from '@/components/pages/devops/EnterpriseOnboardingSection'
 import { ContactForm } from '@/components/shared/common'
+import SEO from '@/components/shared/SEO'
+import { getPageMetadata } from '@/config/metadata'
 
 export default function DevOpsPage() {
 	return (
 		<>
+			<SEO metadata={getPageMetadata('devops')} />
 			<Header />
 			<DevOpsHero />
 			<MinimalContainerDilemma />

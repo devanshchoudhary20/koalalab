@@ -6,7 +6,9 @@ import ContainerGrid from '@/components/pages/containers/ContainerGrid'
 import SearchBar from '@/components/pages/containers/SearchBar'
 import CategoryFilter from '@/components/pages/containers/CategoryFilter'
 import Pagination from '@/components/shared/Pagination'
+import SEO from '@/components/shared/SEO'
 import { Container } from '@/types/api'
+import { getPageMetadata } from '@/config/metadata'
 
 const categories = [
 	{ id: 'all', label: 'All' },
@@ -46,6 +48,7 @@ function sortContainersByRelevance(containers: Container[], searchTerm: string):
 }
 
 export default function ContainersPage() {
+	const metadata = getPageMetadata('containers')
 	const router = useRouter()
 	const [search, setSearch] = useState('')
 	const [selectedCategory, setSelectedCategory] = useState('all')
@@ -159,6 +162,7 @@ export default function ContainersPage() {
 
 	return (
 		<>
+			<SEO metadata={metadata} />
 			<Header />
 			<main className="container mx-auto px-4 py-4 sm:py-6 lg:py-8 max-w-5xl mx-auto">
 				<div className="space-y-6">

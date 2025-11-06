@@ -39,10 +39,10 @@ export default function HeroSection() {
             </div>
 
             {/* Main hero graph image */}
-            <div className="relative z-10 w-[500px] h-[421px]">
+            <div className="relative z-10 sm:w-[500px] sm:h-[421px] w-full h-full">
               {/* Mobile image */}
               <Image 
-                src="/images/heroGraphMob.webp" 
+                src="/images/heroGraph.png" 
                 alt="Hero" 
                 width={500} 
                 height={500} 
