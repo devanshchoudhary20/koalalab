@@ -63,7 +63,7 @@ export default function FamiliarDevExSection() {
 				</div>
 
 				{/* Call to Action Buttons */}
-				<CTAButtons talkToUsHref="#" />
+				<CTAButtons className="justify-center lg:justify-start" primaryButtonPadding="px-8" />
 			</div>
 		</section>
 	)

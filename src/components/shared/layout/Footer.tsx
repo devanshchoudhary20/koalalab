@@ -17,7 +17,7 @@ export default function FooterSection() {
 
   // External arrow icon component
   const ExternalArrowIcon = () => (
-    <span>↗</span>
+    <span className="pl-2">↗</span>
   )
 
   return (
